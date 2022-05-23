@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="primary-btn">THÊM VÀO GIỎ HÀNG</button>
+                        <button type="submit" data-id_product="{{$value->product_id}}" class="primary-btn add-to-cart" name="add-to-cart">THÊM VÀO GIỎ HÀNG</button>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         </form>
 

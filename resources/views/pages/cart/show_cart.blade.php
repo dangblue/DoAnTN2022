@@ -102,7 +102,7 @@
                         <li>Tổng tiền <span>{{$total}}$</span></li>
 
                     </ul>
-                    <a href="#" class="primary-btn">Thanh toán</a>
+                    <a href="{{URL::to('/login-checkout')}}" class="primary-btn">Thanh toán</a>
                 </div>
             </div>
         </div>

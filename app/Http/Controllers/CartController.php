@@ -54,7 +54,15 @@ class CartController extends Controller
 
     public function save_cart(Request $request){
 
-        //Cart::add('293ad', 'Product 1', 1, 9.99, 550);
+        $productID = $request ->productid_hidden;
+        $quantity = $request ->qty;
+        $product_info = DB::table('tbl_product')->where('product_id',$productID)->first();
+
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')
+        ->orderBy('category_id','desc')->get();
+
+        return view('pages.cart.show_cart')->with('category',$cate_product)->with('product_info',$product_info)->with('quantity',$quantity);
+
 
 
     }

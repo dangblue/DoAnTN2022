@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/style.css" type="text/css">
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/sweetalert.css" type="text/css">
+    <link rel="stylesheet" href="{{url('public/frontend')}}/css/main.css" type="text/css">
 
 </head>
 
@@ -56,7 +57,7 @@
                             </div>
 
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+                                <a href="{{URL::to('/login-checkout')}}"><i class="fa fa-user"></i> Đăng nhập</a>
                             </div>
                         </div>
                     </div>
@@ -79,7 +80,7 @@
                                 <ul class="header__menu__dropdown">
 
                                     <li><a href="{{URL::to('/show-cart')}}">Giỏ hàng</a></li>
-                                    <li><a href="{{URL::to('/check-out')}}">Check Out</a></li>
+                                    <li><a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
                                     <li><a href="{{URL::to('/blog-detail')}}">Blog Details</a></li>
                                 </ul>
                             </li>
@@ -223,8 +224,8 @@
     <script src="{{asset('public/frontend/js/jquery.slicknav.js')}}"></script>
     <script src="{{asset('public/frontend/js/mixitup.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('public/frontend/js/main.js')}}"></script>
-    <script src="{{url('public/frontend')}}/js/sweetalert.js"></script>
+    <script src="{{url('public/frontend')}}/js/main.js"></script>
+    <script src="{{url('public/frontend')}}/js/sweetalert.js"></>
     <script src="{{url('public/frontend')}}/js/sweetalert.min.js"></script>
 
 

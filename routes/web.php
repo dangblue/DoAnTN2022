@@ -76,6 +76,9 @@ Route::post('/update-cart', 'CartController@update_cart');
 Route::get('/del-product/{session_id}', 'CartController@delete_product');
 Route::get('/show-cart', 'CartController@show_cart');
 Route::post('/add-cart-ajax', 'CartController@add_cart_ajax');
-
+//Checkout
+Route::get('/login-checkout', 'CheckoutController@login_checkout');
+Route::post('/add-customer', 'CheckoutController@add_customer');
+Route::get('/checkout', 'CheckoutController@checkout');
 
 
