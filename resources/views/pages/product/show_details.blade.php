@@ -23,7 +23,7 @@
                         <input type="hidden" value="1" class="cart_product_qty_{{$value->product_id}}">
                         <h3>{{$value->product_name}}</h3>
 
-                        <form action="{{URL::to('/save-cart')}}" method="POST">
+                        <form action="{{URL::to('/show-cart')}}" method="GET">
                             {{ csrf_field() }}
                         <div class="product__details__price">{{$value->product_price}}$</div>
                         <p>{!!$value->product_desc!!}</p>

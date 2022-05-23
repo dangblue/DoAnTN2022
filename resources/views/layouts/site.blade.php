@@ -57,7 +57,18 @@
                             </div>
 
                             <div class="header__top__right__auth">
+                                <?php
+                                    $customer_id = Session::get('customer_id');
+                                    if($customer_id != NULL){
+                                ?>
+                                <a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-user"></i> Đăng xuất</a>
+                                <?php
+                                    }else{
+                                ?>
                                 <a href="{{URL::to('/login-checkout')}}"><i class="fa fa-user"></i> Đăng nhập</a>
+                                <?php
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -80,7 +91,19 @@
                                 <ul class="header__menu__dropdown">
 
                                     <li><a href="{{URL::to('/show-cart')}}">Giỏ hàng</a></li>
-                                    <li><a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
+                                    <?php
+                                    $customer_id = Session::get('customer_id');
+                                    if($customer_id != NULL){
+                                    ?>
+                                        <li><a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
+                                    <?php
+                                        }else{
+                                    ?>
+                                        <li><a href="{{URL::to('/login-checkout')}}">Thanh toán</a></li>
+                                    <?php
+                                        }
+                                    ?>
+
                                     <li><a href="{{URL::to('/blog-detail')}}">Blog Details</a></li>
                                 </ul>
                             </li>

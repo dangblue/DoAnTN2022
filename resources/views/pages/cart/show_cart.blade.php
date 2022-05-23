@@ -102,7 +102,18 @@
                         <li>Tổng tiền <span>{{$total}}$</span></li>
 
                     </ul>
-                    <a href="{{URL::to('/login-checkout')}}" class="primary-btn">Thanh toán</a>
+                    <?php
+                        $customer_id = Session::get('customer_id');
+                            if($customer_id != NULL){
+                            ?>
+                                 <a href="{{URL::to('/checkout')}}" class="primary-btn">Thanh toán</a>
+                            <?php
+                                }else{
+                            ?>
+                                <a href="{{URL::to('/login-checkout')}}" class="primary-btn">Thanh toán</a>
+                            <?php
+                                }
+                            ?>
                 </div>
             </div>
         </div>
