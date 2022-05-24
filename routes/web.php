@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 // FE
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
+Route::post('/tim-kiem', 'HomeController@search');
 
 
 
@@ -78,6 +79,8 @@ Route::get('/show-cart', 'CartController@show_cart');
 Route::post('/add-cart-ajax', 'CartController@add_cart_ajax');
 //Checkout
 Route::get('/login-checkout', 'CheckoutController@login_checkout');
+Route::get('/logout-checkout', 'CheckoutController@logout_checkout');
+Route::post('/login-customer', 'CheckoutController@login_customer');
 Route::post('/add-customer', 'CheckoutController@add_customer');
 Route::get('/checkout', 'CheckoutController@checkout');
 Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_customer');

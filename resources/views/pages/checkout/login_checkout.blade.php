@@ -1,12 +1,16 @@
 @extends('layouts.site')
 @section('main')
+
+<link rel="stylesheet" href="{{url('public/frontend')}}/css/main.css" type="text/css">
+
 <section id="form"><!--form-->
     <div class="container">
         <div class="row">
             <div class="col-sm-4 col-sm-offset-1">
                 <div class="login-form"><!--login form-->
                     <h2>Đăng nhập tài khoản</h2>
-                    <form action="#">
+                    <form action="{{URL::to('/login-customer')}}" method="POST">
+                        {{ csrf_field() }}
                         <input type="text" name="email_account" placeholder="Tài khoản" />
                         <input type="password" name="password_account" placeholder="Mật khẩu" />
                         <span>

@@ -1,50 +1,13 @@
 @extends('layouts.site')
 @section('main')
 
-
-<!-- Categories Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{url('public/frontend')}}/img/categories/cat-1.jpg">
-                        <h5><a href="#">Fresh Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{url('public/frontend')}}/img/categories/cat-2.jpg">
-                        <h5><a href="#">Dried Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{url('public/frontend')}}/img/categories/cat-3.jpg">
-                        <h5><a href="#">Vegetables</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{url('public/frontend')}}/img/categories/cat-4.jpg">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{url('public/frontend')}}/img/categories/cat-5.jpg">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Categories Section End -->
-
 <!-- Featured Section Begin -->
 <section class="featured spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2> New product </h2>
+                    <h2> Kết quả sản phẩm </h2>
                 </div>
                 <div class="featured__controls">
                     <ul>
@@ -57,7 +20,7 @@
             </div>
         </div>
         <div class="row featured__filter">
-            @foreach($all_product as $key => $product)
+            @foreach($search_product as $key => $product)
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
                     <form>
@@ -72,7 +35,7 @@
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
 
-                            <li><a><i type="button" data-id_product="{{$product->product_id}}" class="fa fa-shopping-cart add-to-cart" name="add-to-cart"></i></a></li>
+                            <li><a><i type="button" class="fa fa-shopping-cart add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart"></i></a></li>
                         </ul>
                     </div>
 

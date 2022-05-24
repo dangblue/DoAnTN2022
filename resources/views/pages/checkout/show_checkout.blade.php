@@ -42,17 +42,11 @@
                                     <input type="text" name="shipping_name">
                                 </div>
                             </div>
-
                         </div>
-
                         <div class="checkout__input">
                             <p>Địa chỉ<span>*</span></p>
                             <input type="text" name="shipping_address" placeholder="Street Address" class="checkout__input__add">
-
                         </div>
-
-
-
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
@@ -67,7 +61,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="checkout__input">
                             <p>Ghi chú đơn hàng<span>*</span></p>
                             <input type="text" name="shipping_notes"
@@ -76,7 +69,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="checkout__order">
-                            <h4>Your Order</h4>
+                            <h4>Giỏ hàng của bạn</h4>
                             <div class="checkout__order__products">Products <span>Total</span></div>
                             <ul>
                                 <li>Vegetable’s Package <span>$75.99</span></li>
@@ -85,21 +78,23 @@
                             </ul>
                             <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
                             <div class="checkout__order__total">Total <span>$750.99</span></div>
-
+                        <form method="POST" action="{{URL::to('/save-checkout-customer')}}">
+                            {{csrf_field()}}
                             <div class="checkout__input__checkbox">
                                 <label for="payment">
-                                    Check Payment
-                                    <input type="checkbox" id="payment">
+                                    Trả tiền mặt
+                                    <input type="checkbox" id="payment" name="payment_option" value="2">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="paypal">
-                                    Paypal
-                                    <input type="checkbox" id="paypal">
+                                    Thẻ ngân hàng
+                                    <input type="checkbox" id="paypal" name="payment_option" value="1">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
+                        </form>
                             <button type="submit" name="send_order" class="site-btn">ĐẶT HÀNG</button>
                         </div>
                     </div>

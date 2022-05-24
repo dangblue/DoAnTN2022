@@ -22,11 +22,12 @@
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/style.css" type="text/css">
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/sweetalert.css" type="text/css">
-    <link rel="stylesheet" href="{{url('public/frontend')}}/css/main.css" type="text/css">
+
 
 </head>
 
 <body>
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -142,9 +143,10 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
-                            <input type="text" placeholder="What do yo u need?">
-                            <button type="submit" class="site-btn">SEARCH</button>
+                        <form action="{{URL::to('/tim-kiem')}}" method="POST">
+                            {{csrf_field()}}
+                            <input type="text" name="keywords_submit" placeholder="Nhập từ khóa cần tìm">
+                            <button type="submit" name="search_items" class="site-btn">Tìm kiếm</button>
                         </form>
                     </div>
                     <div class="hero__search__phone">

@@ -23,7 +23,7 @@ class CheckoutController extends Controller
         $data['customer_name'] = $request->customer_name;
         $data['customer_phone'] = $request->customer_phone;
         $data['customer_email'] = $request->customer_email;
-        $data['customer_password'] = $request->customer_password;
+        $data['customer_password'] = md5($request->customer_password);
 
         $customer_id = DB::table('tbl_customers')->insertGetId($data);
 
@@ -51,14 +51,30 @@ class CheckoutController extends Controller
 
         Session::put('shipping_id',$shipping_id);
 
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
+        return view('pages.checkout.payment')->with('category',$cate_product);
 
-        return Redirect::to('/payment');
-
-
-    }
-    public function payment(){
 
     }
 
+    public function logout_checkout(){
+        Session::flush();
+        return Redirect::to('/login-checkout');
+    }
+    public function login_customer(Request $request){
+        $email = $request->email_account;
+        $password = md5($request->password_account);
+        $result = DB::table('tbl_customers')->where('customer_email',$email)
+        ->where('customer_password',$password)->first();
+        if($result){
+            Session::put('customer_id',$result->customer_id);
+            return Redirect::to('/checkout');
+        }else{
+            return Redirect::to('/login-checkout');
+        }
+
+
+        return Redirect::to('/checkout');
+    }
 
 }
