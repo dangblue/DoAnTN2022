@@ -70,14 +70,26 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="checkout__order">
                             <h4>Giỏ hàng của bạn</h4>
-                            <div class="checkout__order__products">Products <span>Total</span></div>
-                            <ul>
-                                <li>Vegetable’s Package <span>$75.99</span></li>
-                                <li>Fresh Vegetable <span>$151.99</span></li>
-                                <li>Organic Bananas <span>$53.99</span></li>
-                            </ul>
-                            <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                            <div class="checkout__order__total">Total <span>$750.99</span></div>
+                            <div class="checkout__order__products">Sản phẩm <span>Giá</span></div>
+                            @php
+
+                                    $total = 0;
+                                    $cart1 = Session::get('cart');
+                                    if($cart1 == false){
+                                            $cart1 = [];
+                                        }
+                            @endphp
+                            @foreach($cart1 as $key => $cart)
+                                    @php
+                                        $subtotal = $cart['product_price']*$cart['product_qty'];
+                                        $total+=$subtotal;
+                                    @endphp
+                                    <ul>
+                                        <li>{{$cart['product_name']}}<span>{{$cart['product_price']*$cart['product_qty']}}</span></li>
+                                    </ul>
+                                @endforeach
+                                    <div class="checkout__order__total">Tổng giá <span>{{$total}}</span></div>
+
                         <form method="POST" action="{{URL::to('/save-checkout-customer')}}">
                             {{csrf_field()}}
                             <div class="checkout__input__checkbox">

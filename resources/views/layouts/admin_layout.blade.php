@@ -91,7 +91,15 @@ $name = Session::get('admin_name');
                         <span>Tổng quan danh mục</span>
                     </a>
                 </li>
-
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Đơn hàng</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/manage-order')}}">Quản lý đơn hàng</a></li>
+                    </ul>
+                </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
@@ -122,6 +130,7 @@ $name = Session::get('admin_name');
 						<li><a href="{{URL::to('/all-product')}}">Liệt kê sản phẩm</a></li>
                     </ul>
                 </li>
+
             </ul>            </div>
         <!-- sidebar menu end-->
     </div>

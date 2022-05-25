@@ -20,7 +20,11 @@
 
     <div class="container">
         <form action="{{url('/update-cart')}}" method="POST">
-            @csrf
+            {{csrf_field()}}
+            <?php
+            use Gloudemans\Shoppingcart\Facades\Cart;
+                $content = Cart::content();
+            ?>
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__table">
@@ -37,9 +41,13 @@
                         </thead>
                         <tbody>
                             @php
-                                  $total = 0;
-                                @endphp
-                            @foreach (Session::get('cart') as $key => $cart)
+                                    $total = 0;
+                                    $cart1 = Session::get('cart');
+                                    if($cart1 == false){
+                                            $cart1 = [];
+                                        }
+                            @endphp
+                            @foreach($cart1 as $key => $cart)
                                 @php
                                   $subtotal = $cart['product_price'] * $cart['product_qty'];
                                   $total += $subtotal;
