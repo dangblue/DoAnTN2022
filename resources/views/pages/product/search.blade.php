@@ -12,7 +12,7 @@
                 <div class="featured__controls">
                     <ul>
 
-                        <li class="active" data-filter="*">All</li>
+                        <li class="active" data-filter="*"><a href="{{URL::to('/')}}">All</a></li>
 
 
                     </ul>

@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/style.css" type="text/css">
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/sweetalert.css" type="text/css">
+    <link rel="stylesheet" href="{{url('public/addang')}}/css/formValidation.min.css" type="text/css">
 
 
 </head>
@@ -252,6 +253,10 @@
     <script src="{{url('public/frontend')}}/js/main.js"></script>
     <script src="{{url('public/frontend')}}/js/sweetalert.js"></>
     <script src="{{url('public/frontend')}}/js/sweetalert.min.js"></script>
+    <script src="{{url('public/addang')}}/js/jquery.form-validator.min.js"></script>
+    <script>
+    $.validate({});
+    </script>
 
 
     <script type="text/javascript">

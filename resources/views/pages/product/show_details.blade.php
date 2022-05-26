@@ -141,17 +141,25 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
 
                     <div class="product__item">
+                        <form>
+                            @csrf
+                        <input type="hidden" value="{{$relate->product_id}}" class="cart_product_id_{{$relate->product_id}}">
+                        <input type="hidden" value="{{$relate->product_name}}" class="cart_product_name_{{$relate->product_id}}">
+                        <input type="hidden" value="{{$relate->product_image}}" class="cart_product_image_{{$relate->product_id}}">
+                        <input type="hidden" value="{{$relate->product_price}}" class="cart_product_price_{{$relate->product_id}}">
+                        <input type="hidden" value="1" class="cart_product_qty_{{$relate->product_id}}">
                         <div class="product__item__pic set-bg" data-setbg="{{URL::to('public/uploads/product/'.$relate->product_image)}}">
                             <ul class="product__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a href="{{URL::to('/chi-tiet-san-pham',$relate->product_id)}}"><i class="fa fa-retweet"></i></a></li>
+                                <li><a><i type="button" data-id_product="{{$relate->product_id}}" class="fa fa-shopping-cart add-to-cart" name="add-to-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="product__item__text">
                             <h6><a href="#">{{$relate->product_name}}</a></h6>
                             <h5>{{$relate->product_price}}.$</h5>
                         </div>
+                    </form>
                     </div>
 
                 </div>

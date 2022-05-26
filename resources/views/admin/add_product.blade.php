@@ -23,24 +23,29 @@
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên sản phẩm</label>
-                            <input type="text" name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên sản phẩm">
+                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="Nhập tên sản phẩm và phải có ít nhất 3 ký tự"
+                            name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm</label>
-                            <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Giá sản phẩm">
+                            <input type="text" data-validation="number" data-validation-error-msg=" Nhập giá sản phẩm và phải là số"
+                            name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Giá sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>
+
                             <input type="file" name="product_image" class="form-control" id="exampleInputEmail1">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả sản phẩm</label>
-                            <textarea style="resize: none;" rows="5" name="product_desc" class="form-control" id="ckeditor1"
+                            <textarea  style="resize: none;" rows="5"
+                             name="product_desc" class="form-control" id="ckeditor1"
                             placeholder="Mô tả sản phẩm"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nội dung sản phẩm</label>
-                            <textarea style="resize: none;" rows="5" name="product_content" class="form-control" id="ckeditor1"
+                            <textarea style="resize: none;" rows="5"
+                            name="product_content" class="form-control" id="ckeditor2"
                             placeholder="Nội dung sản phẩm"></textarea>
                         </div>
                         <div class="form-group">

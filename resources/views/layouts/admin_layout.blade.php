@@ -158,6 +158,16 @@ $name = Session::get('admin_name');
 <script src="{{url('public/addang')}}/js/jquery.nicescroll.js"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{url('public/addang')}}/js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="{{url('public/addang')}}/js/jquery.scrollTo.js"></script>
+<script src="{{url('public/addang')}}/ckeditor/ckeditor.js"></script>
+<script src="{{url('public/addang')}}/js/jquery.form-validator.min.js"></script>
+<script>
+    $.validate({});
+</script>
+
+<script>
+    CKEDITOR.replace( 'ckeditor1' );
+    CKEDITOR.replace( 'ckeditor2' );
+</script>
 <!-- morris JavaScript -->
 <script>
 	$(document).ready(function() {

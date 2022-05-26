@@ -111,14 +111,15 @@
 
                     </ul>
                     <?php
+                        $cart_checkout = Session::get('cart');
                         $customer_id = Session::get('customer_id');
-                            if($customer_id != NULL){
+                            if($customer_id != NULL && $cart_checkout !=NULL){
                             ?>
-                                 <a href="{{URL::to('/checkout')}}" class="primary-btn">Thanh toán</a>
+                                 <a href="{{URL::to('/checkout')}}" class="primary-btn" >Thanh toán</a>
                             <?php
                                 }else{
                             ?>
-                                <a href="{{URL::to('/login-checkout')}}" class="primary-btn">Thanh toán</a>
+                                <a href="{{URL::to('/login-checkout')}}" class="primary-btn" style="pointer-events: none">Thanh toán</a>
                             <?php
                                 }
                             ?>

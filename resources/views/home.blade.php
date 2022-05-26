@@ -58,6 +58,7 @@
         </div>
         <div class="row featured__filter">
             @foreach($all_product as $key => $product)
+
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
                     <form>
@@ -71,7 +72,7 @@
                     <div class="featured__item__pic set-bg" data-setbg="{{URL::to('/public/uploads/product/'.$product->product_image)}}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
-
+                            <li><a href="{{URL::to('/chi-tiet-san-pham',$product->product_id)}}"><i class="fa fa-retweet"></i></a></li>
                             <li><a><i type="button" data-id_product="{{$product->product_id}}" class="fa fa-shopping-cart add-to-cart" name="add-to-cart"></i></a></li>
                         </ul>
                     </div>
@@ -167,7 +168,7 @@
                                 </div>
 
                         </div>
-                        <
+
                     </div>
                 </div>
             </div>
@@ -220,18 +221,19 @@
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="blog__item">
                     <div class="blog__item__pic">
-                        <img src="{{url('public/frontend')}}/img/blog/blog-3.jpg" alt="">
+                        <img src="{{url('public/frontend')}}/img/blog/blog-2.jpg" alt="">
                     </div>
                     <div class="blog__item__text">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
                             <li><i class="fa fa-comment-o"></i> 5</li>
                         </ul>
-                        <h5><a href="#">Visit the clean farm in the US</a></h5>
+                        <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
                         <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
