@@ -21,10 +21,7 @@
     <div class="container">
         <form action="{{url('/update-cart')}}" method="POST">
             {{csrf_field()}}
-            <?php
-            use Gloudemans\Shoppingcart\Facades\Cart;
-                $content = Cart::content();
-            ?>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__table">
@@ -55,8 +52,11 @@
 
                             <tr>
                                 <td class="shoping__cart__item">
-                                    <img src="{{asset('public/uploads/product/'.$cart['product_image'])}}"
-                                    width="100" alt="">
+                                    <a href="{{URL::to('/chi-tiet-san-pham',$cart['product_id'])}}">
+                                        <img src="{{asset('public/uploads/product/'.$cart['product_image'])}}"
+                                        width="100" alt="">
+                                    </a>
+
                                     <h5>{{$cart['product_name']}}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
@@ -91,24 +91,37 @@
 
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Discount Codes</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">Nhập mã giảm giá</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <div class="shoping__checkout">
                     <h5>Tổng giỏ hàng</h5>
                     <ul>
-                        <li>Phí vận chuyển <span>{{$total}}$</span></li>
+                        <li>Phí vận chuyển <span>Free</span></li>
                         <li>Tổng tiền <span>{{$total}}$</span></li>
+                        @if(Session::get('coupon'))
+							<li>
+									@foreach(Session::get('coupon') as $key => $cou)
+										@if($cou['coupon_condition']==1)
+										Mã giảm <span>{{$cou['coupon_number']}} % </span>
+											<p>
+												@php
+												$total_coupon = ($total*$cou['coupon_number'])/100;
+												echo '<p><li>Tổng giảm:<span>'.number_format($total_coupon,0,',','.').'đ</span></li></p>';
+												@endphp
+											</p>
+											<p><li>Tổng tiền sau giảm <span>{{number_format($total-$total_coupon,0,',','.')}}$</span></li></p>
+										@elseif($cou['coupon_condition']==2)
+											Mã giảm  <span>{{number_format($cou['coupon_number'],0,',','.')}} $</span>
+											<p>
+												@php
+												$total_coupon = $total - $cou['coupon_number'];
 
+												@endphp
+											</p>
+											<p><li> Tổng tiền sau giảm <span>{{number_format($total_coupon,0,',','.')}}$</span></li></p>
+										@endif
+									@endforeach
+							</li>
+						@endif
                     </ul>
                     <?php
                         $cart_checkout = Session::get('cart');
@@ -127,6 +140,23 @@
             </div>
         </div>
     </form>
+    @if(Session::get('cart'))
+    <div class="col-lg-6">
+        <div class="shoping__continue">
+            <div class="shoping__discount">
+                <h5>Mã giảm giá</h5>
+                <form action="{{url('/check-coupon')}}" method="POST">
+                    {{csrf_field()}}
+                    <input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br><br>
+                    <input type="submit" class="site-btn check_coupon" name="check_coupon" value="Tính mã giảm giá"><br><br>
+                    @if(Session::get('coupon'))
+                    <a class="site-btn check_coupon" href="{{url('/unset-coupon')}}">Xóa mã giảm giá</a>
+                    @endif
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
     </div>
 
 </section>

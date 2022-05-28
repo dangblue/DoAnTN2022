@@ -33,8 +33,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="index.html" class="logo">
-        adm
+    <a href="{{URL::to('/dashboard')}}" class="logo">
+        admin
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
@@ -128,6 +128,16 @@ $name = Session::get('admin_name');
                     <ul class="sub">
 						<li><a href="{{URL::to('/add-product')}}">Thêm sản phẩm</a></li>
 						<li><a href="{{URL::to('/all-product')}}">Liệt kê sản phẩm</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Mã giảm giá</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/insert-coupon')}}">Quản lý mã giảm giá</a></li>
+                        <li><a href="{{URL::to('/list-coupon')}}">Liệt kê mã giảm giá</a></li>
                     </ul>
                 </li>
 

@@ -39,32 +39,31 @@
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Họ và tên <span>*</span></p>
-                                    <input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg="Nhập tên người dùng" name="shipping_name">
+                                    <input type="text" name="shipping_name" required>
                                 </div>
                             </div>
                         </div>
                         <div class="checkout__input">
                             <p>Địa chỉ<span>*</span></p>
-                            <input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg="Nhập địa chỉ" name="shipping_address" placeholder="Street Address" class="checkout__input__add">
+                            <input type="text" name="shipping_address" placeholder="Street Address" class="checkout__input__add" required>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Số điện thoại<span>*</span></p>
-                                    <input type="text" data-validation="number" data-validation-error-msg=" Nhập số điện thoại" name="shipping_phone">
+                                    <input type="number"  name="shipping_phone" required>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Email<span>*</span></p>
-                                    <input type="text" data-validation="email" data-validation-error-msg=" Nhập địa chỉ email" name="shipping_email">
+                                    <input type="email" name="shipping_email" required>
                                 </div>
                             </div>
                         </div>
                         <div class="checkout__input">
                             <p>Ghi chú đơn hàng<span>*</span></p>
-                            <input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg="Nhập ghi chú" name="shipping_notes"
-                                placeholder="Ghi chú đơn hàng">
+                            <input type="text" name="shipping_notes" placeholder="Ghi chú đơn hàng" required>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">

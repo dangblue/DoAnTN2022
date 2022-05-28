@@ -486,7 +486,7 @@ ol {
 }
 
 .header__menu ul li a {
-    font-size: 14px;
+    font-size: 13px;
     color: #252525;
     text-transform: uppercase;
     font-weight: 700;
@@ -2020,14 +2020,14 @@ ol {
     height: 46px;
     border: 1px solid #cccccc;
     font-size: 16px;
-    color: #b2b2b2;
+    color: #fdfdfd;
     text-align: center;
     display: inline-block;
     margin-right: 15px;
 }
 
 .shoping__discount form input::placeholder {
-    color: #b2b2b2;
+    color: #fdfdfd;
 }
 
 .shoping__discount form button {

@@ -3,6 +3,7 @@
 
 <link rel="stylesheet" href="{{url('public/frontend')}}/css/main.css" type="text/css">
 
+
 <section id="form"><!--form-->
     <div class="container">
         <div class="row">

@@ -87,12 +87,13 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="{{URL::to('/')}}">Home</a></li>
-                            <li><a href="{{URL::to('/shop')}}">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="active"><a href="{{URL::to('/')}}">Trang chủ</a></li>
+                            <li><a href="{{URL::to('/shop')}}">Cửa hàng</a></li>
+                            <li><a href="#">Trang</a>
                                 <ul class="header__menu__dropdown">
 
                                     <li><a href="{{URL::to('/show-cart')}}">Giỏ hàng</a></li>
+                                    <!--
                                     <?php
                                     $customer_id = Session::get('customer_id');
                                     if($customer_id != NULL){
@@ -105,12 +106,12 @@
                                     <?php
                                         }
                                     ?>
-
+                                    -->
                                     <li><a href="{{URL::to('/blog-detail')}}">Blog Details</a></li>
                                 </ul>
                             </li>
                             <li><a href="{{URL::to('/blog')}}">Blog</a></li>
-                            <li><a href="{{URL::to('/contact')}}">Contact</a></li>
+                            <li><a href="{{URL::to('/contact')}}">Liên hệ</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -130,7 +131,7 @@
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span>All Category</span>
+                        <span>Danh mục sản phẩm</span>
                     </div>
                     <ul>
                         @foreach($category as $key => $cate)

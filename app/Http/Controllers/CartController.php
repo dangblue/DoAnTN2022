@@ -9,11 +9,44 @@ use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Gloudemans\Shoppingcart\Facades\Cart;
-
+use App\Models\Coupon;
 session_start();
 
 class CartController extends Controller
 {
+    public function check_coupon(Request $request){
+        $data = $request->all();
+        $coupon = Coupon::where('coupon_code',$data['coupon'])->first();
+        if($coupon){
+            $count_coupon = $coupon->count();
+            if($count_coupon>0){
+                $coupon_session = Session::get('coupon');
+                if($coupon_session==true){
+                    $is_avaiable = 0;
+                    if($is_avaiable==0){
+                        $cou[]=array(
+                            'coupon_code'=>$coupon->coupon_code,
+                            'coupon_condition'=>$coupon->coupon_condition,
+                            'coupon_number'=>$coupon->coupon_number,
+                        );
+                        Session::put('coupon',$cou);
+                    }
+                }else{
+                    $cou[]=array(
+                        'coupon_code'=>$coupon->coupon_code,
+                        'coupon_condition'=>$coupon->coupon_condition,
+                        'coupon_number'=>$coupon->coupon_number,
+                    );
+                    Session::put('coupon',$cou);
+                }
+                Session::save();
+                return redirect()->back()->with('message','Thêm mã giảm giá thành công');
+            }
+
+        }else{
+            return redirect()->back()->with('message','Mã giảm giá không đúng');
+        }
+    }
     public function add_cart_ajax(Request $request){
         $data = $request->all();
         $session_id = substr(md5(microtime()),rand(0,26),5);
@@ -74,9 +107,7 @@ class CartController extends Controller
     }
     public function delete_product($session_id){
         $cart = Session::get('cart');
-        //echo '<pre>';
-        //print_r($cart);
-        //echo '</pre>';
+
         if($cart==true){
            foreach($cart as $key => $val){
              if($val['session_id']==$session_id){

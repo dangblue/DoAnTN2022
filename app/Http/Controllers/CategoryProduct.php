@@ -49,7 +49,7 @@ class CategoryProduct extends Controller
         $this->AuthLoginCheck();
         DB::table('tbl_category_product')->where('category_id',$category_product_id)
         ->update(['category_status'=>1]);
-        Session::put('message','Không kích hoạt danh mục sản phẩm thành công');
+        Session::put('message','Không kích hoạt danh mục sản phẩm ');
         return Redirect::to('all-category-product');
 
     }

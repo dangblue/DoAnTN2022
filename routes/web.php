@@ -88,6 +88,13 @@ Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_custome
 Route::get('/manage-order', 'CheckoutController@manage_order');
 Route::get('/view-order/{orderId}', 'CheckoutController@view_order');
 Route::get('/delete-order/{orderId}', 'CheckoutController@delete_order');
+//Coupon
+Route::post('/check-coupon', 'CartController@check_coupon');
 
+Route::get('/unset-coupon', 'CouponController@unset_coupon');
+Route::get('/insert-coupon', 'CouponController@insert_coupon');
+Route::post('/insert-coupon-code', 'CouponController@insert_coupon_code');
+Route::get('/list-coupon', 'CouponController@list_coupon');
+Route::get('/delete-coupon/{coupon_id}', 'CouponController@delete_coupon');
 
 

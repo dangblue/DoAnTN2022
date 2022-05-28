@@ -38,7 +38,7 @@ class CheckoutController extends Controller
         Session::put('customer_id',$customer_id);
         Session::put('customer_name',$request->customer_name);
 
-        return Redirect::to('/checkout');
+        return Redirect::to('/');
 
 
     }
@@ -89,6 +89,7 @@ class CheckoutController extends Controller
         }
 
         Session::forget('cart');
+        Session::forget('coupon');
 
         if($data1['payment_method']==1){
             $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
@@ -113,7 +114,7 @@ class CheckoutController extends Controller
         ->where('customer_password',$password)->first();
         if($result){
             Session::put('customer_id',$result->customer_id);
-            return Redirect::to('/checkout');
+            return Redirect::to('/');
         }else{
             return Redirect::to('/login-checkout');
         }
@@ -130,14 +131,23 @@ class CheckoutController extends Controller
     }
     public function view_order($orderId){
         $this->AuthLoginCheck();
+        $order_1 = DB::table('tbl_order')->
+        join('tbl_customers','tbl_customers.customer_id','=','tbl_order.customer_id')
+        ->select('tbl_order.*','tbl_customers.*')
+        ->where('tbl_order.order_id',$orderId)->first();
+
+        $order_2 = DB::table('tbl_shipping')
+        ->join('tbl_order','tbl_shipping.shipping_id','=','tbl_order.shipping_id')
+        ->select('tbl_order.*','tbl_shipping.*')
+        ->where('tbl_order.order_id',$orderId)->first();
 
         $order_by_Id = DB::table('tbl_order')
-        ->join('tbl_customers','tbl_customers.customer_id','=','tbl_order.customer_id')
-        ->join('tbl_shipping','tbl_shipping.shipping_id','=','tbl_order.shipping_id')
         ->join('tbl_order_details','tbl_order_details.order_id','=','tbl_order.order_id')
-        ->select('tbl_order.*','tbl_order_details.*','tbl_customers.*','tbl_shipping.*')
+        ->select('tbl_order.*','tbl_order_details.*')
         ->where('tbl_order.order_id',$orderId)->get();
-        $manager_order_by_Id = view('admin.view_order')->with('order_by_Id',$order_by_Id);
+
+        $manager_order_by_Id = view('admin.view_order')->with('order_by_Id',$order_by_Id)
+        ->with('order_1',$order_1)->with('order_2',$order_2);
         return view('layouts.admin_layout')->with('admin.view_order',$manager_order_by_Id);
 
     }

@@ -28,12 +28,12 @@
           </tr>
         </thead>
         <tbody>
-            @foreach($order_by_Id as $key =>$v_content)
+
           <tr>
-            <td>{{$v_content->customer_name}}</td>
-            <td>{{$v_content->customer_phone}}</td>
+            <td>{{$order_1->customer_name}}</td>
+            <td>{{$order_1->customer_phone}}</td>
           </tr>
-            @endforeach
+
         </tbody>
       </table>
     </div>
@@ -69,13 +69,13 @@
           </tr>
         </thead>
         <tbody>
-            @foreach($order_by_Id as $key =>$v_content)
+
           <tr>
-            <td>{{$v_content->shipping_name}}</td>
-            <td>{{$v_content->shipping_address}}</td>
-            <td>{{$v_content->shipping_phone}}</td>
+            <td>{{$order_2->shipping_name}}</td>
+            <td>{{$order_2->shipping_address}}</td>
+            <td>{{$order_2->shipping_phone}}</td>
           </tr>
-            @endforeach
+
         </tbody>
       </table>
     </div>
