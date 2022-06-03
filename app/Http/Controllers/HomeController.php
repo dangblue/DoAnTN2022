@@ -14,14 +14,18 @@ session_start();
 class HomeController extends Controller
 {
     public function index(){
+        $product1 = DB::table('tbl_product')->where('product_status','0')
+        ->orderBy('product_id','asc')->limit(6)->get();
+
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')
         ->orderBy('category_id','desc')->get();
 
         $all_product = DB::table('tbl_product')->where('product_status','0')
-        ->orderBy('product_id','desc')->limit(6)->get();
+        ->orderBy('product_id','desc')->limit(8)->get();
 
 
-        return view('home')->with('category',$cate_product)->with('all_product',$all_product);
+        return view('home')->with('category',$cate_product)->with('all_product',$all_product)
+        ->with('product1',$product1);
     }
 
     public function search(Request $request){
@@ -29,5 +33,11 @@ class HomeController extends Controller
         $keywords = $request->keywords_submit;
         $search_product = DB::table('tbl_product')->where('product_name','like','%'.$keywords.'%')->get();
         return view('pages.product.search')->with('category',$cate_product)->with('search_product',$search_product);
+    }
+    public function wishlist(){
+        $product = DB::table('tbl_product')->where('product_status','0')
+        ->orderBy('product_id','desc')->get();
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
+         return view('pages.likeproduct.like_product')->with('category',$cate_product)->with('product',$product);
     }
 }

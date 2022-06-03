@@ -39,7 +39,7 @@
     ?>
         <thead>
           <tr>
-
+            <th>STT</th>
             <th>Tên mã</th>
             <th>Mã giảm giá</th>
             <th>Số lượng mã</th>
@@ -52,7 +52,7 @@
         <tbody>
             @foreach($coupon as $key => $cou)
           <tr>
-
+            <td><i>{{$key=$key+1}}</i></label></td>
             <td>{{$cou -> coupon_name}}</td>
             <td>{{$cou -> coupon_code}}</td>
             <td>{{$cou -> coupon_time}}</td>
@@ -100,7 +100,7 @@
       <div class="row">
 
         <div class="col-sm-5 text-center">
-          <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+          <small class="text-muted inline m-t-sm m-b-sm"></small>
         </div>
         <div class="col-sm-7 text-right text-center-xs">
           <ul class="pagination pagination-sm m-t-none m-b-none">

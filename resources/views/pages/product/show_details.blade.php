@@ -1,5 +1,22 @@
 @extends('layouts.site')
 @section('main')
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{{url('public/frontend')}}/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Chi tiết sản phẩm</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{{URL::to('/')}}">Trang chủ</a>
+
+                        <span>Chi tiết sản phẩm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @foreach ($product_details as $key => $value)
 
     <!-- Product Details Section Begin -->
@@ -12,6 +29,16 @@
                             <img class="product__details__pic__item--large" width="528" height="516"
                                 src="{{URL::to('public/uploads/product/'.$value->product_image)}}" alt="">
                         </div>
+                        <div class="product__details__pic__slider owl-carousel">
+                            <img class="product__details__pic__item--large"
+                                src="{{URL::to('public/uploads/product/'.$value->product_image)}}" alt="">
+                            <img class="product__details__pic__item--large"
+                                src="{{URL::to('public/uploads/product/'.$value->product_image)}}" alt="">
+                            <img class="product__details__pic__item--large"
+                                src="{{URL::to('public/uploads/product/'.$value->product_image)}}" alt="">
+                            <img class="product__details__pic__item--large"
+                                src="{{URL::to('public/uploads/product/'.$value->product_image)}}" alt="">
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -20,7 +47,7 @@
                         <input type="hidden" value="{{$value->product_name}}" class="cart_product_name_{{$value->product_id}}">
                         <input type="hidden" value="{{$value->product_image}}" class="cart_product_image_{{$value->product_id}}">
                         <input type="hidden" value="{{$value->product_price}}" class="cart_product_price_{{$value->product_id}}">
-                        <input type="hidden" value="1" class="cart_product_qty_{{$value->product_id}}">
+
                         <h3>{{$value->product_name}}</h3>
 
                         <form action="{{URL::to('/show-cart')}}" method="GET">
@@ -30,7 +57,7 @@
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input name="qty" type="number" value="1"/>
+                                    <input name="qty" id="qty" type="number" value="1" min="1" data-decimals="0" required>
                                     <input name="productid_hidden" type="hidden" value="{{$value->product_id}}"/>
 
                                 </div>
@@ -42,10 +69,10 @@
 
                         <ul>
 
-                            <li><b>Availability</b> <span>In Stock</span></li>
-                            <li><b>Category</b> <span>{{$value->category_name}}</span></li>
-                            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                            <li><b>Weight</b> <span>0.5 kg</span></li>
+                            <li><b>Tình trạng</b> <span>Còn hàng</span></li>
+                            <li><b>Danh mục</b> <span>{{$value->category_name}}</span></li>
+                            <li><b>Phí ship</b> <span><samp>Miễn phí vận chuyển</samp></span></li>
+                            <li><b>Cân nặng</b> <span>0.5 kg</span></li>
                             <li><b>Share on</b>
                                 <div class="share">
                                     <a href="#"><i class="fa fa-facebook"></i></a>

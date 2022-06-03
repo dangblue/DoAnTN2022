@@ -8,7 +8,10 @@ use App\Http\Requests;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-
+use App\Models\Shipping;
+use App\Models\Order;
+use App\Models\OrderDetails;
+use Carbon\Carbon;
 session_start();
 
 class CheckoutController extends Controller
@@ -65,20 +68,45 @@ class CheckoutController extends Controller
 
         //insert order
         $total =0;
-        foreach(Session::get('cart') as $key => $cart){
+        $total_coupon=0;
+
+        $cart1 = Session::get('cart');
+        $cou1 = Session::get('coupon');
+        if($cart1 == false){
+            $cart1 = [];
+        }
+        if($cou1 == false){
+            $cou1 = [];
+        }
+        foreach($cart1 as $key => $cart){
                 $subtotal = $cart['product_price']*$cart['product_qty'];
                 $total+=$subtotal;
+
         }
+        foreach($cou1 as $key => $cou){
+            if($cou['coupon_condition']==1){
+                $total_coupon = ($total*$cou['coupon_number'])/100;
+            }
+            else{
+                $total_coupon = ($total - $cou['coupon_number']);
+            }
+
+        }
+        $money = ($total-$total_coupon);
+
         $order_data = array();
         $order_data['customer_id'] = Session::get('customer_id');
         $order_data['shipping_id'] = Session::get('shipping_id');
         $order_data['payment_id'] = $payment_id;
-        $order_data['order_total'] = $total;
+        $order_data['order_total'] = $money;
         $order_data['order_status'] = 'Đang chờ xử lý';
+
+        $order_data['created_at'] = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $order_id = DB::table('tbl_order')->insertGetId($order_data);
 
         //insert order_details
-        foreach($content = Session::get('cart') as $key => $v_content){
+
+        foreach($cart1 as $key => $v_content){
             $order_d_data['order_id'] = $order_id;
             $order_d_data['product_id'] = $v_content['product_id'];
             $order_d_data['product_name'] = $v_content['product_name'];
@@ -91,12 +119,12 @@ class CheckoutController extends Controller
         Session::forget('cart');
         Session::forget('coupon');
 
-        if($data1['payment_method']==1){
+        if($data1['payment_method']=='trả bằng thẻ'){
             $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
             $request->session()->forget('cart');
            return view('pages.checkout.payment')->with('category',$cate_product);
 
-        }elseif($data1['payment_method']==2){
+        }elseif($data1['payment_method']=='trả tiền mặt'){
             $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
             $request->session()->forget('cart');
            return view('pages.checkout.payment')->with('category',$cate_product);
@@ -141,13 +169,18 @@ class CheckoutController extends Controller
         ->select('tbl_order.*','tbl_shipping.*')
         ->where('tbl_order.order_id',$orderId)->first();
 
+        $order_3 = DB::table('tbl_payment')
+        ->join('tbl_order','tbl_payment.payment_id','=','tbl_order.payment_id')
+        ->select('tbl_order.*','tbl_payment.*')
+        ->where('tbl_order.order_id',$orderId)->first();
+
         $order_by_Id = DB::table('tbl_order')
         ->join('tbl_order_details','tbl_order_details.order_id','=','tbl_order.order_id')
         ->select('tbl_order.*','tbl_order_details.*')
         ->where('tbl_order.order_id',$orderId)->get();
 
         $manager_order_by_Id = view('admin.view_order')->with('order_by_Id',$order_by_Id)
-        ->with('order_1',$order_1)->with('order_2',$order_2);
+        ->with('order_1',$order_1)->with('order_2',$order_2)->with('order_3',$order_3);
         return view('layouts.admin_layout')->with('admin.view_order',$manager_order_by_Id);
 
     }
@@ -161,5 +194,6 @@ class CheckoutController extends Controller
         ->orderBy('tbl_order.order_id','desc')->get();
         return Redirect::to('/manage-order');
     }
+
 
 }

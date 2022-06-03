@@ -3,6 +3,23 @@
 
 <link rel="stylesheet" href="{{url('public/frontend')}}/css/main.css" type="text/css">
 
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{{url('public/frontend')}}/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Đăng nhập-Đăng ký</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{{URL::to('/')}}">Trang chủ</a>
+
+                        <span>Đăng nhập-Đăng ký</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="form"><!--form-->
     <div class="container">

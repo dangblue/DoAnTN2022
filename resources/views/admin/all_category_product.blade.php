@@ -39,11 +39,7 @@
     ?>
         <thead>
           <tr>
-            <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
-            </th>
+            <th>STT</th>
             <th>Tên danh mục</th>
             <th>Hiển thị</th>
             <th>Quản lý</th>
@@ -53,7 +49,7 @@
         <tbody>
             @foreach($all_category_product as $key => $cate_pro)
           <tr>
-            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+            <td><i>{{$key=$key+1}}</i></label></td>
             <td>{{$cate_pro -> category_name}}</td>
             <td><span class="text-ellipsis">
              <?php

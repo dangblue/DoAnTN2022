@@ -24,11 +24,11 @@
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên sản phẩm</label>
-                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="Nhập tên sản phẩm và phải có ít nhất 3 ký tự" name="product_name" class="form-control" id="exampleInputEmail1" value="{{$pro->product_name}}">
+                            <input type="text" data-validation="length" data-validation-length="min2" data-validation-error-msg="Nhập tên sản phẩm và phải có ít nhất 2 ký tự" name="product_name" class="form-control" id="exampleInputEmail1" value="{{$pro->product_name}}">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm</label>
-                            <input type="text" data-validation="number" data-validation-error-msg=" Nhập giá sản phẩm và phải là số" name="product_price" class="form-control" id="exampleInputEmail1" value="{{$pro->product_price}}">
+                            <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" value="{{$pro->product_price}}" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>

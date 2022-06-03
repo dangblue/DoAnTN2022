@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
 Route::post('/tim-kiem', 'HomeController@search');
-
-
+//SP yeu thich
+Route::get('/wishlist', 'HomeController@wishlist');
 
 //Danh muc san pham trang chu
 Route::get('/danh-muc-san-pham/{category_id}', 'CategoryProduct@show_category_home');
@@ -78,12 +78,14 @@ Route::get('/del-product/{session_id}', 'CartController@delete_product');
 Route::get('/show-cart', 'CartController@show_cart');
 Route::post('/add-cart-ajax', 'CartController@add_cart_ajax');
 //Checkout
+
 Route::get('/login-checkout', 'CheckoutController@login_checkout');
 Route::get('/logout-checkout', 'CheckoutController@logout_checkout');
 Route::post('/login-customer', 'CheckoutController@login_customer');
 Route::post('/add-customer', 'CheckoutController@add_customer');
 Route::get('/checkout', 'CheckoutController@checkout');
 Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_customer');
+//Route::post('/confirm-order', 'CheckoutController@confirm_order');
 //Order
 Route::get('/manage-order', 'CheckoutController@manage_order');
 Route::get('/view-order/{orderId}', 'CheckoutController@view_order');
@@ -97,4 +99,11 @@ Route::post('/insert-coupon-code', 'CouponController@insert_coupon_code');
 Route::get('/list-coupon', 'CouponController@list_coupon');
 Route::get('/delete-coupon/{coupon_id}', 'CouponController@delete_coupon');
 
+//Shop
+Route::get('/shop', 'ProductController@shop');
+//Contact
+Route::get('/contact', 'ContactController@contact');
+Route::get('/information', 'ContactController@information');
+Route::post('/save-info', 'ContactController@save_info');
+Route::post('/update-info/{info_id}', 'ContactController@update_info');
 

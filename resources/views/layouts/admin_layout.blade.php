@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <head>
 <title>Dashboard</title>
@@ -89,6 +88,12 @@ $name = Session::get('admin_name');
                     <a class="active" href="{{URL::to('/dashboard')}}">
                         <i class="fa fa-dashboard"></i>
                         <span>Tổng quan danh mục</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{URL::to('/information')}}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Thông tin website</span>
                     </a>
                 </li>
                 <li class="sub-menu">

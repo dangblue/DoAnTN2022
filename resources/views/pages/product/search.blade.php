@@ -1,6 +1,22 @@
 @extends('layouts.site')
 @section('main')
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{{url('public/frontend')}}/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Tìm kiếm</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{{URL::to('/')}}">Trang chủ</a>
 
+                        <span>Tìm kiếm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- Featured Section Begin -->
 <section class="featured spad">
     <div class="container">
@@ -12,7 +28,7 @@
                 <div class="featured__controls">
                     <ul>
 
-                        <li class="active" data-filter="*"><a href="{{URL::to('/')}}">All</a></li>
+                        <li class="active" data-filter="*"><a href="{{URL::to('/')}}">Trang chủ</a></li>
 
 
                     </ul>

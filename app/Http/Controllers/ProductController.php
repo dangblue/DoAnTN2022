@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use GuzzleHttp\Psr7\Message;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
@@ -25,9 +26,10 @@ class ProductController extends Controller
         $this->AuthLoginCheck();
         $cate_product = DB::table('tbl_category_product')->orderBy('category_id','desc')->get();
         $brand_product = DB::table('tbl_brand')->orderBy('brand_id','desc')->get();
+        $product = DB::table('tbl_product')->orderBy('product_id','desc')->get();
 
         return view('admin.add_product')->with('cate_product',$cate_product)
-        ->with('brand_product',$brand_product);
+        ->with('brand_product',$brand_product)->with('product',$product);
 
     }
     public function all_product(){
@@ -146,5 +148,29 @@ class ProductController extends Controller
 
         return view('pages.product.show_details')->with('category',$cate_product)
         ->with('product_details',$details_product)->with('related',$related_product);
+    }
+    public function shop(){
+
+        $product_show = DB::table('tbl_product')->where('product_status','0')
+        ->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')
+        ->orderBy('tbl_product.product_id','asc')->limit(6)->get();
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
+       // $all_product = DB::table('tbl_product')->Paginate(6);
+       $all_product = Product::orderBy('product_id','ASC')->Paginate(6);
+        if(isset($_GET['sort_by'])){
+            $sort_by = $_GET['sort_by'];
+            if($sort_by=='kytu_za'){
+                $all_product = Product::orderBy('product_name','DESC')->Paginate(6)->appends(request()->query());
+
+            }elseif($sort_by=='kytu_az'){
+                $all_product = Product::orderBy('product_name','ASC')->Paginate(6)->appends(request()->query());
+            }elseif($sort_by=='tang_dan'){
+                $all_product = Product::orderBy('product_price','ASC')->Paginate(6)->appends(request()->query());
+            }elseif($sort_by=='giam_dan'){
+                $all_product = Product::orderBy('product_price','DESC')->Paginate(6)->appends(request()->query());
+            }
+        }
+        return view('pages.shop.show_shop')->with('category',$cate_product)->with('product',$all_product)
+        ->with('product_show',$product_show);
     }
 }

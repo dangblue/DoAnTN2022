@@ -23,18 +23,18 @@
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên sản phẩm</label>
-                            <input type="text" data-validation="length" data-validation-length="min3" data-validation-error-msg="Nhập tên sản phẩm và phải có ít nhất 3 ký tự"
+                            <input type="text" data-validation="length" data-validation-length="min2" data-validation-error-msg="Nhập tên sản phẩm và phải có ít nhất 2 ký tự"
                             name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Tên sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá sản phẩm</label>
-                            <input type="text" data-validation="number" data-validation-error-msg=" Nhập giá sản phẩm và phải là số"
+                            <input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg=" Nhập giá sản phẩm"
                             name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Giá sản phẩm">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>
-
                             <input type="file" name="product_image" class="form-control" id="exampleInputEmail1">
+
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả sản phẩm</label>

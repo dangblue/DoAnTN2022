@@ -39,12 +39,9 @@
     ?>
         <thead>
           <tr>
-            <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
-            </th>
+            <th>STT</th>
             <th>Tên người đặt hàng</th>
+            <th>Thời gian đặt</th>
             <th>Tổng giá tiền</th>
             <th>Tình trạng đơn hàng</th>
             <th>Hiển thị</th>
@@ -54,10 +51,12 @@
         <tbody>
             @foreach($all_order as $key => $order)
           <tr>
-            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+            <td><i>{{$key=$key+1}}</i></label></td>
             <td>{{$order -> customer_name}}</td>
+            <td>{{$order -> created_at}}</td>
             <td>{{$order -> order_total}}</td>
             <td>{{$order -> order_status}}</td>
+
 
             <td>
             <a href="{{URL::to('/view-order/'.$order->order_id)}}" class="active" ui-toggle-class="">

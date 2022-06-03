@@ -133,7 +133,7 @@ ol {
     bottom: -15px;
     right: 0;
     height: 4px;
-    width: 80px;
+    width: 240px;
     background: #7fad39;
     content: "";
     margin: 0 auto;
@@ -636,7 +636,7 @@ ol {
 }
 
 .hero__categories ul li a {
-    font-size: 16px;
+    font-size: 18px;
     color: #1c1c1c;
     line-height: 39px;
     display: block;
@@ -2898,7 +2898,7 @@ ol {
     color: #6f6f6f;
     padding-left: 20px;
     margin-bottom: 30px;
-    border: 1px solid #ebebeb;
+    border: 1px solid #7fad39;
     border-radius: 4px;
 }
 
@@ -2913,7 +2913,7 @@ ol {
     color: #6f6f6f;
     padding-left: 20px;
     margin-bottom: 24px;
-    border: 1px solid #ebebeb;
+    border: 1px solid #7fad39;
     border-radius: 4px;
     padding-top: 12px;
     resize: none;

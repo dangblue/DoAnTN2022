@@ -1,6 +1,22 @@
 @extends('layouts.site')
 @section('main')
-
+ <!-- Breadcrumb Section Begin -->
+ <section class="breadcrumb-section set-bg" data-setbg="{{url('public/frontend')}}/img/breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Giỏ hàng</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{{URL::to('/')}}">Trang chủ</a>
+                        <span>Giỏ hàng</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
 
@@ -40,8 +56,12 @@
                             @php
                                     $total = 0;
                                     $cart1 = Session::get('cart');
+                                    $cou1 = Session::get('coupon');
                                     if($cart1 == false){
                                             $cart1 = [];
+                                        }
+                                    if($cou1 == false){
+                                            $cou1 = [];
                                         }
                             @endphp
                             @foreach($cart1 as $key => $cart)
@@ -97,9 +117,9 @@
                     <ul>
                         <li>Phí vận chuyển <span>Free</span></li>
                         <li>Tổng tiền <span>{{$total}}$</span></li>
-                        @if(Session::get('coupon'))
+                        @if($cou1)
 							<li>
-									@foreach(Session::get('coupon') as $key => $cou)
+									@foreach($cou1 as $key => $cou)
 										@if($cou['coupon_condition']==1)
 										Mã giảm <span>{{$cou['coupon_number']}} % </span>
 											<p>
@@ -141,7 +161,7 @@
         </div>
     </form>
     @if(Session::get('cart'))
-    <div class="col-lg-6">
+    <div class="col-lg-4">
         <div class="shoping__continue">
             <div class="shoping__discount">
                 <h5>Mã giảm giá</h5>
