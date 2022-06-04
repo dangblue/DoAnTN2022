@@ -27,8 +27,6 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Humberger End -->
-
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
@@ -38,7 +36,7 @@
                         <div class="header__top__left">
                             <ul>
                                 <li><i class="fa fa-envelope"></i> damgblue@gmail.com</li>
-                                <li></li>
+                                <li>Free Shipping toàn quốc</li>
                             </ul>
                         </div>
                     </div>
@@ -50,7 +48,15 @@
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
-
+                            <div class="header__top__right__language">
+                                <img src="{{url('public/frontend')}}/img/language.png" alt="">
+                                <div>English</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="#">VietNam</a></li>
+                                    <li><a href="#">English</a></li>
+                                </ul>
+                            </div>
                             <div class="header__top__right__auth">
                                 <?php
                                     $customer_id = Session::get('customer_id');
@@ -82,10 +88,9 @@
                         <ul>
                             <li class="active"><a href="{{URL::to('/')}}">Trang chủ</a></li>
                             <li><a href="{{URL::to('/shop')}}">Cửa hàng</a></li>
-                            <li><a href="#">Trang</a>
+                            <li><a href="{{URL::to('/show-cart')}}">Giỏ hàng</a>
                                 <ul class="header__menu__dropdown">
-
-                                    <li><a href="{{URL::to('/show-cart')}}">Giỏ hàng</a></li>
+                                    <li><a></a></li>
 
                                     <?php
                                     $customer_id = Session::get('customer_id');
@@ -114,7 +119,7 @@
                             <li><a href="{{URL::to('/wishlist')}}"><i class="fa fa-heart"></i> <span></span></a></li>
                             <li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-bag"></i><span></span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span></span></div>
+
                     </div>
                 </div>
             </div>
@@ -124,57 +129,6 @@
         </div>
     </header>
     <!-- Header Section End -->
-   <!-- Hero Section Begin -->
-   <section class="hero">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="hero__categories">
-                    <div class="hero__categories__all">
-                        <i class="fa fa-bars"></i>
-                        <span>Danh mục sản phẩm</span>
-                    </div>
-                    <ul>
-                        @foreach($category as $key => $cate)
-                        <li><b><a href="{{URL::to('/danh-muc-san-pham/'.$cate->category_id)}}">{{$cate->category_name}}</a></b></li>
-                        @endforeach
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="col-lg-9">
-                <div class="hero__search">
-                    <div class="hero__search__form">
-                        <form action="{{URL::to('/tim-kiem')}}" method="POST">
-                            {{csrf_field()}}
-                            <input type="text" name="keywords_submit" placeholder="Nhập từ khóa cần tìm">
-                            <button type="submit" name="search_items" class="site-btn">Tìm kiếm</button>
-                        </form>
-                    </div>
-                    <div class="hero__search__phone">
-                        <div class="hero__search__phone__icon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="hero__search__phone__text">
-                            <h5>0975715824</h5>
-                            <span>Hỗ trợ 24/7</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero__item set-bg" data-setbg="{{url('public/frontend')}}/img/hero/banner.jpg">
-                    <div class="hero__text">
-                        <span>Ogani Shop</span>
-                        <h2>Good <br/>for health</h2>
-                        <a href="{{URL::to('/shop')}}" class="primary-btn">Đến cửa hàng ngay</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-</section>
     @yield('main')
     <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -186,7 +140,7 @@
                             <a href="{{URL::to('/')}}"><img src="{{url('public/frontend')}}/img/logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Địa chỉ: Chuyên Mỹ-Phú Xuyên-Hà Nội</li>
+                            <li>Địa chỉ: 99 Nguyễn Chí Thanh - Láng Hạ - Đống Đa - Hà Nội</li>
                             <li>SĐT: 0975715824</li>
                             <li>Email: damgblue@gmail.com</li>
                         </ul>
@@ -197,19 +151,18 @@
                         <h6>Liên kết hữu ích</h6>
                         <ul>
                             <li><a href="#">Về chúng tôi</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
+                            <li><a href="#">Giới thiệu về cửa hàng</a></li>
+                            <li><a href="#">Mua sắm an toàn</a></li>
+                            <li><a href="#">Thông tin phân phối</a></li>
+
+
                         </ul>
                         <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
+                            <li><a href="#">Dịch vụ của cửa hàng</a></li>
+                            <li><a href="#">Dự án</a></li>
+                            <li><a href="{{URL::to('/contact')}}">Liên hệ</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -234,7 +187,7 @@
                 <div class="col-lg-12">
                     <div class="footer__copyright">
                         <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> Designed <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">Ogani</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
                         <div class="footer__copyright__payment"><img src="{{url('public/frontend')}}/img/payment-item.png" alt=""></div>
                     </div>
@@ -316,7 +269,7 @@
                 var data = JSON.parse(localStorage.getItem('data'));
                 data.reverse();
                 document.getElementById('row_wishlist').style.overflow = 'scroll';
-                document.getElementById('row_wishlist').style.height = '600px';
+                document.getElementById('row_wishlist').style.height = '400px';
 
                 for(i=0;i<data.length;i++){
                     var product_id = data[i].product_id;
@@ -325,8 +278,8 @@
                     var price = data[i].price;
                     var image = data[i].image;
                     var url = data[i].url;
-                    //var valueImage = data[i].valueImage;
-                    $("#row_wishlist").append('<div class="row"><div class="col-lg-12"><div class="shoping__cart__table"><table><thead><tr><th class="shoping__product">Sản phẩm</th><th>Giá</th></tr></thead> <tbody> <tr><td class="shoping__cart__item"> <a href="{{URL::to('/chi-tiet-san-pham')}}"><img src="'+image+'" width="100" alt=""></a><h5>'+name+'</h5></td><td class="shoping__cart__price"><span>'+price+'</span></td><td><div class="row"><div class="col-lg-12"><div class="shoping__cart__btns"><a type="button" data-id_product="" class="primary-btn cart-btn add-to-cart">Thêm vào giỏ hàng</a></div></div></div></td><td class="shoping__cart__item__close"><a type="button" class="icon_close delete_wishlist"></a></td> </tr></tbody></table></div>');
+                    var valueImage = data[i].valueImage;
+                    $("#row_wishlist").append('<div class="row"><div class="col-lg-12"><div class="shoping__cart__table"><table><thead><tr><th class="shoping__product">Sản phẩm</th><th>Giá</th></tr></thead> <tbody> <tr><td class="shoping__cart__item"> <a href="'+url+'"><img src="'+image+'" width="100" alt=""></a><h5>'+name+'</h5></td><td class="shoping__cart__price"><span>'+price+'</span></td><td><div class="row"><div class="col-lg-12"><div class="shoping__cart__btns"><input type="hidden" value="'+product_id+'" class="cart_product_id_'+product_id+'"><input type="hidden" value="'+name+'" class="cart_product_name_'+product_id+'"><input type="hidden" value="'+valueImage+'" class="cart_product_image_'+product_id+'"><input type="hidden" value="'+price+'" class="cart_product_price_'+product_id+'"><input type="hidden" name="qty" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required><input type="hidden" value="1" class="cart_product_qty_'+product_id+'"><a type="button" data-id_product="'+product_id+'" class="primary-btn cart-btn add-to-cart">Thêm vào giỏ hàng</a></div></div></div></td><td class="shoping__cart__item__close"><button><a type="button" class="icon_close delete_wishlist" data-id="'+product_id+'"></a></button></td> </tr></tbody></table></div>');
                 }
             }
         }
@@ -339,7 +292,7 @@
             var price = document.getElementById('wishlist_productprice'+product_id).value;
             var image = document.getElementById('wishlist_productimage'+product_id).src;
             var url = document.getElementById('wishlist_producturl'+product_id).href;
-            //var valueImage = document.getElementById('wishlist_valueimage'+product_id).value;
+            var valueImage = document.getElementById('wishlist_valueimage'+product_id).value;
 
             var newItem = {
                 'url':url,
@@ -348,7 +301,7 @@
                 'name':name,
                 'price':price,
                 'image':image,
-                //'valueImage':valueImage,
+                'valueImage':valueImage,
             }
 
             if(localStorage.getItem('data')==null){

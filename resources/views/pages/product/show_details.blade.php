@@ -1,5 +1,46 @@
 @extends('layouts.site')
 @section('main')
+<!-- Hero Section Begin -->
+<section class="hero hero-normal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>Danh mục sản phẩm</span>
+                    </div>
+                    <ul>
+                        @foreach($category as $key => $cate)
+                        <li><b><a href="{{URL::to('/danh-muc-san-pham/'.$cate->category_id)}}">{{$cate->category_name}}</a></b></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="{{URL::to('/tim-kiem')}}" method="POST">
+                            {{csrf_field()}}
+                            <input type="text" name="keywords_submit" placeholder="Nhập từ khóa cần tìm">
+                            <button type="submit" name="search_items" class="site-btn">Tìm kiếm</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>0975715824</h5>
+                            <span>Hỗ trợ 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="{{url('public/frontend')}}/img/breadcrumb.jpg">
     <div class="container">
@@ -171,14 +212,15 @@
                         <form>
                             @csrf
                         <input type="hidden" value="{{$relate->product_id}}" class="cart_product_id_{{$relate->product_id}}">
-                        <input type="hidden" value="{{$relate->product_name}}" class="cart_product_name_{{$relate->product_id}}">
-                        <input type="hidden" value="{{$relate->product_image}}" class="cart_product_image_{{$relate->product_id}}">
-                        <input type="hidden" value="{{$relate->product_price}}" class="cart_product_price_{{$relate->product_id}}">
+                        <input type="hidden" id="wishlist_productname{{$relate->product_id}}" value="{{$relate->product_name}}" class="cart_product_name_{{$relate->product_id}}">
+                        <input type="hidden" id="wishlist_valueimage{{$relate->product_id}}" value="{{$relate->product_image}}" class="cart_product_image_{{$relate->product_id}}">
+                        <input type="hidden" id="wishlist_productprice{{$relate->product_id}}" value="{{$relate->product_price}}" class="cart_product_price_{{$relate->product_id}}">
                         <input type="hidden" value="1" class="cart_product_qty_{{$relate->product_id}}">
-                        <div class="product__item__pic set-bg" data-setbg="{{URL::to('public/uploads/product/'.$relate->product_image)}}">
+                        <div class="product__item__pic set-bg">
+                            <img id="wishlist_productimage{{$relate->product_id}}" src="{{URL::to('public/uploads/product/'.$relate->product_image)}}">
                             <ul class="product__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="{{URL::to('/chi-tiet-san-pham',$relate->product_id)}}"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i type="button" class="fa fa-heart button_wishlist" id="{{$relate->product_id}}" onclick="add_wishlist(this.id);"></i></a></li>
+                                <li><a id="wishlist_producturl{{$relate->product_id}}" href="{{URL::to('/chi-tiet-san-pham',$relate->product_id)}}"><i class="fa fa-retweet"></i></a></li>
                                 <li><a><i type="button" data-id_product="{{$relate->product_id}}" class="fa fa-shopping-cart add-to-cart" name="add-to-cart"></i></a></li>
                             </ul>
                         </div>

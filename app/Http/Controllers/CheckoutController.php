@@ -195,5 +195,11 @@ class CheckoutController extends Controller
         return Redirect::to('/manage-order');
     }
 
+    public function forgot_password(){
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')
+        ->orderBy('category_id','desc')->get();
+        return view('pages.checkout.forget_pass')->with('category',$cate_product);
+    }
+
 
 }

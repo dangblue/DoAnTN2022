@@ -1,5 +1,7 @@
 @extends('layouts.site')
 @section('main')
+
+<link rel="stylesheet" href="{{url('public/frontend')}}/css/main.css" type="text/css">
 <!-- Hero Section Begin -->
 <section class="hero hero-normal">
     <div class="container">
@@ -47,26 +49,34 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Thanh toán</h2>
+                    <h2>Quên mật khẩu</h2>
                     <div class="breadcrumb__option">
                         <a href="{{URL::to('/')}}">Trang chủ</a>
 
-                        <span>Thanh toán</span>
+                        <span>Quên mật khẩu</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Related Product Section Begin -->
-<section class="related-product">
+
+<section id="form"><!--form-->
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title related__product__title">
-                    <h2>Đã đặt hàng thành công. Cảm ơn quý khách !</h2>
-                </div>
+            <div class="col-sm-6">
+                <div class="login-form"><!--login form-->
+                    <h2>Lấy lại mật khẩu</h2>
+                    <form action="{{URL::to('/recover-pass')}}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="text" data-validation="email" data-validation-error-msg=" Nhập tài khoản gmail"
+                        name="email_account" placeholder=" Nhập địa chỉ email" />
+
+                        <button type="submit" class="btn btn-default">Gửi xác nhận</button>
+                    </form>
+                </div><!--/login form-->
             </div>
         </div>
     </div>
+</section><!--/form-->
 @stop();

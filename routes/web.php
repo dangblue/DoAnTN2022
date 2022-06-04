@@ -78,13 +78,14 @@ Route::get('/del-product/{session_id}', 'CartController@delete_product');
 Route::get('/show-cart', 'CartController@show_cart');
 Route::post('/add-cart-ajax', 'CartController@add_cart_ajax');
 //Checkout
-
 Route::get('/login-checkout', 'CheckoutController@login_checkout');
 Route::get('/logout-checkout', 'CheckoutController@logout_checkout');
 Route::post('/login-customer', 'CheckoutController@login_customer');
 Route::post('/add-customer', 'CheckoutController@add_customer');
 Route::get('/checkout', 'CheckoutController@checkout');
 Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_customer');
+Route::get('/quen-mat-khau', 'CheckoutController@forgot_password');
+Route::post('/recover-pass', 'CheckoutController@recover_pass');
 //Route::post('/confirm-order', 'CheckoutController@confirm_order');
 //Order
 Route::get('/manage-order', 'CheckoutController@manage_order');
