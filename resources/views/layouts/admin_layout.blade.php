@@ -145,6 +145,26 @@ $name = Session::get('admin_name');
                         <li><a href="{{URL::to('/list-coupon')}}">Liệt kê mã giảm giá</a></li>
                     </ul>
                 </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span> Danh mục bài viết</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/add-category-post')}}">Thêm danh mục bài viết</a></li>
+						<li><a href="{{URL::to('/all-category-post')}}">Liệt kê danh mục bài viết</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Bài viết</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/add-post')}}">Thêm bài viết</a></li>
+						<li><a href="{{URL::to('/all-post')}}">Liệt kê bài viết</a></li>
+                    </ul>
+                </li>
 
             </ul>            </div>
         <!-- sidebar menu end-->
@@ -159,9 +179,10 @@ $name = Session::get('admin_name');
  <!-- footer -->
 		  <div class="footer">
 			<div class="wthree-copyright">
-			  <p>THIS IS MY PAGE</p>
+			  <p> Copyright &copy;<script>document.write(new Date().getFullYear());</script> Designed <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">Ogani</a></p>
 			</div>
 		  </div>
+
   <!-- / footer -->
 </section>
 <!--main content end-->

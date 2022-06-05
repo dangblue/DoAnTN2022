@@ -48,10 +48,10 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Checkout</h2>
+                    <h2>Thanh toán</h2>
                     <div class="breadcrumb__option">
-                        <a href="{{URL::to('/')}}">Home</a>
-                        <span>Checkout</span>
+                        <a href="{{URL::to('/')}}">Trang chủ</a>
+                        <span>Thanh toán</span>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
+                <h6><span class="icon_tag_alt"></span> Bạn có phiếu giảm giá? <a href="{{URL::to('/show-cart')}}">Bấm vào đây</a> để nhập mã giảm giá của bạn
                 </h6>
             </div>
         </div>

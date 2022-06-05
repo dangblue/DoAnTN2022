@@ -1,6 +1,47 @@
 @extends('layouts.site')
 @section('main')
 
+<!-- Hero Section Begin -->
+<section class="hero hero-normal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>Danh mục sản phẩm</span>
+                    </div>
+                    <ul>
+                        @foreach($category as $key => $cate)
+                        <li><b><a href="{{URL::to('/danh-muc-san-pham/'.$cate->category_id)}}">{{$cate->category_name}}</a></b></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form action="{{URL::to('/tim-kiem')}}" method="POST">
+                            {{csrf_field()}}
+                            <input type="text" name="keywords_submit" placeholder="Nhập từ khóa cần tìm">
+                            <button type="submit" name="search_items" class="site-btn">Tìm kiếm</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>0975715824</h5>
+                            <span>Hỗ trợ 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="{{url('public/frontend')}}/img/breadcrumb.jpg">
@@ -10,7 +51,7 @@
                 <div class="breadcrumb__text">
                     <h2>Blog</h2>
                     <div class="breadcrumb__option">
-                        <a href="./index.html">Home</a>
+                        <a href="{{URL::to('/')}}">Trang chủ</a>
                         <span>Blog</span>
                     </div>
                 </div>
@@ -33,17 +74,15 @@
                         </form>
                     </div>
                     <div class="blog__sidebar__item">
-                        <h4>Categories</h4>
+                        <h4>Danh mục bài viết</h4>
                         <ul>
-                            <li><a href="#">All</a></li>
-                            <li><a href="#">Beauty (20)</a></li>
-                            <li><a href="#">Food (5)</a></li>
-                            <li><a href="#">Life Style (9)</a></li>
-                            <li><a href="#">Travel (10)</a></li>
+                            @foreach($category_post as $key => $danhmucbaiviet)
+                            <li><a href="{{URL::to('/danh-muc-bai-viet/'.$danhmucbaiviet->cate_post_slug)}}">{{$danhmucbaiviet->cate_post_name}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="blog__sidebar__item">
-                        <h4>Recent News</h4>
+                        <h4>Bài viết gần đây</h4>
                         <div class="blog__sidebar__recent">
                             <a href="#" class="blog__sidebar__recent__item">
                                 <div class="blog__sidebar__recent__item__pic">
@@ -102,7 +141,7 @@
                                 <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
                                 <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
                                     quaerat </p>
-                                <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                <a href="#" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
                             </div>
                         </div>
                     </div>

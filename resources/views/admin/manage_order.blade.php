@@ -33,7 +33,7 @@
 
             $message = Session::get('message');
         if($message){
-    echo $message;
+            echo '<b style="color:red">'.$message.'</b>';
         Session::put('message',null);
      }
     ?>
@@ -51,7 +51,7 @@
         <tbody>
             @foreach($all_order as $key => $order)
           <tr>
-            <td><i>{{$key=$key+1}}</i></label></td>
+            <td><i>{{$key=$key+1}}</i></td>
             <td>{{$order -> customer_name}}</td>
             <td>{{$order -> created_at}}</td>
             <td>{{$order -> order_total}}</td>

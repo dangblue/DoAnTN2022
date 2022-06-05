@@ -58,6 +58,21 @@ Route::get('/active-brand-product/{brand_product_id}', 'BrandProduct@active_bran
 Route::post('/save-brand-product', 'BrandProduct@save_brand_product');
 Route::post('/update-brand-product/{brand_product_id}', 'BrandProduct@update_brand_product');
 
+//CategoryPost
+Route::get('/add-category-post', 'CategoryPost@add_category_post');
+Route::post('/save-category-post', 'CategoryPost@save_category_post');
+Route::get('/all-category-post', 'CategoryPost@all_category_post');
+Route::get('/blog', 'CategoryPost@show_blog');
+Route::get('/danh-muc-bai-viet/{cate_post_slug}', 'CategoryPost@blog_details');
+Route::get('/edit-category-post/{category_post_id}', 'CategoryPost@edit_category_post');
+Route::post('/update-category-post/{cate_id}', 'CategoryPost@update_category_post');
+Route::get('/delete-category-post/{cate_id}', 'CategoryPost@delete_category_post');
+
+//Post
+Route::get('/add-post', 'PostController@add_post');
+Route::post('/save-post', 'PostController@save_post');
+
+
 //Product
 Route::get('/add-product', 'ProductController@add_product');
 
@@ -107,4 +122,5 @@ Route::get('/contact', 'ContactController@contact');
 Route::get('/information', 'ContactController@information');
 Route::post('/save-info', 'ContactController@save_info');
 Route::post('/update-info/{info_id}', 'ContactController@update_info');
+
 

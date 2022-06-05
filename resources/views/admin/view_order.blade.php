@@ -108,11 +108,8 @@
     ?>
         <thead>
           <tr>
-            <th style="width:20px;">
-              <label class="i-checks m-b-none">
-                <input type="checkbox"><i></i>
-              </label>
-            </th>
+
+            <th>STT</th>
             <th>Tên sản phẩm</th>
             <th>Số lượng</th>
             <th>Giá </th>
@@ -124,8 +121,7 @@
         <tbody>
             @foreach($order_by_Id as $key =>$v_content)
           <tr>
-
-            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+            <td><i>{{$key=$key+1}}</i></td>
             <td>{{$v_content->product_name}}</td>
             <td>{{$v_content->product_sales_quantity}}</td>
             <td>{{$v_content->product_price}}</td>

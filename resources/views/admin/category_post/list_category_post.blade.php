@@ -2,7 +2,7 @@
 @section('admin_content')
 <div class="panel panel-default">
     <div class="panel-heading">
-    Liệt kê sản phẩm
+    Liệt kê danh mục bài viết
     </div>
     <div class="row w3-res-tb">
       <div class="col-sm-5 m-b-xs">
@@ -39,47 +39,30 @@
     ?>
         <thead>
           <tr>
-
             <th>STT</th>
-            <th>Tên sản phẩm</th>
-            <th>Giá</th>
-            <th>Hình ảnh</th>
-            <th>Danh mục</th>
-            <th>Thương hiệu</th>
+            <th>Tên danh mục bài viết</th>
+            <th>Slug</th>
             <th>Hiển thị</th>
             <th>Quản lý</th>
             <th style="width:30px;"></th>
           </tr>
         </thead>
         <tbody>
-            @foreach($all_product as $key => $pro)
+            @foreach($category_post as $key => $cate_post)
           <tr>
-            <td><i>{{$key=$key+1}}</i></label></td>
-            <td>{{$pro -> product_name}}</td>
-            <td>{{$pro -> product_price}}</td>
-            <td><img src="public/uploads/product/{{$pro -> product_image}}" height="100" width="100"></td>
-            <td>{{$pro -> category_name}}</td>
-            <td>{{$pro -> brand_name}}</td>
-
+            <td><i>{{$key=$key+1}}</i></td>
+            <td>{{$cate_post -> cate_post_name}}</td>
+            <td>{{$cate_post -> cate_post_slug}}</td>
             <td><span class="text-ellipsis">
-             <?php
-                if($pro -> product_status == 0){
-                ?>
-                <a href="{{URL::to('/unactive-product/'.$pro->product_id)}}"><span>Ẩn</span></a>
-                <?php
-                } else {
-                ?>
-                <a href="{{URL::to('/active-product/'.$pro->product_id)}}"><span>Hiện</span></a>
-                <?php
-                }
-                ?>
-                </span></td>
-
+             @if($cate_post -> cate_post_status == 0)
+                Hiển thị
+             @else
+                Ẩn
+            @endif
             <td>
-            <a href="{{URL::to('/edit-product/'.$pro->product_id)}}" class="active" ui-toggle-class="">
+            <a href="{{URL::to('/edit-category-post/'.$cate_post->cate_post_id)}}" class="active" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i></a>
-            <a onclick="return confirm('Bạn có muốn xóa?')"
-            href="{{URL::to('/delete-product/'.$pro->product_id)}}" class="active" ui-toggle-class="">
+            <a onclick="return confirm('Bạn có muốn xóa?')" href="{{URL::to('/delete-category-post/'.$cate_post->cate_post_id)}}" class="active" ui-toggle-class="">
                   <i class="fa fa-times text-danger text"></i></a>
             </td>
           </tr>
@@ -95,12 +78,7 @@
         </div>
         <div class="col-sm-7 text-right text-center-xs">
           <ul class="pagination pagination-sm m-t-none m-b-none">
-            <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+            {!!$category_post->links()!!}
           </ul>
         </div>
       </div>

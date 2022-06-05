@@ -67,8 +67,8 @@
             <div class="col-sm-6">
                 <div class="login-form"><!--login form-->
                     <h2>Lấy lại mật khẩu</h2>
-                    <form action="{{URL::to('/recover-pass')}}" method="POST">
-                        {{ csrf_field() }}
+                    <form action="{{url('/recover-pass')}}" method="POST">
+                        @csrf
                         <input type="text" data-validation="email" data-validation-error-msg=" Nhập tài khoản gmail"
                         name="email_account" placeholder=" Nhập địa chỉ email" />
 

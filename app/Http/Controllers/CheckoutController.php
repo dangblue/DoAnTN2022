@@ -88,11 +88,11 @@ class CheckoutController extends Controller
                 $total_coupon = ($total*$cou['coupon_number'])/100;
             }
             else{
-                $total_coupon = ($total - $cou['coupon_number']);
+                $total_coupon = $cou['coupon_number'];
             }
 
         }
-        $money = ($total-$total_coupon);
+        $money = $total-$total_coupon;
 
         $order_data = array();
         $order_data['customer_id'] = Session::get('customer_id');

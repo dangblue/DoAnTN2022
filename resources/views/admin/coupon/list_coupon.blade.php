@@ -33,7 +33,7 @@
 
             $message = Session::get('message');
         if($message){
-    echo $message;
+            echo '<b style="color:red">'.$message.'</b>';
         Session::put('message',null);
      }
     ?>
