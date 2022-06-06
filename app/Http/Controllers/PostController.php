@@ -29,15 +29,11 @@ class PostController extends Controller
         return view('admin.post.add_post')->with(compact('cate_post'));
 
     }
-    public function all_product(){
+    public function all_post(){
         $this->AuthLoginCheck();
-        $all_product=DB::table('tbl_product')
-        ->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')
-        ->join('tbl_brand','tbl_product.brand_id','=','tbl_brand.brand_id')
-        ->orderBy('tbl_product.product_id','desc')->get();
-        $manager_product=view('admin.all_product')
-        ->with('all_product',$all_product);
-        return view('layouts.admin_layout')->with('admin.all_product',$manager_product);
+        $all_post= Post::with('cate_post')->orderBy('post_id')->get();
+
+        return view('admin.post.list_post')->with((compact('all_post')));
     }
     public function save_post(Request $request){
         $this->AuthLoginCheck();
@@ -73,64 +69,112 @@ class PostController extends Controller
             return redirect()->back();
         }
     }
-    public function unactive_product($product_id){
+    public function delete_post($post_id){
         $this->AuthLoginCheck();
-        DB::table('tbl_product')->where('product_id',$product_id)
-        ->update(['product_status'=>1]);
-        Session::put('message','Không kích hoạt sản phẩm.');
-        return Redirect::to('all-product');
+        $post = Post::find($post_id);
+        $post_image = $post->post_image;
 
-    }
-    public function active_product($product_id){
-        $this->AuthLoginCheck();
-        DB::table('tbl_product')->where('product_id',$product_id)
-        ->update(['product_status'=>0]);
-        Session::put('message','Kích hoạt sản phẩm thành công.');
-        return Redirect::to('all-product');
-    }
-    public function edit_product($product_id){
-        $this->AuthLoginCheck();
-        $cate_product = DB::table('tbl_category_product')->orderBy('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->orderBy('brand_id','desc')->get();
-
-        $edit_product=DB::table('tbl_product')->where('product_id',$product_id)->get();
-        $manager_product=view('admin.edit_product')
-        ->with('edit_product',$edit_product)->with('cate_product',$cate_product)
-        ->with('brand_product',$brand_product);
-        return view('layouts.admin_layout')->with('admin.edit_product',$manager_product);
-    }
-    public function update_product(Request $request, $product_id){
-        $this->AuthLoginCheck();
-        $data = array();
-        $data['product_name'] = $request->product_name;
-        $data['product_price'] = $request->product_price;
-        $data['product_desc'] = $request->product_desc;
-        $data['product_content'] = $request->product_content;
-        $data['category_id'] = $request->product_cate;
-        $data['brand_id'] = $request->product_brand;
-        $data['product_status'] = $request->product_status;
-        $get_image = $request->file('product_image');
-        if($get_image){
-            $get_name_image=$get_image->getClientOriginalName();
-            $name_image=current(explode('.',$get_name_image));
-            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
-            $get_image->move('public/uploads/product',$new_image);
-            $data['product_image'] = $new_image;
-            DB::table('tbl_product')->where('product_id', $product_id)->update($data);
-            Session::put('message','Cập nhập thành công');
-            return Redirect::to('/all-product');
+        if($post_image){
+            $path = 'public/uploads/post/'.$post_image;
+            unlink($path);
         }
 
-        DB::table('tbl_product')->where('product_id', $product_id)->update($data);
-        Session::put('message','Cập nhập thành công');
-        return Redirect::to('/all-product');
+        $post->delete();
+
+        Session::put('message','Xóa thành công');
+        return redirect()->back();
+
     }
-    public function delete_product($product_id){
+    public function edit_post($post_id){
         $this->AuthLoginCheck();
-        DB::table('tbl_product')->where('product_id',$product_id)-> delete();
-        Session::put('message',' Xoá thành công');
-        return Redirect::to('all-product');
+        $post = Post::find($post_id);
+        $cate_post = CatePost::orderBy('cate_post_id')->get();
+        return view('admin.post.edit_post')->with(compact('post','cate_post'));
+    }
+    public function update_post(Request $request ,$post_id){
+        $this->AuthLoginCheck();
+        $data = $request->all();
+        $post = Post::find($post_id);
+
+        $post->post_title = $data['post_title'];
+        $post->post_slug = $data['post_slug'];
+        $post->post_desc = $data['post_desc'];
+        $post->post_content = $data['post_content'];
+        $post->post_meta_keywords = $data['post_meta_keywords'];
+        $post->post_meta_desc = $data['post_meta_desc'];
+        $post->cate_post_id = $data['cate_post_id'];
+        $post->post_status = $data['post_status'];
+
+        $get_image = $request->file('post_image');
+
+       if($get_image){
+            //Xoa anh cu
+            $post_image_old = $post->post_image;
+            $path = 'public/uploads/post/'.$post_image_old;
+            unlink($path);
+            //Cap nhat anh moi
+            $get_name_image=$get_image->getClientOriginalName(); // lay ten cua hinh anh
+            $name_image=current(explode('.',$get_name_image));
+            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/uploads/post',$new_image);
+
+            $post->post_image = $new_image;
+        }
+        else{
+
+
+        }
+        $post->save();
+        Session::put('message','Cập nhật bài viết thành công');
+        return redirect()->back();
     }
     //end admin page
+    public function blog(Request $request, $post_slug){
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')
+        ->orderBy('category_id','desc')->get();
+        $catepost = CatePost::where('cate_post_slug', $post_slug)->take(1)->get();
 
+        foreach($catepost as $key => $cate){
+            $meta_desc = $cate->cate_post_desc;
+            $meta_keywords = $cate->cate_post_slug;
+            $meta_title = $cate->cate_post_name;
+            $cate_id = $cate->cate_post_id;
+            $url_canonical = $request->url();
+        }
+        $post = Post::with('cate_post')->where('post_status', '0')->where('cate_post_id', $cate_id)->get();
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+        $all_post = DB::table('tbl_posts')->where('post_status','0')
+        ->orderBy('post_id','desc')->limit(3)->get();
+
+        return view('pages.blog.blog')->with('category_post',$category_post)
+        ->with('category',$cate_product)->with('post',$post)->with('meta_desc',$meta_desc)
+        ->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)
+        ->with('url_canonical',$url_canonical)->with('all_post',$all_post);
+    }
+    public function blog_details(Request $request, $post_slug){
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')
+        ->orderBy('category_id','desc')->get();
+        //$catepost = CatePost::where('cate_post_slug', $post_slug)->take(1)->get();
+        $post = Post::with('cate_post')->where('post_status', '0')->where('post_slug', $post_slug)->get();
+        foreach($post as $key => $p){
+            $meta_desc = $p->post_meta_desc;
+            $meta_keywords = $p->post_meta_keywords;
+            $meta_title = $p->post_title;
+            $cate_id = $p->cate_post_id;
+            $url_canonical = $request->url();
+            $cate_post_id = $p->cate_post_id;
+        }
+        $related = Post::with('cate_post')->where('post_status', '0')->where('cate_post_id', $cate_post_id)
+        ->whereNotIn('post_slug', [$post_slug])->take(5)->get();
+
+
+        $all_post = DB::table('tbl_posts')->where('post_status','0')
+        ->orderBy('post_id','desc')->limit(3)->get();
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+
+        return view('pages.blog.blog_details')->with('category_post',$category_post)
+        ->with('category',$cate_product)->with('post',$post)->with('meta_desc',$meta_desc)
+        ->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)
+        ->with('url_canonical',$url_canonical)->with('related',$related)->with('all_post',$all_post);
+    }
 }

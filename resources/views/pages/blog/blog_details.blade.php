@@ -1,6 +1,5 @@
 @extends('layouts.site')
 @section('main')
-
 <!-- Hero Section Begin -->
 <section class="hero hero-normal">
     <div class="container">
@@ -43,29 +42,31 @@
 </section>
 <!-- Hero Section End -->
 
-<!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="{{url('public/frontend')}}/img/breadcrumb.jpg">
+
+<!-- Blog Details Hero Begin -->
+<section class="blog-details-hero set-bg" data-setbg="{{url('public/frontend')}}/img/blog/details/details-hero.jpg">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="breadcrumb__text">
+            <div class="col-lg-12">
+                <div class="blog__details__hero__text">
                     <h2>{{$meta_title}}</h2>
-                    <div class="breadcrumb__option">
-                        <a href="{{URL::to('/')}}">Trang chủ</a>
-                        <span>Blog</span>
-                    </div>
+                    <ul>
+                        <li>By Hai Dang</li>
+                        <li>January 14, 2019</li>
+                        <li>8 Comments</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Breadcrumb Section End -->
+<!-- Blog Details Hero End -->
 
-<!-- Blog Section Begin -->
-<section class="blog spad">
+<!-- Blog Details Section Begin -->
+<section class="blog-details spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-5">
+            <div class="col-lg-4 col-md-5 order-md-1 order-2">
                 <div class="blog__sidebar">
                     <div class="blog__sidebar__search">
                         <form action="#">
@@ -110,40 +111,85 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 col-md-7">
-                <div class="row">
-                    @foreach($post as $key => $value)
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="blog__item">
-                            <div class="blog__item__pic">
+            <div class="col-lg-8 col-md-7 order-md-1 order-1">
+                @foreach($post as $key => $value)
+                <div class="blog__details__text">
+                    <img src="{{asset('public/uploads/post/'.$value->post_image)}}" height="450px" width="710px" alt="{{$value->post_lug}}">
+                    <p>{!!$value->post_content!!}</p>
 
-                                <a href="{{URL::to('/bai-viet/'.$value->post_slug)}}"> <img src="{{asset('public/uploads/post/'.$value->post_image)}}" alt="{{$value->post_lug}}"> </a>
-                            </div>
-                            <div class="blog__item__text">
-                                <ul>
-                                    <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                    <li><i class="fa fa-comment-o"></i>10</li>
-                                </ul>
-                                <h5><a href="#">{{$value->post_title}}</a></h5>
-                                <p> {!!$value->post_desc!!} </p>
-                                <a href="{{URL::to('/bai-viet/'.$value->post_slug)}}" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
+                </div>
+
+                <div class="blog__details__content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="blog__details__author">
+                                <div class="blog__details__author__pic">
+                                    <a href="https://www.facebook.com/dangblue.231"><img src="{{url('public/frontend')}}/img/blog/details/admindang.jpg" alt=""></a>
+
+                                </div>
+                                <div class="blog__details__author__text">
+                                    <a href="https://www.facebook.com/dangblue.231"><h6>Hải Đăng</h6></a>
+                                    <span>Admin</span>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <div class="blog__details__widget">
+                                <ul>
+                                    <li><span>Danh mục:</span>  {{$value ->cate_post->cate_post_name}}</li>
+                                    <li><span>Tags:</span>  {{$value->post_meta_keywords}} </li>
+                                </ul>
+                                <div class="blog__details__social">
+                                    <a href="https://www.facebook.com/OganiShopFood"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Details Section End -->
+
+<!-- Related Blog Section Begin -->
+<section class="related-blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related-blog-title">
+                    <h2>Bài viết liên quan</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="blog__item">
+                    @foreach($related as $key => $post_relate)
+                    <div class="blog__item__pic">
+                        <a href="{{URL::to('/bai-viet/'.$post_relate->post_slug)}}"> <img src="{{asset('public/uploads/post/'.$post_relate->post_image)}}" alt=""> </a>
+                    </div>
+                    <div class="blog__item__text">
+
+                        <ul>
+                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                            <li><i class="fa fa-comment-o"></i> 5</li>
+                        </ul>
+                        <h5><a href="{{URL::to('/bai-viet/'.$post_relate->post_slug)}}">{{$post_relate->post_title}}</a></h5>
+                        {!!$post_relate->post_desc!!}
                     </div>
                     @endforeach
-                    <div class="col-lg-12">
-                        <div class="product__pagination blog__pagination">
-                            <a href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Blog Section End -->
+<!-- Related Blog Section End -->
+
 
 @stop();

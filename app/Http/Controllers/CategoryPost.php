@@ -9,6 +9,7 @@ use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\CatePost;
+use App\Models\Post;
 session_start();
 
 class CategoryPost extends Controller
@@ -79,14 +80,13 @@ class CategoryPost extends Controller
     }
     //end admin page
 
-    public function show_blog(){
-        $category_post = CatePost::orderBy('cate_post_id', 'desc')->get();
-        $cate_product = DB::table('tbl_category_product')->where('category_status','0')
-        ->orderBy('category_id','desc')->get();
+     //public function show_blog(){
+        //$category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+        //$cate_product = DB::table('tbl_category_product')->where('category_status','0')
+        //->orderBy('category_id','desc')->get();
+        //$post = Post::with('cate_post')->where('post_status', '0')->get();
+        //return view('pages.blog.blog')->with(compact('category_post'))->with('category',$cate_product)
+        //->with('post',$post);
+    //}
 
-        return view('pages.blog.blog')->with(compact('category_post'))->with('category',$cate_product);
-    }
-    public function blog_details($cate_post_slug){
-
-    }
 }

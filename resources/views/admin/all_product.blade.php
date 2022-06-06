@@ -52,12 +52,18 @@
           </tr>
         </thead>
         <tbody>
+            @php
+                $i=0;
+            @endphp
             @foreach($all_product as $key => $pro)
+            @php
+            $i++;
+            @endphp
           <tr>
-            <td><i>{{$key=$key+1}}</i></label></td>
+            <td><i>{{$i}}</i></label></td>
             <td>{{$pro -> product_name}}</td>
             <td>{{$pro -> product_price}}</td>
-            <td><img src="public/uploads/product/{{$pro -> product_image}}" height="100" width="100"></td>
+            <td><img src="{{asset('public/uploads/product/'.$pro->product_image)}}" height="100" width="100"></td>
             <td>{{$pro -> category_name}}</td>
             <td>{{$pro -> brand_name}}</td>
 

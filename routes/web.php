@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
 Route::post('/tim-kiem', 'HomeController@search');
+
 //SP yeu thich
 Route::get('/wishlist', 'HomeController@wishlist');
 
@@ -62,17 +63,23 @@ Route::post('/update-brand-product/{brand_product_id}', 'BrandProduct@update_bra
 Route::get('/add-category-post', 'CategoryPost@add_category_post');
 Route::post('/save-category-post', 'CategoryPost@save_category_post');
 Route::get('/all-category-post', 'CategoryPost@all_category_post');
-Route::get('/blog', 'CategoryPost@show_blog');
-Route::get('/danh-muc-bai-viet/{cate_post_slug}', 'CategoryPost@blog_details');
+//Route::get('/blog', 'CategoryPost@show_blog');
+//Route::get('/danh-muc-bai-viet/{cate_post_slug}', 'CategoryPost@blog_details');
 Route::get('/edit-category-post/{category_post_id}', 'CategoryPost@edit_category_post');
 Route::post('/update-category-post/{cate_id}', 'CategoryPost@update_category_post');
 Route::get('/delete-category-post/{cate_id}', 'CategoryPost@delete_category_post');
 
 //Post
 Route::get('/add-post', 'PostController@add_post');
+Route::get('/delete-post/{post_id}', 'PostController@delete_post');
+Route::get('/edit-post/{post_id}', 'PostController@edit_post');
 Route::post('/save-post', 'PostController@save_post');
+Route::post('/update-post/{post_id}', 'PostController@update_post');
+Route::get('/all-post', 'PostController@all_post');
 
-
+//Blog
+Route::get('/danh-muc-bai-viet/{post_slug}', 'PostController@blog');
+Route::get('/bai-viet/{post_slug}', 'PostController@blog_details');
 //Product
 Route::get('/add-product', 'ProductController@add_product');
 
@@ -122,5 +129,6 @@ Route::get('/contact', 'ContactController@contact');
 Route::get('/information', 'ContactController@information');
 Route::post('/save-info', 'ContactController@save_info');
 Route::post('/update-info/{info_id}', 'ContactController@update_info');
+
 
 

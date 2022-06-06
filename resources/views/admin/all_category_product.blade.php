@@ -47,9 +47,15 @@
           </tr>
         </thead>
         <tbody>
+            @php
+                $i=0;
+            @endphp
             @foreach($all_category_product as $key => $cate_pro)
+            @php
+                $i++;
+            @endphp
           <tr>
-            <td><i>{{$key=$key+1}}</i></label></td>
+            <td><i>{{$i}}</i></label></td>
             <td>{{$cate_pro -> category_name}}</td>
             <td><span class="text-ellipsis">
              <?php

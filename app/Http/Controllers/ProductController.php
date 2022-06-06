@@ -9,7 +9,7 @@ use GuzzleHttp\Psr7\Message;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-
+use App\Models\CatePost;
 session_start();
 
 class ProductController extends Controller
@@ -145,9 +145,9 @@ class ProductController extends Controller
         $related_product=DB::table('tbl_product')
         ->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')
         ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_id',[$product_id])->get();
-
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
         return view('pages.product.show_details')->with('category',$cate_product)
-        ->with('product_details',$details_product)->with('related',$related_product);
+        ->with('product_details',$details_product)->with('related',$related_product)->with('category_post',$category_post);
     }
     public function shop(){
 
@@ -155,6 +155,7 @@ class ProductController extends Controller
         ->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')
         ->orderBy('tbl_product.product_id','asc')->limit(6)->get();
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
        // $all_product = DB::table('tbl_product')->Paginate(6);
        $all_product = Product::orderBy('product_id','ASC')->Paginate(6);
         if(isset($_GET['sort_by'])){
@@ -171,6 +172,6 @@ class ProductController extends Controller
             }
         }
         return view('pages.shop.show_shop')->with('category',$cate_product)->with('product',$all_product)
-        ->with('product_show',$product_show);
+        ->with('product_show',$product_show)->with('category_post',$category_post);
     }
 }

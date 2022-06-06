@@ -50,9 +50,15 @@
           </tr>
         </thead>
         <tbody>
+            @php
+                $i=0;
+            @endphp
             @foreach($coupon as $key => $cou)
+            @php
+                $i++;
+            @endphp
           <tr>
-            <td><i>{{$key=$key+1}}</i></label></td>
+            <td><i>{{$i}}</i></label></td>
             <td>{{$cou -> coupon_name}}</td>
             <td>{{$cou -> coupon_code}}</td>
             <td>{{$cou -> coupon_time}}</td>

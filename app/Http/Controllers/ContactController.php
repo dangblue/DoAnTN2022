@@ -9,6 +9,7 @@ use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Contact;
+use App\Models\CatePost;
 session_start();
 
 class ContactController extends Controller
@@ -17,7 +18,9 @@ class ContactController extends Controller
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')
         ->orderBy('category_id','desc')->get();
         $contact = Contact::where('info_id',1)->get();
-        return view('pages.contact.contact')->with('category',$cate_product)->with('contact',$contact);
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+        return view('pages.contact.contact')->with('category',$cate_product)->with('contact',$contact)
+        ->with('category_post',$category_post);
     }
     public function information(){
         $contact = Contact::where('info_id',1)->get();

@@ -26,7 +26,89 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        <div class="humberger__menu__logo">
+            <a href="#"><img src="{{url('public/frontend')}}/img/logo.png" alt=""></a>
+        </div>
+        <div class="humberger__menu__cart">
+            <ul>
+                <li><a href="{{URL::to('/wishlist')}}"><i class="fa fa-heart"></i> <span></span></a></li>
+                <li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-bag"></i><span></span></a></li>
+            </ul>
+            <div class="header__cart__price">item: <span></span></div>
+        </div>
+        <div class="humberger__menu__widget">
+            <div class="header__top__right__language">
+                <img src="{{url('public/frontend')}}/img/language.png" alt="">
+                <div>English</div>
+                <span class="arrow_carrot-down"></span>
+                <ul>
+                    <li><a href="#">VietNam</a></li>
+                    <li><a href="#">English</a></li>
+                </ul>
+            </div>
+            <div class="header__top__right__auth">
+                        <?php
+                            $customer_id = Session::get('customer_id');
+                            if($customer_id != NULL){
+                        ?>
+                            <a href="{{URL::to('/logout-checkout')}}"><i class="fa fa-user"></i> Đăng xuất</a>
+                        <?php
+                            }else{
+                        ?>
+                            <a href="{{URL::to('/login-checkout')}}"><i class="fa fa-user"></i> Đăng nhập</a>
+                        <?php
+                            }
+                        ?>
+            </div>
+        </div>
+        <nav class="humberger__menu__nav mobile-menu">
+            <ul>
+                <li class="active"><a href="{{URL::to('/')}}">Trang chủ</a></li>
+                            <li><a href="{{URL::to('/shop')}}">Cửa hàng</a></li>
+                            <li><a href="{{URL::to('/show-cart')}}">Giỏ hàng</a>
+                                <ul class="header__menu__dropdown">
+                                    <?php
+                                    $customer_id = Session::get('customer_id');
+                                    if($customer_id != NULL){
+                                    ?>
+                                        <li><a href="{{URL::to('/checkout')}}">Thanh toán</a></li>
+                                    <?php
+                                        }else{
+                                    ?>
+                                        <li><a href="{{URL::to('/login-checkout')}}">Thanh toán</a></li>
+                                    <?php
+                                        }
+                                    ?>
+                                </ul>
+                            </li>
+                            <li><a href="#">Blog</a>
+                                <ul class="header__menu__dropdown">
+                                    @foreach($category_post as $key => $danhmucbaiviet)
+                                    <li><a href="{{URL::to('/danh-muc-bai-viet/'.$danhmucbaiviet->cate_post_slug)}}">{{$danhmucbaiviet->cate_post_name}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li><a href="{{URL::to('/contact')}}">Liên hệ</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu-wrap"></div>
+        <div class="header__top__right__social">
+            <a href="https://www.facebook.com/OganiShopFood"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        </div>
+        <div class="humberger__menu__contact">
+            <ul>
+                <li><i class="fa fa-envelope"></i> damgblue@gmail.com</li>
+                <li>Free Shipping toàn quốc</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Humberger End -->
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
@@ -90,7 +172,6 @@
                             <li><a href="{{URL::to('/shop')}}">Cửa hàng</a></li>
                             <li><a href="{{URL::to('/show-cart')}}">Giỏ hàng</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a></a></li>
 
                                     <?php
                                     $customer_id = Session::get('customer_id');
@@ -104,11 +185,15 @@
                                     <?php
                                         }
                                     ?>
-
-                                    <li><a href="{{URL::to('/blog-detail')}}">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{URL::to('/blog')}}">Blog</a></li>
+                            <li><a href="#">Blog</a>
+                                <ul class="header__menu__dropdown">
+                                    @foreach($category_post as $key => $danhmucbaiviet)
+                                    <li><a href="{{URL::to('/danh-muc-bai-viet/'.$danhmucbaiviet->cate_post_slug)}}">{{$danhmucbaiviet->cate_post_name}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
                             <li><a href="{{URL::to('/contact')}}">Liên hệ</a></li>
                         </ul>
                     </nav>
@@ -119,7 +204,7 @@
                             <li><a href="{{URL::to('/wishlist')}}"><i class="fa fa-heart"></i> <span></span></a></li>
                             <li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-bag"></i><span></span></a></li>
                         </ul>
-
+                        <div class="header__cart__price">item: <span></span></div>
                     </div>
                 </div>
             </div>
@@ -222,8 +307,6 @@
                 return false;
             });
         });
-
-
 
     </script>
 

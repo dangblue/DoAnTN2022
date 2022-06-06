@@ -110,26 +110,38 @@
           <tr>
 
             <th>STT</th>
+
             <th>Tên sản phẩm</th>
             <th>Số lượng</th>
             <th>Giá </th>
-            <th>Tổng tiền</th>
-            <th>Tổng tiền (Sau giảm) </th>
+            <th>Tổng giá</th>
+
             <th style="width:30px;"></th>
           </tr>
         </thead>
         <tbody>
+            @php
+                $i=0;
+            @endphp
             @foreach($order_by_Id as $key =>$v_content)
+            @php
+                $i++;
+            @endphp
           <tr>
-            <td><i>{{$key=$key+1}}</i></td>
+            <td><i>{{$i}}</i></td>
             <td>{{$v_content->product_name}}</td>
             <td>{{$v_content->product_sales_quantity}}</td>
             <td>{{$v_content->product_price}}</td>
             <td>{{$v_content->product_price*$v_content->product_sales_quantity}}</td>
-            <td>{{$v_content->order_total}}</td>
+
 
           </tr>
             @endforeach
+            <tr>
+                <td>
+                   <b> <i> Tổng thanh toán (Sau giảm): {{$v_content->order_total}} </i></b>
+                </td>
+            </tr>
         </tbody>
       </table>
     </div>

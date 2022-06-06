@@ -12,6 +12,7 @@ use App\Models\Shipping;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use Carbon\Carbon;
+use App\Models\CatePost;
 session_start();
 
 class CheckoutController extends Controller
@@ -27,7 +28,9 @@ class CheckoutController extends Controller
     public function login_checkout(){
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')
         ->orderBy('category_id','desc')->get();
-        return view('pages.checkout.login_checkout')->with('category',$cate_product);
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+        return view('pages.checkout.login_checkout')->with('category',$cate_product)
+        ->with('category_post',$category_post);
     }
     public function add_customer(Request $request){
         $data = array();
@@ -48,7 +51,8 @@ class CheckoutController extends Controller
     public function checkout(){
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')
         ->orderBy('category_id','desc')->get();
-        return view('pages.checkout.show_checkout')->with('category',$cate_product);
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+        return view('pages.checkout.show_checkout')->with('category',$cate_product)->with('category_post',$category_post);
     }
     public function save_checkout_customer(Request $request){
         $data = array();
@@ -122,12 +126,14 @@ class CheckoutController extends Controller
         if($data1['payment_method']=='trả bằng thẻ'){
             $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
             $request->session()->forget('cart');
-           return view('pages.checkout.payment')->with('category',$cate_product);
+            $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+           return view('pages.checkout.payment')->with('category',$cate_product)->with('category_post',$category_post);
 
         }elseif($data1['payment_method']=='trả tiền mặt'){
             $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
             $request->session()->forget('cart');
-           return view('pages.checkout.payment')->with('category',$cate_product);
+            $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+           return view('pages.checkout.payment')->with('category',$cate_product)->with('category_post',$category_post);
         }
     }
 
@@ -198,7 +204,8 @@ class CheckoutController extends Controller
     public function forgot_password(){
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')
         ->orderBy('category_id','desc')->get();
-        return view('pages.checkout.forget_pass')->with('category',$cate_product);
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+        return view('pages.checkout.forget_pass')->with('category',$cate_product)->with('category_post',$category_post);
     }
 
 

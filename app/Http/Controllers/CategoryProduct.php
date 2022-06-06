@@ -8,7 +8,7 @@ use App\Http\Requests;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-
+use App\Models\CatePost;
 session_start();
 
 class CategoryProduct extends Controller
@@ -90,9 +90,9 @@ class CategoryProduct extends Controller
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->where('tbl_product.category_id',$category_id)->get();
         $category_name = DB::table('tbl_category_product')->where('tbl_category_product.category_id',$category_id)->limit(1)->get();
-
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
         return view('pages.category.show_category')->with('category',$cate_product)
-        ->with('category_by_id',$category_by_id)->with('category_name',$category_name);
+        ->with('category_by_id',$category_by_id)->with('category_name',$category_name)->with('category_post',$category_post);
     }
 
 }

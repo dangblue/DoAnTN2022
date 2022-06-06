@@ -13,4 +13,8 @@ class Post extends Model
     'post_meta_keywords','post_status','post_image','cate_post_id','post_slug'];
     protected $primaryKey = 'post_id';
     protected $table = 'tbl_posts';
+
+    public function cate_post(){
+        return $this->belongsTo('App\Models\CatePost','cate_post_id');
+    }
 }

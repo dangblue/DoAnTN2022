@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Coupon;
+use App\Models\CatePost;
 session_start();
 
 class CartController extends Controller
@@ -93,8 +94,9 @@ class CartController extends Controller
 
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')
         ->orderBy('category_id','desc')->get();
-
-        return view('pages.cart.show_cart')->with('category',$cate_product)->with('product_info',$product_info)->with('quantity',$quantity);
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+        return view('pages.cart.show_cart')->with('category',$cate_product)->with('product_info',$product_info)->with('quantity',$quantity)
+        ->with('category_post',$category_post);
 
 
 
@@ -102,7 +104,8 @@ class CartController extends Controller
     public function show_cart(){
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')
         ->orderBy('category_id','desc')->get();
-        return view('pages.cart.show_cart')->with('category',$cate_product);
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+        return view('pages.cart.show_cart')->with('category',$cate_product)->with('category_post',$category_post);
 
     }
     public function delete_product($session_id){

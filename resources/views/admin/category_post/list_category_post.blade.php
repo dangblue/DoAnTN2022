@@ -48,9 +48,15 @@
           </tr>
         </thead>
         <tbody>
+            @php
+                $i=0;
+            @endphp
             @foreach($category_post as $key => $cate_post)
+            @php
+                $i++;
+            @endphp
           <tr>
-            <td><i>{{$key=$key+1}}</i></td>
+            <td><i>{{$i}}</i></td>
             <td>{{$cate_post -> cate_post_name}}</td>
             <td>{{$cate_post -> cate_post_slug}}</td>
             <td><span class="text-ellipsis">
