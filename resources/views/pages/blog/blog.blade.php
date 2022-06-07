@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="blog__sidebar__recent__item__text">
                                     <h6>{{$all->post_title}}</h6>
-                                    <span>MAR 05, 2019</span>
+                                    <span>{{$all->created_at}}</span>
                                 </div>
                             </a>
                             @endforeach
@@ -121,7 +121,7 @@
                             </div>
                             <div class="blog__item__text">
                                 <ul>
-                                    <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                    <li><i class="fa fa-calendar-o"></i> {{$value->created_at}}</li>
                                     <li><i class="fa fa-comment-o"></i>10</li>
                                 </ul>
                                 <h5><a href="#">{{$value->post_title}}</a></h5>

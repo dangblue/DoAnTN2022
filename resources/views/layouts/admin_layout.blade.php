@@ -18,6 +18,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="{{url('public/addang')}}/css/font.css" type="text/css"/>
 <link href="{{url('public/addang')}}/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="{{url('public/addang')}}/css/morris.css" type="text/css"/>
+<link rel="stylesheet" href="{{url('public/addang')}}/css/bootstrap-tagsinput.css" type="text/css"/>
 <!-- calendar -->
 <link rel="stylesheet" href="{{url('public/addang')}}/css/monthly.css">
 <!-- //calendar -->
@@ -25,6 +26,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{url('public/addang')}}/js/jquery2.0.3.min.js"></script>
 <script src="{{url('public/addang')}}/js/raphael-min.js"></script>
 <script src="{{url('public/addang')}}/js/morris.js"></script>
+<script src="{{url('public/addang')}}/js/bootstrap-tagsinput.js"></script>
+<script src="{{url('public/addang')}}/js/bootstrap-tagsinput.min.js"></script>
 </head>
 <body>
 <section id="container">

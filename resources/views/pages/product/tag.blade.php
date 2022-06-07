@@ -1,8 +1,7 @@
 @extends('layouts.site')
 @section('main')
-
 <!-- Hero Section Begin -->
-<section class="hero">
+<section class="hero hero-normal">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -17,9 +16,7 @@
                         @endforeach
                     </ul>
                 </div>
-
             </div>
-
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
@@ -39,66 +36,48 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="{{url('public/frontend')}}/img/hero/banner.jpg">
-                    <div class="hero__text">
-                        <span>Ogani Shop</span>
-                        <h2>Good <br/>for health</h2>
-                        <a href="{{URL::to('/shop')}}" class="primary-btn">Đến cửa hàng ngay</a>
-                    </div>
-                </div>
             </div>
         </div>
-
     </div>
-</div>
 </section>
-<!-- Categories Section Begin -->
-<section class="categories">
+<!-- Hero Section End -->
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{{url('public/frontend')}}/img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2> Sản phẩm nổi bật </h2>
-                </div>
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Tag tìm kiếm : {{$product_tag}}</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{{URL::to('/')}}">Trang chủ</a>
 
-            </div>
-            <div class="categories__slider owl-carousel">
-                @foreach($product1 as $key =>$pro1)
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{URL::to('/public/uploads/product/'.$pro1->product_image)}}">
-                        <h5><a href="{{URL::to('/chi-tiet-san-pham',$pro1->product_id)}}">
-                            {{$pro1->product_name}}
-                        </a></h5>
+                        <span> Tag tìm kiếm</span>
                     </div>
                 </div>
-
-                @endforeach
             </div>
         </div>
     </div>
 </section>
-<!-- Categories Section End -->
-
 <!-- Featured Section Begin -->
 <section class="featured spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2> Sản phẩm mới </h2>
+                    <h2> Kết quả sản phẩm </h2>
                 </div>
                 <div class="featured__controls">
                     <ul>
 
-                        <li class="active" data-filter="*"><b><a href="{{URL::to('/shop')}}"><h4>Cửa hàng</h4></a></b></li>
+                        <li class="active" data-filter="*"><a href="{{URL::to('/')}}"><h5>Trang chủ</h5></a></li>
+
 
                     </ul>
                 </div>
             </div>
         </div>
         <div class="row featured__filter">
-            @foreach($all_product as $key => $product)
-
+            @foreach($pro_tag as $key => $product)
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
                     <form>
@@ -154,38 +133,7 @@
 </div>
 <!-- Banner End -->
 
+<!-- Latest Product Section Begin -->
 
-
-<!-- Blog Section Begin -->
-<section class="from-blog spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title from-blog__title">
-                    <h2>Bài viết từ Blog</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            @foreach($post as $key => $post)
-            <div class="col-lg-4 col-md-4 col-sm-6">
-                <div class="blog__item">
-                    <div class="blog__item__pic">
-                        <a href="{{URL::to('/bai-viet/'.$post->post_slug)}}"> <img src="{{asset('public/uploads/post/'.$post->post_image)}}" alt=""> </a>
-                    </div>
-                    <div class="blog__item__text">
-                        <ul>
-                            <li><i class="fa fa-calendar-o"></i>{{$post->created_at}}</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
-                        </ul>
-                        <h5><a href="{{URL::to('/bai-viet/'.$post->post_slug)}}">{{$post->post_title}}</a></h5>
-                        <p>{!!$post->post_desc!!}</p>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
 <!-- Blog Section End -->
 @stop();

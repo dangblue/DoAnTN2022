@@ -58,6 +58,11 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Tags sản phẩm</label>
+                                <input type="text" data-role="tagsinput"
+                                name="product_tags" class="form-control" id="exampleInputEmail1" placeholder="Tags sản phẩm" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputPassword1">Thương hiệu</label>
                                     <select name="product_brand" class="form-control input-sm m-bot15">
                                         @foreach($brand_product as $key => $brand)

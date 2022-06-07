@@ -120,7 +120,7 @@
                                     <h5>{{$cart['product_name']}}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    {{$cart['product_price']}}$
+                                    {{$cart['product_price']}} VNĐ
                                 </td>
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity">
@@ -130,7 +130,7 @@
                                     </div>
                                 </td>
                                 <td class="shoping__cart__total">
-                                    {{$subtotal}}$
+                                    {{$subtotal}} VNĐ
                                 </td>
                                 <td class="shoping__cart__item__close">
                                     <a class="icon_close" href="{{url('/del-product/'.$cart['session_id'])}}"></a>
@@ -156,7 +156,7 @@
                     <h5>Tổng giỏ hàng</h5>
                     <ul>
                         <li>Phí vận chuyển <span>Free</span></li>
-                        <li>Tổng tiền <span>{{$total}}$</span></li>
+                        <li>Tổng tiền <span>{{$total}} VNĐ</span></li>
                         @if($cou1)
 							<li>
 									@foreach($cou1 as $key => $cou)
@@ -168,16 +168,16 @@
 												echo '<p><li>Tổng giảm:<span>'.number_format($total_coupon,0,',','.').'đ</span></li></p>';
 												@endphp
 											</p>
-											<p><li>Tổng tiền sau giảm <span>{{number_format($total-$total_coupon,0,',','.')}}$</span></li></p>
+											<p><li>Tổng tiền sau giảm <span>{{number_format($total-$total_coupon,0,',','.')}} VNĐ</span></li></p>
 										@elseif($cou['coupon_condition']==2)
-											Mã giảm  <span>{{number_format($cou['coupon_number'],0,',','.')}} $</span>
+											Mã giảm  <span>{{number_format($cou['coupon_number'],0,',','.')}} VNĐ</span>
 											<p>
 												@php
 												$total_coupon = $total - $cou['coupon_number'];
 
 												@endphp
 											</p>
-											<p><li> Tổng tiền sau giảm <span>{{number_format($total_coupon,0,',','.')}}$</span></li></p>
+											<p><li> Tổng tiền sau giảm <span>{{number_format($total_coupon,0,',','.')}} VNĐ</span></li></p>
 										@endif
 									@endforeach
 							</li>

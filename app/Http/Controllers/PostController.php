@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Post;
 use App\Models\CatePost;
+use Carbon\Carbon;
 session_start();
 
 class PostController extends Controller
@@ -48,7 +49,7 @@ class PostController extends Controller
         $post->post_meta_desc = $data['post_meta_desc'];
         $post->cate_post_id = $data['cate_post_id'];
         $post->post_status = $data['post_status'];
-
+        $post->created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $get_image = $request->file('post_image');
 
        if($get_image){
@@ -104,7 +105,7 @@ class PostController extends Controller
         $post->post_meta_desc = $data['post_meta_desc'];
         $post->cate_post_id = $data['cate_post_id'];
         $post->post_status = $data['post_status'];
-
+        $post->created_at = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $get_image = $request->file('post_image');
 
        if($get_image){
@@ -163,6 +164,7 @@ class PostController extends Controller
             $cate_id = $p->cate_post_id;
             $url_canonical = $request->url();
             $cate_post_id = $p->cate_post_id;
+            $created = $p->created_at;
         }
         $related = Post::with('cate_post')->where('post_status', '0')->where('cate_post_id', $cate_post_id)
         ->whereNotIn('post_slug', [$post_slug])->take(5)->get();
@@ -175,6 +177,6 @@ class PostController extends Controller
         return view('pages.blog.blog_details')->with('category_post',$category_post)
         ->with('category',$cate_product)->with('post',$post)->with('meta_desc',$meta_desc)
         ->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)
-        ->with('url_canonical',$url_canonical)->with('related',$related)->with('all_post',$all_post);
+        ->with('url_canonical',$url_canonical)->with('related',$related)->with('all_post',$all_post)->with('created',$created);
     }
 }

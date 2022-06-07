@@ -52,7 +52,7 @@
                     <h2>{{$meta_title}}</h2>
                     <ul>
                         <li>By Hai Dang</li>
-                        <li>January 14, 2019</li>
+                        <li>{{$created}}</li>
                         <li>8 Comments</li>
                     </ul>
                 </div>
@@ -92,7 +92,7 @@
                                 </div>
                                 <div class="blog__sidebar__recent__item__text">
                                     <h6>{{$all->post_title}}</h6>
-                                    <span>MAR 05, 2019</span>
+                                    <span>{{$all->created_at}}</span>
                                 </div>
                             </a>
                             @endforeach
@@ -177,7 +177,7 @@
                     <div class="blog__item__text">
 
                         <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                            <li><i class="fa fa-calendar-o"></i>{{$post_relate->created_at}}</li>
                             <li><i class="fa fa-comment-o"></i> 5</li>
                         </ul>
                         <h5><a href="{{URL::to('/bai-viet/'.$post_relate->post_slug)}}">{{$post_relate->post_title}}</a></h5>

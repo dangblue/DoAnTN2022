@@ -46,6 +46,7 @@ class ProductController extends Controller
         $this->AuthLoginCheck();
         $data = array();
         $data['product_name'] = $request->product_name;
+        $data['product_tags'] = $request->product_tags;
         $data['product_price'] = $request->product_price;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
@@ -101,6 +102,7 @@ class ProductController extends Controller
         $this->AuthLoginCheck();
         $data = array();
         $data['product_name'] = $request->product_name;
+        $data['product_tags'] = $request->product_tags;
         $data['product_price'] = $request->product_price;
         $data['product_desc'] = $request->product_desc;
         $data['product_content'] = $request->product_content;
@@ -157,6 +159,7 @@ class ProductController extends Controller
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
         $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
        // $all_product = DB::table('tbl_product')->Paginate(6);
+       $product_new = DB::table('tbl_product')->where('product_status','0')->orderBy('product_id','desc')->limit(5)->get();
        $all_product = Product::orderBy('product_id','ASC')->Paginate(6);
         if(isset($_GET['sort_by'])){
             $sort_by = $_GET['sort_by'];
@@ -171,7 +174,21 @@ class ProductController extends Controller
                 $all_product = Product::orderBy('product_price','DESC')->Paginate(6)->appends(request()->query());
             }
         }
+        $pro_tag = Product::where('product_status','0')->take(5)->get();
+
         return view('pages.shop.show_shop')->with('category',$cate_product)->with('product',$all_product)
-        ->with('product_show',$product_show)->with('category_post',$category_post);
+        ->with('product_show',$product_show)->with('category_post',$category_post)->with('product_new',$product_new)->with('pro_tag',$pro_tag);
+    }
+    public function tag(Request $request, $product_tag){
+        $cate_product = DB::table('tbl_category_product')->where('category_status','0')
+        ->orderBy('category_id','desc')->get();
+        $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+        $tag = str_replace('-',' ',$product_tag);
+        $pro_tag = Product::where('product_status','0')->where('product_name','LIKE','%'.$tag.'%')->
+        orWhere('product_tags','LIKE','%'.$tag.'%')->get();
+
+
+        return view('pages.product.tag')->with('category',$cate_product)->with('category_post',$category_post)
+        ->with('product_tag',$product_tag)->with('pro_tag',$pro_tag);
     }
 }

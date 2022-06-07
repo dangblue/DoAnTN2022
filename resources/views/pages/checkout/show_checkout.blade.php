@@ -151,19 +151,19 @@
 											<p>
 												@php
 												$total_coupon = ($total*$cou['coupon_number'])/100;
-												echo '<div class="checkout__order__total">Tổng giảm:<span>'.number_format($total_coupon,0,',','.').'đ</span></div>';
+												echo '<div class="checkout__order__total">Tổng giảm:<span>'.number_format($total_coupon,0,',','.').'VNĐ</span></div>';
 												@endphp
 											</p>
-											<div class="checkout__order__total">Tổng tiền sau giảm: <span>{{number_format($total-$total_coupon,0,',','.')}}$</span></div>
+											<div class="checkout__order__total">Tổng tiền sau giảm: <span>{{number_format($total-$total_coupon,0,',','.')}} VNĐ</span></div>
 										@elseif($cou['coupon_condition']==2)
-										<div class="checkout__order__total"> Mã giảm: <span>{{number_format($cou['coupon_number'],0,',','.')}} $</span> </div>
+										<div class="checkout__order__total"> Mã giảm: <span>{{number_format($cou['coupon_number'],0,',','.')}} VNĐ</span> </div>
 											<p>
 												@php
 												$total_coupon = $total - $cou['coupon_number'];
 
 												@endphp
 											</p>
-											<div class="checkout__order__total"> Tổng tiền sau giảm: <span> {{number_format($total_coupon,0,',','.')}}$ </span></div>
+											<div class="checkout__order__total"> Tổng tiền sau giảm: <span> {{number_format($total_coupon,0,',','.')}} VNĐ </span></div>
 										@endif
 									@endforeach
 

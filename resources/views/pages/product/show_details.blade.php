@@ -93,7 +93,7 @@
 
                         <form action="{{URL::to('/show-cart')}}" method="GET">
                             {{ csrf_field() }}
-                        <div class="product__details__price">{{$value->product_price}}$</div>
+                        <div class="product__details__price">{{$value->product_price}} VNĐ</div>
 
                         <div class="product__details__quantity">
                             <div class="quantity">
@@ -114,6 +114,32 @@
                             <li><b>Danh mục</b> <span>{{$value->category_name}}</span></li>
                             <li><b>Phí ship</b> <span><samp>Miễn phí vận chuyển</samp></span></li>
                             <li><b>Cân nặng</b> <span>0.5 kg</span></li>
+                            <style type="text/css">
+                                a.tags_style{
+                                    margin: 3px 2px;
+                                    border: 1px solid;
+                                     height: auto;
+                                     background: #0c5ca2
+                                     color: #ffff;
+                                     padding: 0px;
+                                }
+                                a.tags_style:hover{
+                                    background: #7fad39;
+
+                                }
+                            </style>
+                            <li><b>Tag</b>
+                                <span><i class="fa fa-tag"></i>
+                                    @php
+                                        $tags = $value->product_tags;
+                                        $tags = explode(',',$tags);
+                                    @endphp
+                                    @foreach ($tags as $tag)
+                                        <a href="{{url('/tag/'.$tag)}}" class="tags_style">{{$tag}}</a>
+                                    @endforeach
+                                </span>
+                            </li>
+
                             <li><b>Chia sẻ</b>
                                 <div class="share">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
@@ -212,7 +238,7 @@
                         </div>
                         <div class="product__item__text">
                             <h6><a href="#">{{$relate->product_name}}</a></h6>
-                            <h5>{{$relate->product_price}}.$</h5>
+                            <h5>{{$relate->product_price}} VNĐ</h5>
                         </div>
                     </form>
                     </div>

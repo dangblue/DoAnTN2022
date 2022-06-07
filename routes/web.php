@@ -23,7 +23,7 @@ Route::get('/wishlist', 'HomeController@wishlist');
 //Danh muc san pham trang chu
 Route::get('/danh-muc-san-pham/{category_id}', 'CategoryProduct@show_category_home');
 Route::get('/chi-tiet-san-pham/{category_id}', 'ProductController@details_product');
-
+Route::get('/tag/{product_tag}', 'ProductController@tag');
 
 //BE
 Route::get('/admin', 'AdminController@dashboard');
