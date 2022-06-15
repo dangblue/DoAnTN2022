@@ -104,6 +104,7 @@
                                     @foreach($product_new as $key =>$pro)
                                     <a href="{{URL::to('/chi-tiet-san-pham',$pro->product_id)}}" class="latest-product__item">
                                         <div class="latest-product__item__pic">
+
                                             <img src="{{URL::to('/public/uploads/product/'.$pro->product_image)}}">
                                         </div>
                                         <div class="latest-product__item__text">
@@ -117,6 +118,7 @@
                                     @foreach($product_new as $key =>$pro)
                                     <a href="{{URL::to('/chi-tiet-san-pham',$pro->product_id)}}" class="latest-product__item">
                                         <div class="latest-product__item__pic">
+
                                             <img src="{{URL::to('/public/uploads/product/'.$pro->product_image)}}">
                                         </div>
                                         <div class="latest-product__item__text">
@@ -161,7 +163,7 @@
                                     <div class="product__discount__item__text">
                                         <span>{{$pro->category_name}}</span>
                                         <h5><a href="#">{{$pro->product_name}}</a></h5>
-                                        <div class="product__item__price">{{$pro->product_price}} VNĐ <span>{{$pro->product_price}} $</span></div>
+                                        <div class="product__item__price">{{$pro->product_price}} VNĐ <span>{{$pro->product_price}} VNĐ</span></div>
                                     </div>
                                     </form>
                                 </div>
@@ -173,6 +175,9 @@
 
 
                 <div class="filter__item">
+                    <div class="section-title product__discount__title">
+                        <h2 style="color: red">Tất cả sản phẩm</h2>
+                    </div>
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
@@ -238,5 +243,5 @@
     </div>
 </section>
 <!-- Product Section End -->
-<!-- Product Section End --
-@stop();
+<!-- Product Section End -->
+@stop()

@@ -43,6 +43,7 @@ class PostController extends Controller
 
         $post->post_title = $data['post_title'];
         $post->post_slug = $data['post_slug'];
+        $post->post_author = $data['post_author'];
         $post->post_desc = $data['post_desc'];
         $post->post_content = $data['post_content'];
         $post->post_meta_keywords = $data['post_meta_keywords'];
@@ -99,6 +100,7 @@ class PostController extends Controller
 
         $post->post_title = $data['post_title'];
         $post->post_slug = $data['post_slug'];
+        $post->post_author = $data['post_author'];
         $post->post_desc = $data['post_desc'];
         $post->post_content = $data['post_content'];
         $post->post_meta_keywords = $data['post_meta_keywords'];
@@ -165,6 +167,7 @@ class PostController extends Controller
             $url_canonical = $request->url();
             $cate_post_id = $p->cate_post_id;
             $created = $p->created_at;
+            $author = $p->post_author;
         }
         $related = Post::with('cate_post')->where('post_status', '0')->where('cate_post_id', $cate_post_id)
         ->whereNotIn('post_slug', [$post_slug])->take(5)->get();
@@ -177,6 +180,7 @@ class PostController extends Controller
         return view('pages.blog.blog_details')->with('category_post',$category_post)
         ->with('category',$cate_product)->with('post',$post)->with('meta_desc',$meta_desc)
         ->with('meta_keywords',$meta_keywords)->with('meta_title',$meta_title)
-        ->with('url_canonical',$url_canonical)->with('related',$related)->with('all_post',$all_post)->with('created',$created);
+        ->with('url_canonical',$url_canonical)->with('related',$related)->with('all_post',$all_post)
+        ->with('created',$created)->with('author',$author);
     }
 }

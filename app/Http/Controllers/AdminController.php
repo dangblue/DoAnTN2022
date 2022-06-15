@@ -50,4 +50,18 @@ class AdminController extends Controller
         Session::put('admin_id',null);
         return Redirect::to('/admin');
     }
+
+    public function manage_user(){
+        $this->AuthLoginCheck();
+        $all_user=DB::table('tbl_customers')
+        ->orderBy('customer_id','desc')->get();
+        //$manager_user=view('admin.user.manage_user')->with('all_user',$all_user);
+        return view('admin.user.manage_user')->with('all_user',$all_user);
+    }
+    public function delete_user($customerId){
+        $this->AuthLoginCheck();
+        DB::table('tbl_customers')->where('customer_id',$customerId)-> delete();
+        Session::put('message',' Xoá thành công');
+        return Redirect::to('/manage-user');
+    }
 }

@@ -44,8 +44,9 @@
             <th>Tên sản phẩm</th>
             <th>Giá</th>
             <th>Hình ảnh</th>
+            <th>Thư viện ảnh</th>
             <th>Danh mục</th>
-            <th>Thương hiệu</th>
+
             <th>Hiển thị</th>
             <th>Quản lý</th>
             <th style="width:30px;"></th>
@@ -64,8 +65,9 @@
             <td>{{$pro -> product_name}}</td>
             <td>{{$pro -> product_price}}</td>
             <td><img src="{{asset('public/uploads/product/'.$pro->product_image)}}" height="100" width="100"></td>
+            <td><a href="{{URL::to('/add-gallery/'.$pro->product_id)}}">Thêm thư viện ảnh</a></td>
             <td>{{$pro -> category_name}}</td>
-            <td>{{$pro -> brand_name}}</td>
+
 
             <td><span class="text-ellipsis">
              <?php
@@ -114,4 +116,4 @@
   </div>
 </div>
 
-@stop();
+@stop()

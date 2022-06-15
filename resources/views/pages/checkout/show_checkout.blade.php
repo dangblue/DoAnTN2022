@@ -212,4 +212,4 @@
     </div>
 </section>
 <!-- Checkout Section End -->
-@stop();
+@stop()

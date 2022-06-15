@@ -15,6 +15,10 @@ session_start();
 
 class CartController extends Controller
 {
+    public function show_cart_menu(){
+        $cart = count(Session::get('cart'));
+        echo $cart;
+    }
     public function check_coupon(Request $request){
         $data = $request->all();
         $coupon = Coupon::where('coupon_code',$data['coupon'])->first();

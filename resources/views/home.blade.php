@@ -1,6 +1,5 @@
 @extends('layouts.site')
 @section('main')
-
 <!-- Hero Section Begin -->
 <section class="hero">
     <div class="container">
@@ -39,6 +38,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="hero__item set-bg" data-setbg="{{url('public/frontend')}}/img/hero/banner.jpg">
                     <div class="hero__text">
                         <span>Ogani Shop</span>
@@ -47,6 +47,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
@@ -66,6 +67,7 @@
                 @foreach($product1 as $key =>$pro1)
                 <div class="col-lg-3">
                     <div class="categories__item set-bg" data-setbg="{{URL::to('/public/uploads/product/'.$pro1->product_image)}}">
+                        <div class="product__discount__percent">HOT</div>
                         <h5><a href="{{URL::to('/chi-tiet-san-pham',$pro1->product_id)}}">
                             {{$pro1->product_name}}
                         </a></h5>
@@ -110,8 +112,9 @@
                         <input type="hidden" name="qty" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
 
                     <div class="featured__item__pic set-bg">
-                        <img id="wishlist_productimage{{$product->product_id}}"
-                        src="{{URL::to('/public/uploads/product/'.$product->product_image)}}" alt="">
+                        <div class="product__discount__percent">NEW</div>
+                        <img id="wishlist_productimage{{$product->product_id}}" src="{{URL::to('/public/uploads/product/'.$product->product_image)}}" alt="">
+
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i type="button" class="fa fa-heart button_wishlist" id="{{$product->product_id}}" onclick="add_wishlist(this.id);"></i></a></li>
 
@@ -162,7 +165,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title from-blog__title">
-                    <h2>Bài viết từ Blog</h2>
+                    <h2>Bài viết mới</h2>
                 </div>
             </div>
         </div>
@@ -188,4 +191,4 @@
     </div>
 </section>
 <!-- Blog Section End -->
-@stop();
+@stop()

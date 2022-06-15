@@ -51,7 +51,7 @@
                 <div class="blog__details__hero__text">
                     <h2>{{$meta_title}}</h2>
                     <ul>
-                        <li>By Hai Dang</li>
+                        <li>Tác giả: {{$author}}</li>
                         <li>{{$created}}</li>
                         <li>8 Comments</li>
                     </ul>
@@ -116,9 +116,7 @@
                 <div class="blog__details__text">
                     <img src="{{asset('public/uploads/post/'.$value->post_image)}}" height="450px" width="710px" alt="{{$value->post_lug}}">
                     <p>{!!$value->post_content!!}</p>
-
                 </div>
-
                 <div class="blog__details__content">
                     <div class="row">
                         <div class="col-lg-6">
@@ -192,4 +190,4 @@
 <!-- Related Blog Section End -->
 
 
-@stop();
+@stop()

@@ -156,7 +156,7 @@
                     <h5>Tổng giỏ hàng</h5>
                     <ul>
                         <li>Phí vận chuyển <span>Free</span></li>
-                        <li>Tổng tiền <span>{{$total}} VNĐ</span></li>
+                        <li>Tổng tiền <span>{{number_format($total,0,',','.')}} VNĐ</span></li>
                         @if($cou1)
 							<li>
 									@foreach($cou1 as $key => $cou)
@@ -192,7 +192,7 @@
                             <?php
                                 }else{
                             ?>
-                                <a href="{{URL::to('/login-checkout')}}" class="primary-btn" style="pointer-events: none">Thanh toán</a>
+                                <a href="{{URL::to('/login-checkout')}}" class="primary-btn" > Đăng nhập để thanh toán</a>
                             <?php
                                 }
                             ?>
@@ -221,4 +221,4 @@
 
 </section>
 <!-- Shoping Cart Section End -->
-@stop();
+@stop()

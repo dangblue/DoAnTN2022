@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/style.css" type="text/css">
     <link rel="stylesheet" href="{{url('public/frontend')}}/css/sweetalert.css" type="text/css">
     <link rel="stylesheet" href="{{url('public/addang')}}/css/formValidation.min.css" type="text/css">
+    <link rel="stylesheet" href="{{url('public/frontend')}}/css/lightgallery.min.css" type="text/css">
+    <link rel="stylesheet" href="{{url('public/frontend')}}/css/lightslider.css" type="text/css">
+    <link rel="stylesheet" href="{{url('public/frontend')}}/css/prettify.css" type="text/css">
 </head>
 <body>
     <!-- Page Preloder -->
@@ -35,9 +38,22 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="{{URL::to('/wishlist')}}"><i class="fa fa-heart"></i> <span></span></a></li>
-                <li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-bag"></i><span></span></a></li>
+                <?php
+                                if(Session::get('cart') != NULL){
+                            ?>
+                            <li>
+                               <a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-bag" ></i><span id="show-cart-qt">'.$cart.'</span></a>
+                            </li>
+                            <?php
+                                }else{
+                            ?>
+                             <li>
+                                <a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-bag" ></i><span id="show-cart-qt">0</span></a>
+                             </li>
+                            <?php
+                                }
+                            ?>
             </ul>
-            <div class="header__cart__price">item: <span></span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -66,7 +82,7 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="{{URL::to('/')}}">Trang chủ</a></li>
+                <li><a href="{{URL::to('/')}}">Trang chủ</a></li>
                             <li><a href="{{URL::to('/shop')}}">Cửa hàng</a></li>
                             <li><a href="{{URL::to('/show-cart')}}">Giỏ hàng</a>
                                 <ul class="header__menu__dropdown">
@@ -168,7 +184,7 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="{{URL::to('/')}}">Trang chủ</a></li>
+                            <li><a href="{{URL::to('/')}}">Trang chủ</a></li>
                             <li><a href="{{URL::to('/shop')}}">Cửa hàng</a></li>
                             <li><a href="{{URL::to('/show-cart')}}">Giỏ hàng</a>
                                 <ul class="header__menu__dropdown">
@@ -199,12 +215,25 @@
                     </nav>
                 </div>
                 <div class="col-lg-3">
-                    <div class="header__cart">
+                    <div class="header__cart" >
                         <ul>
                             <li><a href="{{URL::to('/wishlist')}}"><i class="fa fa-heart"></i> <span></span></a></li>
-                            <li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-bag"></i><span></span></a></li>
+                            <?php
+                                if(Session::get('cart') != NULL){
+                            ?>
+                            <li>
+                               <a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-bag" ></i><span id="show-cart-menu">'.$cart.'</span></a>
+                            </li>
+                            <?php
+                                }else{
+                            ?>
+                             <li>
+                                <a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-bag" ></i><span id="show-cart-menu">0</span></a>
+                             </li>
+                            <?php
+                                }
+                            ?>
                         </ul>
-                        <div class="header__cart__price">item: <span></span></div>
                     </div>
                 </div>
             </div>
@@ -291,9 +320,12 @@
     <script src="{{asset('public/frontend/js/mixitup.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/owl.carousel.min.js')}}"></script>
     <script src="{{url('public/frontend')}}/js/main.js"></script>
-    <script src="{{url('public/frontend')}}/js/sweetalert.js"></>
+    <script src="{{url('public/frontend')}}/js/sweetalert.js"></script>
     <script src="{{url('public/frontend')}}/js/sweetalert.min.js"></script>
     <script src="{{url('public/addang')}}/js/jquery.form-validator.min.js"></script>
+    <script src="{{url('public/frontend')}}/js/lightgallery-all.min.js"></script>
+    <script src="{{url('public/frontend')}}/js/lightslider.js"></script>
+    <script src="{{url('public/frontend')}}/js/prettify.js"></script>
     <script>
     $.validate({});
     </script>
@@ -311,7 +343,28 @@
     </script>
 
     <script type="text/javascript">
+        show_cart_menu();
+            function show_cart_menu(){
+                $.ajax({
+                    url:'{{url('/show-cart-menu')}}',
+                    method:'get',
+                    success:function(data){
+                        $('#show-cart-menu').html(data);
+                    }
+                });
+            }
+            show_cart_qt();
+            function show_cart_qt(){
+                $.ajax({
+                    url:'{{url('/show-cart-menu')}}',
+                    method:'get',
+                    success:function(data){
+                        $('#show-cart-qt').html(data);
+                    }
+                });
+            }
         $(document).ready(function(){
+
 
             $(".add-to-cart").click(function(){
                 var id = $(this).data('id_product');
@@ -340,6 +393,8 @@
                             function() {
                                 window.location.href = "{{url('/show-cart')}}";
                             });
+                            show_cart_menu();
+                            show_cart_qt();
                         }
                     });
                 });
@@ -347,6 +402,7 @@
     </script>
 
     <script type="text/javascript">
+
         function view(){
             if(localStorage.getItem('data')!=null){
                 var data = JSON.parse(localStorage.getItem('data'));
@@ -426,7 +482,24 @@
         });
     </script>
 
-
+    <script>
+        $(document).ready(function() {
+            $('#imageGallery').lightSlider({
+        gallery:true,
+        item:1,
+        loop:true,
+        thumbItem:4,
+        slideMargin:0,
+        enableDrag: false,
+        currentPagerPosition:'left',
+        onSliderLoad: function(el) {
+            el.lightGallery({
+                selector: '#imageGallery .lslide'
+            });
+        }
+    });
+  });
+    </script>
 
 </body>
 

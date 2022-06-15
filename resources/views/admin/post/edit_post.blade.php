@@ -29,6 +29,10 @@
                             <input type="text" name="post_slug" value="{{$post->post_slug}}" class="form-control" id="convert_slug" placeholder="Tên danh mục" required>
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Tên tác giả</label>
+                            <input type="text" name="post_author" value="{{$post->post_author}}" class="form-control" id="exampleInputEmail1" placeholder="Tên danh mục" required>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Tóm tắt bài viết</label>
                             <textarea style="resize: none;" rows="5" name="post_desc" class="form-control" id="ckeditor1" placeholder="Mô tả danh mục">{{$post->post_desc}}</textarea>
                         </div>
@@ -79,4 +83,4 @@
 
     </div>
 
-@stop();
+@stop()

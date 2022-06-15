@@ -111,6 +111,11 @@ ol {
     margin: 0;
 }
 
+li.active {
+    border: 2px solid;
+    color: #7fad39;
+}
+
 
 /*---------------------
   Helper CSS
@@ -430,7 +435,7 @@ ol {
 .header__menu ul li {
     list-style: none;
     display: inline-block;
-    margin-right: 50px;
+    margin-right: 45px;
     position: relative;
 }
 
@@ -609,7 +614,7 @@ ol {
 }
 
 .hero__categories__all span {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     color: #ffffff;
 }
@@ -767,6 +772,20 @@ ol {
   Categories
 -----------------------*/
 
+.categories__item .product__discount__percent {
+    height: 45px;
+    width: 45px;
+    background: #dd2222;
+    border-radius: 50%;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 45px;
+    text-align: center;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+
 .categories__item {
     height: 270px;
     position: relative;
@@ -834,7 +853,7 @@ ol {
 .featured__controls ul li {
     list-style: none;
     font-size: 18px;
-    color: #1c1c1c;
+    color: #7fad39;
     display: inline-block;
     margin-right: 25px;
     position: relative;
@@ -866,6 +885,20 @@ ol {
 
 .featured__item:hover .featured__item__pic .featured__item__pic__hover {
     bottom: 20px;
+}
+
+.featured__item__pic .product__discount__percent {
+    height: 45px;
+    width: 45px;
+    background: #dd2222;
+    border-radius: 50%;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 45px;
+    text-align: center;
+    position: absolute;
+    left: 15px;
+    top: 15px;
 }
 
 .featured__item__pic {

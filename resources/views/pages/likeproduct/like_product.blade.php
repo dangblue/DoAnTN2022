@@ -73,5 +73,5 @@
 </section>
 <!-- Breadcrumb Section End -->
 <!-- Blog Section End -->
-@stop();
+@stop()
 

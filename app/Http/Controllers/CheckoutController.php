@@ -38,7 +38,7 @@ class CheckoutController extends Controller
         $data['customer_phone'] = $request->customer_phone;
         $data['customer_email'] = $request->customer_email;
         $data['customer_password'] = md5($request->customer_password);
-
+        $data['created_at'] = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $customer_id = DB::table('tbl_customers')->insertGetId($data);
 
         Session::put('customer_id',$customer_id);

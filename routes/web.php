@@ -31,6 +31,11 @@ Route::get('/dashboard', 'AdminController@show_dashboard');
 Route::post('/admin-dashboard', 'AdminController@admin_dashboard');
 Route::get('/logout', 'AdminController@logout');
 
+//User
+Route::get('/manage-user', 'AdminController@manage_user');
+//Route::get('/view-user/{userId}', 'AdminController@view_user');
+Route::get('/delete-user/{customerId}', 'AdminController@delete_user');
+
 //Category Product
 Route::get('/add-category-product', 'CategoryProduct@add_category_product');
 
@@ -99,6 +104,8 @@ Route::post('/update-cart', 'CartController@update_cart');
 Route::get('/del-product/{session_id}', 'CartController@delete_product');
 Route::get('/show-cart', 'CartController@show_cart');
 Route::post('/add-cart-ajax', 'CartController@add_cart_ajax');
+Route::get('/show-cart-menu', 'CartController@show_cart_menu');
+
 //Checkout
 Route::get('/login-checkout', 'CheckoutController@login_checkout');
 Route::get('/logout-checkout', 'CheckoutController@logout_checkout');
@@ -113,6 +120,7 @@ Route::post('/recover-pass', 'CheckoutController@recover_pass');
 Route::get('/manage-order', 'CheckoutController@manage_order');
 Route::get('/view-order/{orderId}', 'CheckoutController@view_order');
 Route::get('/delete-order/{orderId}', 'CheckoutController@delete_order');
+
 //Coupon
 Route::post('/check-coupon', 'CartController@check_coupon');
 
@@ -129,6 +137,12 @@ Route::get('/contact', 'ContactController@contact');
 Route::get('/information', 'ContactController@information');
 Route::post('/save-info', 'ContactController@save_info');
 Route::post('/update-info/{info_id}', 'ContactController@update_info');
-
+//Gallery
+Route::get('/add-gallery/{product_id}', 'GalleryController@add_gallery');
+Route::post('/select-gallery', 'GalleryController@select_gallery');
+Route::post('/insert-gallery/{product_id}', 'GalleryController@insert_gallery');
+Route::post('/update-gallery-name', 'GalleryController@update_gallery_name');
+Route::post('/delete-gallery', 'GalleryController@delete_gallery');
+Route::post('/update-gallery', 'GalleryController@update_gallery');
 
 

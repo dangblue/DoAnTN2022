@@ -124,7 +124,7 @@
                                     <li><i class="fa fa-calendar-o"></i> {{$value->created_at}}</li>
                                     <li><i class="fa fa-comment-o"></i>10</li>
                                 </ul>
-                                <h5><a href="#">{{$value->post_title}}</a></h5>
+                                <h5><a href="{{URL::to('/bai-viet/'.$value->post_slug)}}">{{$value->post_title}}</a></h5>
                                 <p> {!!$value->post_desc!!} </p>
                                 <a href="{{URL::to('/bai-viet/'.$value->post_slug)}}" class="blog__btn">Xem thêm <span class="arrow_right"></span></a>
                             </div>
@@ -146,4 +146,4 @@
 </section>
 <!-- Blog Section End -->
 
-@stop();
+@stop()

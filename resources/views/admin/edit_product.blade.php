@@ -31,6 +31,11 @@
                             <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" value="{{$pro->product_price}}" required>
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Trọng lượng</label>
+                            <input type="text" value="{{$pro->product_weight}}"
+                            name="product_weight" class="form-control" id="exampleInputEmail1" placeholder="Trọng lượng sản phẩm">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>
                             <input type="file" name="product_image" class="form-control" id="exampleInputEmail1">
                             <img src="{{asset('public/uploads/product/'.$pro->product_image)}}" height="100" width="100">
@@ -91,4 +96,4 @@
 
     </div>
 
-@stop();
+@stop()

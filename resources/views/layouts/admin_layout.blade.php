@@ -7,10 +7,12 @@
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
-<link rel="stylesheet" href="{{url('public/addang')}}/css/bootstrap.min.css" >
+<link rel="stylesheet" href="{{url('public/addang')}}/css/bootstrap.min.css">
+<meta name="csrf-token" content="{{csrf_token()}}">
+
 <!-- //bootstrap-css -->
 <!-- Custom CSS -->
-<link href="{{url('public/addang')}}/css/style.css" rel='stylesheet' type='text/css' />
+<link href="{{url('public/addang')}}/css/style.css" rel='stylesheet' type='text/css'/>
 <link href="{{url('public/addang')}}/css/style-responsive.css" rel="stylesheet"/>
 <!-- font CSS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -53,7 +55,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="{{url('public/addang')}}/images/2.png">
+                <img alt="" src="{{url('public/addang')}}/images/addang.png">
                 <span class="username">
 
                     <?php
@@ -106,6 +108,15 @@ $name = Session::get('admin_name');
                     </a>
                     <ul class="sub">
 						<li><a href="{{URL::to('/manage-order')}}">Quản lý đơn hàng</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Người dùng</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/manage-user')}}">Tài khoản người dùng</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -206,6 +217,107 @@ $name = Session::get('admin_name');
 <script>
     CKEDITOR.replace( 'ckeditor1' );
     CKEDITOR.replace( 'ckeditor2' );
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        load_gallery();
+        function load_gallery(){
+            var pro_id= $('.pro_id').val();
+            var _token = $('input[name="_token"]').val();
+            //alert(pro_id);
+            $.ajax({
+                url:"{{url('/select-gallery')}}",
+                method: "POST",
+                data:{pro_id:pro_id,_token:_token},
+                success:function(data){
+                    $('#gallery_load').html(data);
+                }
+            });
+        }
+        $('#file').change(function(){
+            var error = '';
+            var files = $('#file')[0].files;
+
+            if(files.length > 5){
+                error+='<p>Chỉ được chọn tối đa 5 ảnh</p>';
+            }else if(files.length==''){
+                error+='<p>Bạn không được bỏ trống ảnh</p>';
+            }else if(files.size > 2000000){
+                error+='<p>File ảnh không được lớn hơn 2MB</p>';
+            }
+            if(error==''){
+
+            }else{
+                $('#file').val('');
+                $('#error_gallery').html('<span class="text-danger">'+error+'</span>');
+                return false;
+            }
+        });
+
+        $(document).on('blur','.edit_gal_name', function(){
+            var gal_id = $(this).data('gal_id');
+            var gal_text =$(this).text();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{url('/update-gallery-name')}}",
+                method: "POST",
+                data:{gal_id:gal_id,gal_text:gal_text,_token:_token},
+                success:function(data){
+                    load_gallery();
+                    $('#error_gallery').html('<span class="text-danger">Cập nhật tên hình ảnh thành công</span>');
+                }
+            });
+
+        });
+
+        $(document).on('click','.delete-gallery', function(){
+            var gal_id = $(this).data('gal_id');
+
+            var _token = $('input[name="_token"]').val();
+            if(confirm('Bạn muốn có muốn xóa ?')){
+            $.ajax({
+                url:"{{url('/delete-gallery')}}",
+                method: "POST",
+                data:{gal_id:gal_id,_token:_token},
+                success:function(data){
+                    load_gallery();
+                    $('#error_gallery').html('<span class="text-danger">Xoá thành công</span>');
+                }
+            });
+            }
+
+        });
+
+        $(document).on('change','.file_image',function(){
+
+            var gal_id = $(this).data('gal_id');
+            var image = document.getElementById("file-"+gal_id).files[0];
+
+            var form_data = new FormData();
+
+            form_data.append("file", document.getElementById("file-"+gal_id).files[0]);
+            form_data.append("gal_id", gal_id);
+
+            $.ajax({
+                url:"{{url('/update-gallery')}}",
+                method: "POST",
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:form_data,
+
+                contentType:false,
+                cache:false,
+                processData:false,
+                success:function(data){
+                    load_gallery();
+                    $('#error_gallery').html('<span class="text-danger">Cập nhật thành công</span>');
+                },
+            });
+
+
+        });
+    });
 </script>
 <!-- morris JavaScript -->
 <script>

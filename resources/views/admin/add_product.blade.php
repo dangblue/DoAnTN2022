@@ -32,6 +32,11 @@
                             name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Giá sản phẩm">
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Trọng lượng</label>
+                            <input type="text" data-validation="length" data-validation-length="min1" data-validation-error-msg=" Nhập trọng lượng sản phẩm"
+                            name="product_weight" class="form-control" id="exampleInputEmail1" placeholder="Trọng lượng sản phẩm">
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh sản phẩm</label>
                             <input type="file" name="product_image" class="form-control" id="exampleInputEmail1">
 
@@ -86,4 +91,4 @@
 
     </div>
 
-@stop();
+@stop()

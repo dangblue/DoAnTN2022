@@ -2,4 +2,4 @@
 @section('admin_content')
 
 
-@stop();
+@stop()

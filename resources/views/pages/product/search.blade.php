@@ -69,7 +69,7 @@
                 <div class="featured__controls">
                     <ul>
 
-                        <li class="active" data-filter="*"><a href="{{URL::to('/')}}"><h5>Trang chủ</h5></a></li>
+                        <li class="active" data-filter="*"><a href="{{URL::to('/')}}"><h4>Trang chủ</h4></a></li>
 
 
                     </ul>
@@ -137,4 +137,4 @@
 <!-- Latest Product Section Begin -->
 
 <!-- Blog Section End -->
-@stop();
+@stop()

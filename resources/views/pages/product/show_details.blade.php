@@ -65,22 +65,26 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <div class="product__details__pic">
-                        <div class="product__details__pic__item">
-                            <img class="product__details__pic__item--large" width="528" height="516"
-                                src="{{URL::to('public/uploads/product/'.$value->product_image)}}" alt="">
-                        </div>
-                        <div class="product__details__pic__slider owl-carousel">
-                            <img class="product__details__pic__item--large"
-                                src="{{URL::to('public/uploads/product/'.$value->product_image)}}" alt="">
-                            <img class="product__details__pic__item--large"
-                                src="{{URL::to('public/uploads/product/'.$value->product_image)}}" alt="">
-                            <img class="product__details__pic__item--large"
-                                src="{{URL::to('public/uploads/product/'.$value->product_image)}}" alt="">
-                            <img class="product__details__pic__item--large"
-                                src="{{URL::to('public/uploads/product/'.$value->product_image)}}" alt="">
-                        </div>
-                    </div>
+
+                    <ul id="imageGallery">
+                        <li data-thumb="{{URL::to('public/uploads/product/'.$value->product_image)}}"
+                            data-src="{{URL::to('public/uploads/product/'.$value->product_image)}}">
+                          <img width="100%" src="{{URL::to('public/uploads/product/'.$value->product_image)}}" />
+                        </li>
+                        <li data-thumb="{{URL::to('public/uploads/product/'.$value->product_image)}}"
+                            data-src="{{URL::to('public/uploads/product/'.$value->product_image)}}">
+                          <img width="100%" src="{{URL::to('public/uploads/product/'.$value->product_image)}}" />
+                        </li>
+                        <li data-thumb="{{URL::to('public/uploads/product/'.$value->product_image)}}"
+                            data-src="{{URL::to('public/uploads/product/'.$value->product_image)}}">
+                          <img width="100%" src="{{URL::to('public/uploads/product/'.$value->product_image)}}" />
+                        </li>
+                        <li data-thumb="{{URL::to('public/uploads/product/'.$value->product_image)}}"
+                            data-src="{{URL::to('public/uploads/product/'.$value->product_image)}}">
+                          <img width="100%" src="{{URL::to('public/uploads/product/'.$value->product_image)}}" />
+                        </li>
+                      </ul>
+
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
@@ -113,7 +117,7 @@
                             <li><b>Tình trạng</b> <span>Còn hàng</span></li>
                             <li><b>Danh mục</b> <span>{{$value->category_name}}</span></li>
                             <li><b>Phí ship</b> <span><samp>Miễn phí vận chuyển</samp></span></li>
-                            <li><b>Cân nặng</b> <span>0.5 kg</span></li>
+                            <li><b>Trọng lượng</b> <span>{{$value->product_weight}}</span></li>
                             <style type="text/css">
                                 a.tags_style{
                                     margin: 3px 2px;
@@ -250,4 +254,4 @@
         </div>
     </section>
     <!-- Related Product Section End -->
-@stop();
+@stop()
