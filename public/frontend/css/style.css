@@ -491,7 +491,7 @@ li.active {
 }
 
 .header__menu ul li a {
-    font-size: 12px;
+    font-size: 13px;
     color: #252525;
     text-transform: uppercase;
     font-weight: 700;
@@ -614,7 +614,7 @@ li.active {
 }
 
 .hero__categories__all span {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 700;
     color: #ffffff;
 }

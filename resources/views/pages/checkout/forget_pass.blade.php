@@ -1,7 +1,93 @@
 @extends('layouts.site')
 @section('main')
 
-<link rel="stylesheet" href="{{url('public/frontend')}}/css/main.css" type="text/css">
+<style>
+    #form {
+    display: block;
+    margin-bottom: 185px;
+    margin-top: 185px;
+    overflow: hidden;
+}
+
+.login-form {}
+
+.signup-form {}
+
+.login-form h2,
+.signup-form h2 {
+    color: #696763;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+.login-form form input,
+.signup-form form input {
+    background: #F0F0E9;
+    border: medium none;
+    color: #696763;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    height: 40px;
+    margin-bottom: 10px;
+    outline: medium none;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.login-form form span {
+    line-height: 25px;
+}
+
+.login-form form span input {
+    width: 20px;
+    float: left;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.login-form form button {
+    margin-top: 23px;
+}
+
+.login-form form button,
+.signup-form form button {
+    background: #7fad39;
+    border: medium none;
+    border-radius: 0;
+    color: #FFFFFF;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    padding: 6px 25px;
+}
+
+.login-form label {}
+
+.login-form label input {
+    border: medium none;
+    display: inline-block;
+    height: 0;
+    margin-bottom: 0;
+    outline: medium none;
+    padding-left: 0;
+}
+
+.or {
+    background: #7fad39;
+    border-radius: 40px;
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 75px;
+    text-align: center;
+    width: 50px;
+}
+</style>
 <!-- Hero Section Begin -->
 <section class="hero hero-normal">
     <div class="container">

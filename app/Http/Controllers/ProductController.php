@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use GuzzleHttp\Psr7\Message;
 use App\Models\Product;
+use App\Models\Gallery;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\CatePost;
+use Illuminate\Support\Facades\File;
+
 session_start();
 
 class ProductController extends Controller
@@ -57,19 +60,25 @@ class ProductController extends Controller
 
         $get_image = $request->file('product_image');
 
+        $path = 'public/uploads/product/';
+        $path_gal = 'public/uploads/gallery/';
        if($get_image){
             $get_name_image=$get_image->getClientOriginalName();
             $name_image=current(explode('.',$get_name_image));
-            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
-            $get_image->move('public/uploads/product',$new_image);
+            $new_image = $name_image.rand(0,999).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move($path,$new_image);
+            File::copy($path.$new_image,$path_gal.$new_image);
             $data['product_image'] = $new_image;
-            DB::table('tbl_product')->insert($data);
-        Session::put('message','Thêm thành công');
-        return Redirect::to('/all-product');
+
         }
-        $data['product_image'] = '';
-        DB::table('tbl_product')->insert($data);
-        Session::put('message','Thêm thất bại');
+        $pro_id= DB::table('tbl_product')->insertGetId($data);
+        $gallery = new Gallery();
+        $gallery->gallery_image = $new_image;
+        $gallery->gallery_name = $new_image;
+        $gallery->product_id = $pro_id;
+        $gallery->save();
+
+        Session::put('message','Thêm thành công');
         return Redirect::to('/all-product');
 
     }
@@ -135,6 +144,9 @@ class ProductController extends Controller
     }
     //end admin page
     public function details_product($product_id){
+        //gallery
+
+
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')
         ->orderBy('category_id','desc')->get();
         $details_product=DB::table('tbl_product')
@@ -143,15 +155,19 @@ class ProductController extends Controller
 
         foreach($details_product as $key => $value){
             $category_id = $value -> category_id;
-
+            $product_id = $value -> product_id;
         }
 
         $related_product=DB::table('tbl_product')
         ->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')
         ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_id',[$product_id])->get();
         $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
+        //gallery
+        $gallery = Gallery::where('product_id', $product_id)->get();
+
         return view('pages.product.show_details')->with('category',$cate_product)
-        ->with('product_details',$details_product)->with('related',$related_product)->with('category_post',$category_post);
+        ->with('product_details',$details_product)->with('related',$related_product)
+        ->with('category_post',$category_post)->with('gallery',$gallery);
     }
     public function shop(){
 

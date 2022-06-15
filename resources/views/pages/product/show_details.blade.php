@@ -67,22 +67,12 @@
                 <div class="col-lg-6 col-md-6">
 
                     <ul id="imageGallery">
-                        <li data-thumb="{{URL::to('public/uploads/product/'.$value->product_image)}}"
-                            data-src="{{URL::to('public/uploads/product/'.$value->product_image)}}">
-                          <img width="100%" src="{{URL::to('public/uploads/product/'.$value->product_image)}}" />
+                        @foreach($gallery as $key => $gal)
+                        <li data-thumb="{{URL::to('public/uploads/gallery/'.$gal->gallery_image)}}"
+                            data-src="{{URL::to('public/uploads/gallery/'.$gal->gallery_image)}}">
+                          <img width="100%" alt="{{$gal->gallery_name}}" src="{{URL::to('public/uploads/gallery/'.$gal->gallery_image)}}" />
                         </li>
-                        <li data-thumb="{{URL::to('public/uploads/product/'.$value->product_image)}}"
-                            data-src="{{URL::to('public/uploads/product/'.$value->product_image)}}">
-                          <img width="100%" src="{{URL::to('public/uploads/product/'.$value->product_image)}}" />
-                        </li>
-                        <li data-thumb="{{URL::to('public/uploads/product/'.$value->product_image)}}"
-                            data-src="{{URL::to('public/uploads/product/'.$value->product_image)}}">
-                          <img width="100%" src="{{URL::to('public/uploads/product/'.$value->product_image)}}" />
-                        </li>
-                        <li data-thumb="{{URL::to('public/uploads/product/'.$value->product_image)}}"
-                            data-src="{{URL::to('public/uploads/product/'.$value->product_image)}}">
-                          <img width="100%" src="{{URL::to('public/uploads/product/'.$value->product_image)}}" />
-                        </li>
+                        @endforeach
                       </ul>
 
                 </div>
