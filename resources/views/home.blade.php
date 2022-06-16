@@ -130,7 +130,6 @@
                     </div>
                     </form>
                 </div>
-
             </div>
             @endforeach
         </div>

@@ -98,6 +98,7 @@ Route::get('/active-product/{product_id}', 'ProductController@active_product');
 
 Route::post('/save-product', 'ProductController@save_product');
 Route::post('/update-product/{product_id}', 'ProductController@update_product');
+Route::post('/insert-rating', 'ProductController@insert_rating');
 //Cart
 Route::post('/save-cart', 'CartController@save_cart');
 Route::post('/update-cart', 'CartController@update_cart');
@@ -144,5 +145,6 @@ Route::post('/insert-gallery/{product_id}', 'GalleryController@insert_gallery');
 Route::post('/update-gallery-name', 'GalleryController@update_gallery_name');
 Route::post('/delete-gallery', 'GalleryController@delete_gallery');
 Route::post('/update-gallery', 'GalleryController@update_gallery');
-
+//VN Pay
+//Route::post('/vnpay-payment','CheckoutController@vnpay_payment');
 

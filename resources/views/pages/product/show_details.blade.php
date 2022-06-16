@@ -84,7 +84,30 @@
                         <input type="hidden" value="{{$value->product_price}}" class="cart_product_price_{{$value->product_id}}">
 
                         <h3>{{$value->product_name}}</h3>
+                        <form action="#" method="POST">
+                            {{csrf_field()}}
+                        <div class="product__details__rating">
+                            @for($count=1; $count<=5; $count ++)
+                                @php
+                                    if($count <= $rating){
+                                        $color = 'color:#ffcc00;';
+                                    }else {
+                                        $color = 'color:#ccc;';
+                                    }
+                                @endphp
 
+                                <i title="đánh giá sao"
+                                id="{{$value->product_id}}-{{$count}}"
+                                data-index="{{$count}}"
+                                data-product_id="{{$value->product_id}}"
+                                data-rating="{{$rating}}"
+                                class="rating"
+                                style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</i>
+
+                            @endfor
+                            <span>(Hãy cho mình 5 sao nếu bạn thích sản phẩm này nhé! Thanks:3 ! )</span>
+                        </div>
+                        </form>
                         <form action="{{URL::to('/show-cart')}}" method="GET">
                             {{ csrf_field() }}
                         <div class="product__details__price">{{$value->product_price}} VNĐ</div>
@@ -158,38 +181,25 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                    aria-selected="false">Đánh giá <span>(1)</span></a>
+                                    aria-selected="false">Đánh giá <span></span></a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
+                                    <h6>Thông tin sản phẩm</h6>
                                     <p>{!!$value->product_content!!}</p>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
+                                    <h6>Mô tả sản phẩm</h6>
                                    <p>{!!$value->product_desc!!}</p>
 
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
-                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-                                        Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
-                                        Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
-                                        sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
-                                        eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
-                                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
-                                        sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
-                                        diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
-                                        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                                        Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
-                                        Proin eget tortor risus.</p>
-                                </div>
+
                             </div>
                         </div>
                     </div>

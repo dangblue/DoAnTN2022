@@ -168,19 +168,26 @@
 									@endforeach
 
 						    @endif
-                            <form method="POST" action="{{URL::to('/save-checkout-customer')}}">
+                        <form method="POST" action="{{URL::to('/save-checkout-customer')}}">
                                 {{csrf_field()}}
                             <div class="checkout__input__checkbox">
                                 <label for="payment">
                                     Trả tiền mặt
-                                    <input type="radio" id="payment" class="collapsed " name="payment_option" value="trả tiền mặt">
+                                    <input type="radio" id="payment" class="collapsed " name="payment_option" value="trả tiền mặt" checked>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="paypal">
-                                    Thẻ ngân hàng
-                                    <input type="radio" id="paypal" class="collapsed " name="payment_option" value="trả bằng thẻ" checked>
+                                    Trả bằng thẻ ghi nợ
+                                    <input type="radio" id="paypal" class="collapsed " name="payment_option" value="trả bằng thẻ ghi nợ">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="checkout__input__checkbox">
+                                <label for="vnpay">
+                                    Thanh toán VNPay
+                                    <input type="radio" id="vnpay" class="collapsed " name="payment_option" value="Thanh toán VNPay">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
@@ -191,7 +198,7 @@
 
                             if($cart_checkout !=NULL){
                             ?>
-                                 <button type="submit" name="send_order" class="site-btn send_order">ĐẶT HÀNG</button>
+                                 <button type="submit" name="redirect" class="site-btn send_order">ĐẶT HÀNG</button>
                             <?php
                                 }else{
                             ?>
@@ -200,10 +207,6 @@
                             <?php
                                 }
                             ?>
-
-
-
-
                         </div>
                     </div>
                 </div>

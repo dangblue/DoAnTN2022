@@ -186,7 +186,7 @@
                     <?php
                         $cart_checkout = Session::get('cart');
                         $customer_id = Session::get('customer_id');
-                            if($customer_id != NULL && $cart_checkout !=NULL){
+                            if($customer_id != NULL){
                             ?>
                                  <a href="{{URL::to('/checkout')}}" class="primary-btn" >Thanh toán</a>
                             <?php

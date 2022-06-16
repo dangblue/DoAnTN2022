@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\CatePost;
 use Illuminate\Support\Facades\File;
-
+use App\Models\Rating;
 session_start();
 
 class ProductController extends Controller
@@ -143,10 +143,8 @@ class ProductController extends Controller
         return Redirect::to('all-product');
     }
     //end admin page
-    public function details_product($product_id){
+    public function details_product($product_id, Request $request){
         //gallery
-
-
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')
         ->orderBy('category_id','desc')->get();
         $details_product=DB::table('tbl_product')
@@ -156,6 +154,7 @@ class ProductController extends Controller
         foreach($details_product as $key => $value){
             $category_id = $value -> category_id;
             $product_id = $value -> product_id;
+            $url_canonical = $request->url();
         }
 
         $related_product=DB::table('tbl_product')
@@ -164,10 +163,14 @@ class ProductController extends Controller
         $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
         //gallery
         $gallery = Gallery::where('product_id', $product_id)->get();
+        //rating
+        $rating = Rating::where('product_id', $product_id)->avg('rating');
+        $rating = round($rating);
 
         return view('pages.product.show_details')->with('category',$cate_product)
         ->with('product_details',$details_product)->with('related',$related_product)
-        ->with('category_post',$category_post)->with('gallery',$gallery);
+        ->with('category_post',$category_post)->with('gallery',$gallery)
+        ->with('url_canonical',$url_canonical)->with('rating',$rating);
     }
     public function shop(){
 
@@ -208,5 +211,14 @@ class ProductController extends Controller
 
         return view('pages.product.tag')->with('category',$cate_product)->with('category_post',$category_post)
         ->with('product_tag',$product_tag)->with('pro_tag',$pro_tag);
+    }
+
+    public function insert_rating(Request $request){
+        $data = $request->all();
+        $rating = new Rating();
+        $rating->product_id = $data['product_id'];
+        $rating->rating = $data['index'];
+        $rating->save();
+        echo 'done';
     }
 }
