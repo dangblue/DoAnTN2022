@@ -93,12 +93,17 @@ Route::get('/delete-product/{product_id}', 'ProductController@delete_product');
 
 Route::get('/all-product', 'ProductController@all_product');
 
+
 Route::get('/unactive-product/{product_id}', 'ProductController@unactive_product');
 Route::get('/active-product/{product_id}', 'ProductController@active_product');
+Route::get('/comment', 'ProductController@list_comment');
 
 Route::post('/save-product', 'ProductController@save_product');
 Route::post('/update-product/{product_id}', 'ProductController@update_product');
 Route::post('/insert-rating', 'ProductController@insert_rating');
+Route::post('/load-comment', 'ProductController@load_comment');
+Route::post('/send-comment', 'ProductController@send_comment');
+
 //Cart
 Route::post('/save-cart', 'CartController@save_cart');
 Route::post('/update-cart', 'CartController@update_cart');

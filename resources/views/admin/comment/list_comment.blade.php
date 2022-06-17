@@ -2,7 +2,7 @@
 @section('admin_content')
 <div class="panel panel-default">
     <div class="panel-heading">
-    Liệt kê đơn hàng
+    Liệt kê bình luận
     </div>
     <div class="row w3-res-tb">
       <div class="col-sm-5 m-b-xs">
@@ -39,12 +39,14 @@
     ?>
         <thead>
           <tr>
+
             <th>STT</th>
-            <th>Tên người đặt hàng</th>
-            <th>Thời gian đặt</th>
-            <th>Tổng giá tiền</th>
-            <th>Tình trạng đơn hàng</th>
-            <th>Hiển thị</th>
+            <th>Duyệt</th>
+            <th>Tên người bình luận</th>
+            <th>Bình luận</th>
+            <th>Ngày gửi</th>
+            <th>Sản phẩm bình luận</th>
+            <th>Quản lý</th>
             <th style="width:30px;"></th>
           </tr>
         </thead>
@@ -52,38 +54,32 @@
             @php
                 $i=0;
             @endphp
-            @foreach($all_order as $key => $order)
+            @foreach($comment as $key => $comm)
             @php
             $i++;
             @endphp
           <tr>
-            <td><i>{{$i}}</i></td>
-            <td>{{$order -> customer_name}}</td>
-            <td>{{$order -> created_at}}</td>
-            <td>{{$order -> order_total}}</td>
+            <td><i>{{$i}}</i></label></td>
             <td>
-                <select name="product_cate" class="form-control input-sm m-bot15">
-                    @if($order->order_status == 1)
-                    <option selected value="1">Đang chờ xử lý</option>
-                    <option value="2">Đang giao hàng</option>
-                    <option value="3">Đã giao</option>
-                    @elseif($order->order_status == 2)
-                    <option value="1">Đang chờ xử lý</option>
-                    <option value="2" selected>Đang giao hàng</option>
-                    <option value="3">Đã giao</option>
-                    @elseif($order->order_status == 3)
-                    <option value="1">Đang chờ xử lý</option>
-                    <option value="2">Đang giao hàng</option>
-                    <option value="3" selected>Đã giao</option>
-                    @endif
-                </select>
+                @if($comm ->comment_status==1)
+                    <input type="button" data-comment_id="{{$comm->comment_id}}" id="{{$comm->comment_product_id}}" class="btn btn-primary btn-xs comment_duyet_btn" value="Duyệt">
+                @else
+                    <input type="button" data-comment_id="{{$comm->comment_id}}" id="{{$comm->comment_product_id}}" class="btn btn-danger btn-xs comment_boduyet_btn" value="Bỏ duyệt">
+                @endif
             </td>
+            <td>{{$comm ->comment_name}}</td>
+            <td><b>{{$comm ->comment}}</b>
+                <br><textarea rows="3"></textarea>
+                <br><button href="#">Trả lời</button>
 
-
+            </td>
+            <td>{{$comm ->comment_date}}</td>
+            <td><a href="{{URL::to('/chi-tiet-san-pham/'.$comm->product->product_id)}}" target="_blank">{{$comm ->product->product_name}}</a></td>
             <td>
-            <a href="{{URL::to('/view-order/'.$order->order_id)}}" class="active" ui-toggle-class="">
+            <a href="" class="active" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i></a>
-            <a onclick="return confirm('Bạn có muốn xóa?')" href="{{URL::to('/delete-order/'.$order->order_id)}}" class="active" ui-toggle-class="">
+            <a onclick="return confirm('Bạn có muốn xóa?')"
+            href="" class="active" ui-toggle-class="">
                   <i class="fa fa-times text-danger text"></i></a>
             </td>
           </tr>
@@ -95,7 +91,7 @@
       <div class="row">
 
         <div class="col-sm-5 text-center">
-          <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+          <small class="text-muted inline m-t-sm m-b-sm"></small>
         </div>
         <div class="col-sm-7 text-right text-center-xs">
           <ul class="pagination pagination-sm m-t-none m-b-none">

@@ -152,6 +152,15 @@ $name = Session::get('admin_name');
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
+                        <span>Bình luận</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/comment')}}">Liệt kê bình luận</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
                         <span>Mã giảm giá</span>
                     </a>
                     <ul class="sub">

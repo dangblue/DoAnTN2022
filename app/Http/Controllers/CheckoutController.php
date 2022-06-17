@@ -103,7 +103,7 @@ class CheckoutController extends Controller
         $order_data['shipping_id'] = Session::get('shipping_id');
         $order_data['payment_id'] = $payment_id;
         $order_data['order_total'] = $money;
-        $order_data['order_status'] = 'Đang chờ xử lý';
+        $order_data['order_status'] = '1';
 
         $order_data['created_at'] = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
         $order_id = DB::table('tbl_order')->insertGetId($order_data);

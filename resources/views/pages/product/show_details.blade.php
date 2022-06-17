@@ -199,7 +199,50 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <div class="contact-form spad">
+                                    <div class="container">
 
+                                        <style>
+                                            .row.style_comment{
+                                                border: 1px solid #ddd;
+                                                border-radius: 10px;
+                                                background: #f0f0e9;
+                                            }
+                                        </style>
+                                        <form action="{{url('/load-comment/'.$value->product_id)}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="comment_product_id" class="comment_product_id"
+                                            value="{{$value->product_id}}">
+
+                                        <div id="comment_show">
+                                        </div>
+                                        </form>
+                                        <div class="blog__item__text">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="contact__form__title">
+                                                    <h2>Đánh giá của bạn</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form>
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <input type="text" class="comment_name" placeholder="Tên bình luận" required>
+                                                </div>
+
+                                                <div class="col-lg-12 text-center">
+                                                    <textarea name="comment" class="comment_content" placeholder="Nhập nội dung của bạn" required></textarea>
+                                                    <button type="submit" class="site-btn send-comment">Gửi đánh giá</button>
+                                                </div>
+                                                <div id="notify_comment">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

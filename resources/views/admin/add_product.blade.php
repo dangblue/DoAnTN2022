@@ -61,7 +61,7 @@
                                     @endforeach
 
                                 </select>
-                            </div>
+                        </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tags sản phẩm</label>
                                 <input type="text" data-role="tagsinput"

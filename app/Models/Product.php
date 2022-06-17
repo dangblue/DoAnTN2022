@@ -12,4 +12,8 @@ class Product extends Model
     'product_price', 'product_image', 'product_status', 'product_tags', 'product_weight'];
     protected $primaryKey ='product_id';
     protected $table = 'tbl_product';
+
+    public function comment(){
+        return $this->hasMany('App\Models\Comment');
+    }
 }

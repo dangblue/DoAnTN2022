@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\CatePost;
 use Illuminate\Support\Facades\File;
 use App\Models\Rating;
+use App\Models\Comment;
 session_start();
 
 class ProductController extends Controller
@@ -48,7 +49,7 @@ class ProductController extends Controller
     public function save_product(Request $request){
         $this->AuthLoginCheck();
         $data = array();
-        $data['product_name'] = $request->product_name;
+        $data['product_name'] = $request->product_name; //Lấy giá trị từ input name="product_name"
         $data['product_tags'] = $request->product_tags;
         $data['product_price'] = $request->product_price;
         $data['product_weight'] = $request->product_weight;
@@ -214,11 +215,53 @@ class ProductController extends Controller
     }
 
     public function insert_rating(Request $request){
-        $data = $request->all();
+        $data = $request->all(); //lấy tất cả dữ liệu trong form
         $rating = new Rating();
         $rating->product_id = $data['product_id'];
-        $rating->rating = $data['index'];
+        $rating->rating = $data['index']; //index la gia tri rating
         $rating->save();
         echo 'done';
+    }
+
+    public function send_comment(Request $request){
+        $product_id = $request->product_id;
+        $comment_name = $request->comment_name;
+        $comment_content = $request->comment_content;
+        $comment = new Comment();
+        $comment->comment_product_id = $product_id;
+        $comment->comment = $comment_content;
+        $comment->comment_name = $comment_name;
+        $comment->comment_status = 1;
+        $comment->save();
+
+    }
+
+    public function load_comment(Request $request){
+        $product_id = $request->product_id;
+        $comment = Comment::where('comment_product_id', $product_id)->where('comment_status', 0)->get();
+        $output = '';
+        foreach($comment as $key => $comm){
+
+            $output.='<div class="row style_comment">
+            <div class="col-md-2">
+                <img width="60%" src="'.url('/public/frontend/img/avatar-icon-cm.jpg').'" class="img img-responsive img-thumbnail">
+
+
+            </div>
+            <div class="col-md-10">
+                <p style="color: #7fad39;"><b>'.$comm->comment_name.'</b></p>
+                <p style="color: #7fad39;"> Bình luận lúc: '.$comm->comment_date.'</p>
+                <p>
+                    '.$comm->comment.'
+                </p>
+            </div>
+        </div>';
+        }
+        echo $output;
+    }
+
+    public function list_comment(){
+        $comment = Comment::with('product')->orderBy('comment_status','DESC')->get();
+        return view('admin.comment.list_comment')->with(compact('comment'));
     }
 }
