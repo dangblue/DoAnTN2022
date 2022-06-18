@@ -103,7 +103,7 @@
                         </div>
                         <div class="checkout__input">
                             <p>Ghi chú đơn hàng<span>*</span></p>
-                            <input type="text" name="shipping_notes" class="shipping_notes" required>
+                            <input type="text" name="shipping_notes" value="Không bắt buộc" class="shipping_notes">
                         </div>
 
                     </div>

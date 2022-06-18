@@ -415,6 +415,67 @@ $name = Session::get('admin_name');
 
 		});
 	</script>
+    <script>
+        $('.comment_duyet_btn').click(function(){
+            var comment_status = $(this).data('comment_status');
+            var comment_id = $(this).data('comment_id');
+            var comment_product_id = $(this).attr('id');
+            //alert(comment_status);
+            //alert(comment_id);
+            //alert(comment_product_id);
+            if(comment_status==0){
+                var alert = 'Duyệt thành công';
+            }
+            else{
+                var alert = 'Hủy duyệt thành công';
+            }
+            $.ajax({
+                url:"{{url('/allow-comment')}}",
+                method: "POST",
+
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{comment_id:comment_id,comment_status:comment_status,comment_product_id:comment_product_id},
+                success:function(data){
+                    location.reload();
+                    $('#notify_comment').html('<span class="text text-alert"><b style="color:red">'+alert+'</b></span>');
+
+
+                },
+            });
+
+        });
+
+        $('.btn-reply-comment').click(function(){
+            var comment_id = $(this).data('comment_id');
+            var comment = $('.reply_comment_'+comment_id).val();
+
+            var comment_product_id = $(this).data('product_id');
+            //alert(comment);
+            //alert(comment_id);
+            //alert(comment_product_id);
+            var alert = 'Trả lời bình luận thành công';
+
+
+            $.ajax({
+                url:"{{url('/reply-comment')}}",
+                method: "POST",
+
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{comment_id:comment_id,comment:comment,comment_product_id:comment_product_id},
+                success:function(data){
+
+                   $('#notify_comment').html('<span class="text text-alert"><b style="color:red">'+alert+'</b></span>');
+                   $('.reply_comment_'+comment_id).val('');
+
+                },
+            });
+
+        });
+    </script>
 	<!-- //calendar -->
 </body>
 </html>

@@ -122,7 +122,7 @@ class CheckoutController extends Controller
 
         Session::forget('cart');
         Session::forget('coupon');
-
+        Session::save();
         if($data1['payment_method']=='trả bằng thẻ ghi nợ'){
             $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
             $request->session()->forget('cart');

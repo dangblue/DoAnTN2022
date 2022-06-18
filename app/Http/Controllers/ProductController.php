@@ -14,6 +14,8 @@ use App\Models\CatePost;
 use Illuminate\Support\Facades\File;
 use App\Models\Rating;
 use App\Models\Comment;
+use phpDocumentor\Reflection\Types\Null_;
+
 session_start();
 
 class ProductController extends Controller
@@ -222,6 +224,12 @@ class ProductController extends Controller
         $rating->save();
         echo 'done';
     }
+    public function list_comment(){
+        $this->AuthLoginCheck();
+        $comment = Comment::with('product')->where('comment_parent',NULL)->orderBy('comment_id','DESC')->get();
+        $comment_rep = Comment::with('product')->where('comment_parent','!=',NULL)->orderBy('comment_id','DESC')->get();
+        return view('admin.comment.list_comment')->with(compact('comment'))->with(compact('comment_rep'));
+    }
 
     public function send_comment(Request $request){
         $product_id = $request->product_id;
@@ -232,21 +240,49 @@ class ProductController extends Controller
         $comment->comment = $comment_content;
         $comment->comment_name = $comment_name;
         $comment->comment_status = 1;
+        $comment->comment_parent = NULL;
         $comment->save();
 
+    }
+    public function allow_comment(Request $request){
+        $this->AuthLoginCheck();
+        $data = $request->all();
+        $comment = Comment::find($data['comment_id']);
+        $comment->comment_status = $data['comment_status'];
+        $comment->save();
+    }
+
+    public function reply_comment(Request $request){
+        $this->AuthLoginCheck();
+        $data = $request->all();
+        $comment = new Comment();
+        $comment->comment = $data['comment'];
+        $comment->comment_product_id = $data['comment_product_id'];
+        $comment->comment_parent = $data['comment_id'];
+        $comment->comment_status = 0;
+        $comment->comment_name = 'Admin';
+        $comment->save();
+    }
+
+    public function delete_comment($comment_id){
+        $this->AuthLoginCheck();
+        DB::table('tbl_comment')->where('comment_id',$comment_id)-> delete();
+        Session::put('message',' Xoá thành công');
+        return redirect()->back();
     }
 
     public function load_comment(Request $request){
         $product_id = $request->product_id;
-        $comment = Comment::where('comment_product_id', $product_id)->where('comment_status', 0)->get();
+        $comment = Comment::where('comment_product_id', $product_id)->where('comment_parent',NULL)->where('comment_status', 0)->get();
+        $comment_rep = Comment::with('product')->where('comment_parent','!=',NULL)->orderBy('comment_id','DESC')->get();
         $output = '';
         foreach($comment as $key => $comm){
 
-            $output.='<div class="row style_comment">
+            $output.= '
+
+            <div class="row style_comment">
             <div class="col-md-2">
                 <img width="60%" src="'.url('/public/frontend/img/avatar-icon-cm.jpg').'" class="img img-responsive img-thumbnail">
-
-
             </div>
             <div class="col-md-10">
                 <p style="color: #7fad39;"><b>'.$comm->comment_name.'</b></p>
@@ -255,13 +291,29 @@ class ProductController extends Controller
                     '.$comm->comment.'
                 </p>
             </div>
+        </div>
+        ';
+
+            foreach($comment_rep as $key => $rep_comment){
+            if($rep_comment->comment_parent == $comm ->comment_id){
+
+            $output.= '<div class="row style_comment" style ="margin:5px 40px;">
+            <div class="col-md-2">
+                <img width="50%" src="'.url('/public/frontend/img/admin-icon.jpg').'" class="img img-responsive img-thumbnail">
+            </div>
+            <div class="col-md-10">
+                <p style="color: #4682B4;"><b>Admin</b></p>
+                <p style="color: #4682B4;"> Bình luận lúc: '.$rep_comment->comment_date.'</p>
+                <p>
+                '.$rep_comment->comment.'
+                </p>
+            </div>
         </div>';
+            }
         }
+
+    }
         echo $output;
     }
 
-    public function list_comment(){
-        $comment = Comment::with('product')->orderBy('comment_status','DESC')->get();
-        return view('admin.comment.list_comment')->with(compact('comment'));
-    }
 }

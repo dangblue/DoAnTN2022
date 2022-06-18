@@ -20,6 +20,9 @@ Route::post('/tim-kiem', 'HomeController@search');
 //SP yeu thich
 Route::get('/wishlist', 'HomeController@wishlist');
 
+//Send Mail
+Route::get('/send-mail', 'HomeController@send_mail');
+
 //Danh muc san pham trang chu
 Route::get('/danh-muc-san-pham/{category_id}', 'CategoryProduct@show_category_home');
 Route::get('/chi-tiet-san-pham/{category_id}', 'ProductController@details_product');
@@ -97,12 +100,16 @@ Route::get('/all-product', 'ProductController@all_product');
 Route::get('/unactive-product/{product_id}', 'ProductController@unactive_product');
 Route::get('/active-product/{product_id}', 'ProductController@active_product');
 Route::get('/comment', 'ProductController@list_comment');
+Route::get('/delete-comment/{comment_id}', 'ProductController@delete_comment');
 
 Route::post('/save-product', 'ProductController@save_product');
 Route::post('/update-product/{product_id}', 'ProductController@update_product');
 Route::post('/insert-rating', 'ProductController@insert_rating');
 Route::post('/load-comment', 'ProductController@load_comment');
 Route::post('/send-comment', 'ProductController@send_comment');
+Route::post('/allow-comment', 'ProductController@allow_comment');
+Route::post('/reply-comment', 'ProductController@reply_comment');
+
 
 //Cart
 Route::post('/save-cart', 'CartController@save_cart');

@@ -11,10 +11,20 @@ use Illuminate\Support\Facades\Redirect;
 session_start();
 class CouponController extends Controller
 {
+    public function AuthLoginCheck(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
+    }
     public function insert_coupon(){
+        $this->AuthLoginCheck();
         return view('admin.coupon.insert_coupon');
     }
     public function delete_coupon($coupon_id){
+        $this->AuthLoginCheck();
         $coupon = Coupon::find($coupon_id);
         $coupon->delete();
         Session::put('message','Xóa mã giảm giá thành công.');
@@ -22,10 +32,12 @@ class CouponController extends Controller
     }
 
     public function list_coupon(){
+        $this->AuthLoginCheck();
         $coupon = Coupon::orderby('coupon_id','desc')->get();
         return view('admin.coupon.list_coupon')->with(compact('coupon'));
     }
     public function insert_coupon_code(Request $request){
+        $this->AuthLoginCheck();
         $data = $request->all();
 
         $coupon = new Coupon;
@@ -41,6 +53,7 @@ class CouponController extends Controller
 
     }
     public function unset_coupon(){
+
         $coupon = Session::get('coupon');
         if($coupon == true){
             Session::forget('coupon');

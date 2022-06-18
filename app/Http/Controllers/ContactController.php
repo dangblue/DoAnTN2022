@@ -14,6 +14,14 @@ session_start();
 
 class ContactController extends Controller
 {
+    public function AuthLoginCheck(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id){
+            return Redirect::to('dashboard');
+        }else{
+            return Redirect::to('admin')->send();
+        }
+    }
     public function contact(Request $request){
         $cate_product = DB::table('tbl_category_product')->where('category_status','0')
         ->orderBy('category_id','desc')->get();
@@ -23,10 +31,12 @@ class ContactController extends Controller
         ->with('category_post',$category_post);
     }
     public function information(){
+        $this->AuthLoginCheck();
         $contact = Contact::where('info_id',1)->get();
         return view('admin.information.add_information')->with(compact('contact'));
     }
     public function update_info(Request $request, $info_id){
+        $this->AuthLoginCheck();
         $data = $request->all();
         $contact = Contact::find($info_id);
         $contact->info_contact = $data['info_contact'];
@@ -39,6 +49,7 @@ class ContactController extends Controller
 
     }
     public function save_info(Request $request){
+        $this->AuthLoginCheck();
         $data = $request->all();
         $contact = new Contact();
         $contact->info_contact = $data['info_contact'];

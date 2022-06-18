@@ -50,5 +50,8 @@ class HomeController extends Controller
          ->with('category_post',$category_post);
     }
 
+    public function send_mail(){
+
+    }
 
 }
