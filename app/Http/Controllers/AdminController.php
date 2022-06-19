@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-
+use App\Models\Statistic;
 session_start();
 
 class AdminController extends Controller
@@ -63,5 +63,26 @@ class AdminController extends Controller
         DB::table('tbl_customers')->where('customer_id',$customerId)-> delete();
         Session::put('message',' Xoá thành công');
         return Redirect::to('/manage-user');
+    }
+
+    public function filter_by_date(Request $request){
+        $data = $request->all();
+
+        $from_date = $data['from_date'];
+        $to_date = $data['to_date'];
+
+        $get = Statistic::whereBetween('order_date', [$from_date,$to_date])->orderBy('order_date','ASC')->get();
+        foreach($get as $key => $val){
+
+            $chart_data[] = array(
+
+                'period' => $val->order_date,
+                'order' => $val->total_order,
+                'sales' => $val->sales,
+                'profit' => $val->profit,
+                'quantity' => $val->quantity
+            );
+        }
+        echo $data = json_encode($chart_data);
     }
 }

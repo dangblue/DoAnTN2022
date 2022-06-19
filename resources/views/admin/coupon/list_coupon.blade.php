@@ -41,6 +41,8 @@
           <tr>
             <th>STT</th>
             <th>Tên mã</th>
+            <th>Ngày bắt đầu</th>
+            <th>Ngày kết thúc</th>
             <th>Mã giảm giá</th>
             <th>Số lượng mã</th>
             <th>Điều kiện giảm giá</th>
@@ -59,12 +61,14 @@
             @endphp
           <tr>
             <td><i>{{$i}}</i></label></td>
-            <td>{{$cou -> coupon_name}}</td>
-            <td>{{$cou -> coupon_code}}</td>
-            <td>{{$cou -> coupon_time}}</td>
+            <td>{{$cou ->coupon_name}}</td>
+            <td>{{$cou ->coupon_date_start}}</td>
+            <td>{{$cou ->coupon_date_end}}</td>
+            <td>{{$cou ->coupon_code}}</td>
+            <td>{{$cou ->coupon_time}}</td>
             <td><span class="text-ellipsis">
              <?php
-                if($cou -> coupon_condition == 1){
+                if($cou ->coupon_condition == 1){
                 ?>
                 Giảm theo %
                 <?php

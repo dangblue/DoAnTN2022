@@ -105,7 +105,7 @@
                                 style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</i>
 
                             @endfor
-                            <span>(Hãy cho mình 5 sao nếu bạn thích sản phẩm này nhé! Thanks:3 ! )</span>
+                            <span>(Đánh giá sản phẩm !)</span>
                         </div>
                         </form>
                         <form action="{{URL::to('/show-cart')}}" method="GET">

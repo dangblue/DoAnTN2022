@@ -33,6 +33,8 @@ Route::get('/admin', 'AdminController@dashboard');
 Route::get('/dashboard', 'AdminController@show_dashboard');
 Route::post('/admin-dashboard', 'AdminController@admin_dashboard');
 Route::get('/logout', 'AdminController@logout');
+Route::post('/filter-by-date', 'AdminController@filter_by_date');
+
 
 //User
 Route::get('/manage-user', 'AdminController@manage_user');

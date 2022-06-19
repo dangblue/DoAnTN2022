@@ -22,11 +22,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="{{url('public/addang')}}/css/morris.css" type="text/css"/>
 <link rel="stylesheet" href="{{url('public/addang')}}/css/bootstrap-tagsinput.css" type="text/css"/>
 <!-- calendar -->
+<link rel="stylesheet" href="/resources/demos/style.css">
 <link rel="stylesheet" href="{{url('public/addang')}}/css/monthly.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <!-- //calendar -->
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <!-- //font-awesome icons -->
 <script src="{{url('public/addang')}}/js/jquery2.0.3.min.js"></script>
-<script src="{{url('public/addang')}}/js/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="{{url('public/addang')}}/js/morris.js"></script>
 <script src="{{url('public/addang')}}/js/bootstrap-tagsinput.js"></script>
 <script src="{{url('public/addang')}}/js/bootstrap-tagsinput.min.js"></script>
@@ -164,7 +168,7 @@ $name = Session::get('admin_name');
                         <span>Mã giảm giá</span>
                     </a>
                     <ul class="sub">
-						<li><a href="{{URL::to('/insert-coupon')}}">Quản lý mã giảm giá</a></li>
+						<li><a href="{{URL::to('/insert-coupon')}}">Thêm mã giảm giá</a></li>
                         <li><a href="{{URL::to('/list-coupon')}}">Liệt kê mã giảm giá</a></li>
                     </ul>
                 </li>
@@ -202,7 +206,7 @@ $name = Session::get('admin_name');
  <!-- footer -->
 		  <div class="footer">
 			<div class="wthree-copyright">
-			  <p> Copyright &copy;<script>document.write(new Date().getFullYear());</script> Designed <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">Ogani</a></p>
+			  <p> Copyright &copy;<script>document.write(new Date().getFullYear());</script> Designed <i class="fa fa-heart" aria-hidden="true"></i> by <a href="{{URL::to('/')}}" target="_blank">Ogani</a></p>
 			</div>
 		  </div>
 
@@ -219,6 +223,11 @@ $name = Session::get('admin_name');
 <script src="{{url('public/addang')}}/js/jquery.scrollTo.js"></script>
 <script src="{{url('public/addang')}}/ckeditor/ckeditor.js"></script>
 <script src="{{url('public/addang')}}/js/jquery.form-validator.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+
 <script>
     $.validate({});
 </script>
@@ -477,5 +486,65 @@ $name = Session::get('admin_name');
         });
     </script>
 	<!-- //calendar -->
+    <script>
+        $(function(){
+            $("#datepicker").datepicker({
+                prevText:"Tháng trước",
+                nextText:"Tháng sau",
+                dateFormat:"yy-dd-mm",
+                dayNamesMin: ["Thứ 2", "Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chủ nhật"],
+                duration:"slow"
+            });
+            $("#datepicker2").datepicker({
+                prevText:"Tháng trước",
+                nextText:"Tháng sau",
+                dateFormat:"yy-dd-mm",
+                dayNamesMin: ["Thứ 2", "Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chủ nhật"],
+                duration:"slow"
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+
+            var chart = new Morris.Bar({
+            // ID of the element in which to draw the chart.
+            element: 'myfirstchart',
+            lineColors: ['#819C79','#fc8710','#FF6541', '#A4ADD3', '#766B56'],
+            pointFillColors: ['#ffffff'],
+            pointStrokeColors: ['black'],
+            fillOpacity: 0.3,
+            hideHover:'auto',
+            parseTime: false,
+
+            // The name of the data record attribute that contains x-values.
+            xkey: 'period',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['order','sales','profit', 'quantity'],
+            behaveLikeLine: true,
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['Đơn hàng','Doanh số','Lợi nhuận','Số lượng']
+        });
+            $('#btn-dashboard-filter').click(function(){
+                //alert('ok đã nhận');
+                var _token = $('input[name="_token"]').val();
+                var from_date =$('#datepicker'). val();
+                var to_date =$('#datepicker2'). val();
+                //alert(from_date);
+                //alert(to_date);
+                $.ajax({
+                    url:"{{url('/filter-by-date')}}",
+                    method:"POST",
+                    dataType:"JSON",
+                    data:{from_date:from_date, to_date:to_date, _token:_token},
+                    success:function(data)
+                    {
+                        chart.setData(data);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
