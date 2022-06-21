@@ -28,7 +28,7 @@ class CategoryProduct extends Controller
     }
     public function all_category_product(){
         $this->AuthLoginCheck();
-        $all_category_product=DB::table('tbl_category_product')->get();
+        $all_category_product=DB::table('tbl_category_product')->paginate(20);
         $manager_category_product=view('admin.all_category_product')
         ->with('all_category_product',$all_category_product);
         return view('layouts.admin_layout')->with('admin.all_category_product',$manager_category_product);

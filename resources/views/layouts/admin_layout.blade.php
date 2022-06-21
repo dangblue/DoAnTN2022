@@ -526,6 +526,23 @@ $name = Session::get('admin_name');
             // chart.
             labels: ['Đơn hàng','Doanh số','Lợi nhuận','Số lượng']
         });
+
+        $('.dashboard-filter').change(function(){
+            var dashboard_value = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            //alert(dashboard_value);
+            $.ajax({
+                url: "{{url('/dashboard-filter')}}",
+                method:"POST",
+                dataType:"JSON",
+                    data:{dashboard_value:dashboard_value, _token:_token},
+                    success:function(data)
+                    {
+                        chart.setData(data);
+                    }
+            });
+        });
+
             $('#btn-dashboard-filter').click(function(){
                 //alert('ok đã nhận');
                 var _token = $('input[name="_token"]').val();

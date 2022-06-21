@@ -39,10 +39,10 @@
                     </div>
                 </div>
 
-                <div class="hero__item set-bg" data-setbg="{{url('public/frontend')}}/img/hero/banner.jpg">
+                <div class="hero__item set-bg" data-setbg="{{url('public/frontend')}}/img/hero/banner2.jpg">
                     <div class="hero__text">
                         <span>Ogani Shop</span>
-                        <h2>Good <br/>for health</h2>
+                        <h2>Good for<br/>health</h2>
                         <a href="{{URL::to('/shop')}}" class="primary-btn">Đến cửa hàng ngay</a>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
 
                     <div class="featured__item__text">
                         <h6><a href="#">{{$product->product_name}}</a></h6>
-                        <h5>{{$product->product_price}} VNĐ</h5>
+                        <h5> {{number_format($product->product_price,0,',','.')}} VNĐ</h5>
                     </div>
                     </form>
                 </div>

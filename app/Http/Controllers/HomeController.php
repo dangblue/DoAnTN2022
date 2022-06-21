@@ -26,7 +26,7 @@ class HomeController extends Controller
 
         $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
 
-        $post = Post::with('cate_post')->where('post_status', '0')->take(3)->get();
+        $post = Post::with('cate_post')->orderBy('post_id', 'desc')->where('post_status', '0')->take(3)->get();
         return view('home')->with('category',$cate_product)->with('all_product',$all_product)
         ->with('product1',$product1)->with('category_post',$category_post)->with('post',$post);
     }

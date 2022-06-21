@@ -60,7 +60,7 @@
             <td><i>{{$i}}</i></td>
             <td>{{$order -> customer_name}}</td>
             <td>{{$order -> created_at}}</td>
-            <td>{{$order -> order_total}}</td>
+            <td>{{number_format($order ->order_total,0,',','.')}}</td>
             <td>
                 <select name="product_cate" class="form-control input-sm m-bot15">
                     @if($order->order_status == 1)
@@ -98,14 +98,8 @@
           <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
         </div>
         <div class="col-sm-7 text-right text-center-xs">
-          <ul class="pagination pagination-sm m-t-none m-b-none">
-            <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
-          </ul>
+            {{$all_order->links('admin.pagination.pagination')}}
+
         </div>
       </div>
     </footer>

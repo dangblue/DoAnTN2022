@@ -13,6 +13,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 use Carbon\Carbon;
 use App\Models\CatePost;
+use App\Models\Coupon;
 session_start();
 
 class CheckoutController extends Controller
@@ -23,6 +24,14 @@ class CheckoutController extends Controller
             return Redirect::to('dashboard');
         }else{
             return Redirect::to('admin')->send();
+        }
+    }
+    public function AuCartCheck(){
+        $cart = Session::get('cart');
+        if($cart){
+            return view('pages.checkout.payment');
+        }else{
+            return Redirect::to('/')->send();
         }
     }
     public function login_checkout(){
@@ -55,6 +64,7 @@ class CheckoutController extends Controller
         return view('pages.checkout.show_checkout')->with('category',$cate_product)->with('category_post',$category_post);
     }
     public function save_checkout_customer(Request $request){
+        $this->AuCartCheck();
         $data = array();
         $data['shipping_name'] = $request->shipping_name;
         $data['shipping_phone'] = $request->shipping_phone;
@@ -88,6 +98,9 @@ class CheckoutController extends Controller
 
         }
         foreach($cou1 as $key => $cou){
+            $coupon = Coupon::where('coupon_code', $cou['coupon_code'])->first();
+            $coupon->coupon_time = $coupon->coupon_time - 1;
+            $coupon ->save();
             if($cou['coupon_condition']==1){
                 $total_coupon = ($total*$cou['coupon_number'])/100;
             }
@@ -106,6 +119,7 @@ class CheckoutController extends Controller
         $order_data['order_status'] = '1';
 
         $order_data['created_at'] = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+        $order_data['order_date'] = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
         $order_id = DB::table('tbl_order')->insertGetId($order_data);
 
         //insert order_details
@@ -123,6 +137,7 @@ class CheckoutController extends Controller
         Session::forget('cart');
         Session::forget('coupon');
         Session::save();
+
         if($data1['payment_method']=='trả bằng thẻ ghi nợ'){
             $cate_product = DB::table('tbl_category_product')->where('category_status','0')->orderBy('category_id','desc')->get();
             $request->session()->forget('cart');
@@ -241,7 +256,7 @@ class CheckoutController extends Controller
         $all_order=DB::table('tbl_order')
         ->join('tbl_customers','tbl_customers.customer_id','=','tbl_order.customer_id')
         ->select('tbl_order.*','tbl_customers.customer_name')
-        ->orderBy('tbl_order.order_id','desc')->get();
+        ->orderBy('tbl_order.order_id','desc')->paginate(20);
         $manager_order=view('admin.manage_order')->with('all_order',$all_order);
         return view('layouts.admin_layout')->with('admin.manage_order',$manager_order);
     }

@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{$pro->product_name}}</h6>
-                                            <span>{{$pro->product_price}} VNĐ</span>
+                                            <span>{{number_format($pro->product_price,0,',','.')}} VNĐ</span>
                                         </div>
                                     </a>
                                     @endforeach
@@ -123,7 +123,7 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{$pro->product_name}}</h6>
-                                            <span>{{$pro->product_price}} VNĐ</span>
+                                            <span>{{number_format($pro->product_price,0,',','.')}} VNĐ</span>
                                         </div>
                                     </a>
                                     @endforeach
@@ -163,7 +163,7 @@
                                     <div class="product__discount__item__text">
                                         <span>{{$pro->category_name}}</span>
                                         <h5><a href="#">{{$pro->product_name}}</a></h5>
-                                        <div class="product__item__price">{{$pro->product_price}} VNĐ <span>{{$pro->product_price}} VNĐ</span></div>
+                                        <div class="product__item__price">{{number_format($pro->product_price,0,',','.')}} VNĐ <span> {{number_format($pro->product_price,0,',','.')}} VNĐ</span></div>
                                     </div>
                                     </form>
                                 </div>
@@ -206,7 +206,7 @@
                 </div>
 
                 <div class="row">
-                @foreach($product as $key => $product1)
+                @foreach($all_product as $key => $product1)
                 <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item">
                         <form>
@@ -226,7 +226,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6><a href="{{URL::to('/chi-tiet-san-pham/'.$product1->product_id)}}">{{$product1->product_name}}</a></h6>
-                                <h5>{{$product1->product_price}} VNĐ</h5>
+                                <h5>{{number_format($product1->product_price,0,',','.')}} VNĐ</h5>
                             </div>
                         </form>
                         </div>
@@ -235,7 +235,7 @@
                 @endforeach
 
 
-                        {!!$product->links('pages.shop.my-paginate')!!}
+                        {!!$all_product->links('pages.shop.my-paginate')!!}
 
 
             </div>

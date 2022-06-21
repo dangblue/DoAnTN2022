@@ -120,7 +120,7 @@
                                     <h5>{{$cart['product_name']}}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    {{$cart['product_price']}} VNĐ
+                                   {{number_format($cart['product_price'],0,',','.')}} VNĐ
                                 </td>
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity">
@@ -130,7 +130,7 @@
                                     </div>
                                 </td>
                                 <td class="shoping__cart__total">
-                                    {{$subtotal}} VNĐ
+                                   {{number_format($subtotal,0,',','.')}} VNĐ
                                 </td>
                                 <td class="shoping__cart__item__close">
                                     <a class="icon_close" href="{{url('/del-product/'.$cart['session_id'])}}"></a>

@@ -163,11 +163,10 @@
                             <input type="checkbox" class="checkbox">
                             Nhớ đăng nhập
                         </span>
-                        &nbsp;&nbsp;&nbsp;
-                        <span>
-                            <a href="{{URL::to('/quen-mat-khau')}}">Quên mật khẩu</a>
-                        </span>
+
+
                         <button type="submit" class="btn btn-default">Đăng nhập</button>
+                        <button type="submit" class="btn btn-primary "><a href="{{URL::to('/quen-mat-khau')}}">Quên mật khẩu</a></button>
                     </form>
                 </div><!--/login form-->
             </div>

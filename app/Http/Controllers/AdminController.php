@@ -8,6 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Statistic;
+use Carbon\Carbon;
 session_start();
 
 class AdminController extends Controller
@@ -54,7 +55,7 @@ class AdminController extends Controller
     public function manage_user(){
         $this->AuthLoginCheck();
         $all_user=DB::table('tbl_customers')
-        ->orderBy('customer_id','desc')->get();
+        ->orderBy('customer_id','desc')->paginate(10);
         //$manager_user=view('admin.user.manage_user')->with('all_user',$all_user);
         return view('admin.user.manage_user')->with('all_user',$all_user);
     }
@@ -74,6 +75,40 @@ class AdminController extends Controller
         $get = Statistic::whereBetween('order_date', [$from_date,$to_date])->orderBy('order_date','ASC')->get();
         foreach($get as $key => $val){
 
+            $chart_data[] = array(
+
+                'period' => $val->order_date,
+                'order' => $val->total_order,
+                'sales' => $val->sales,
+                'profit' => $val->profit,
+                'quantity' => $val->quantity
+            );
+        }
+        echo $data = json_encode($chart_data);
+    }
+
+    public function dashboard_filter(Request $request){
+        $data = $request->all();
+        //echo $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
+        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $dau_thangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $cuoi_thangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+
+        $sub7days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(7)->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subDays(365)->toDateString();
+
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        if($data['dashboard_value']=='7ngay'){
+            $get = Statistic::whereBetween('order_date',[$sub7days, $now])->orderBy('order_date','ASC')->get();
+        }elseif($data['dashboard_value']=='thangtruoc'){
+            $get = Statistic::whereBetween('order_date',[$dau_thangtruoc, $cuoi_thangtruoc])->orderBy('order_date','ASC')->get();
+        }elseif($data['dashboard_value']=='thangnay'){
+            $get = Statistic::whereBetween('order_date',[$dauthangnay, $now])->orderBy('order_date','ASC')->get();
+        }else{
+            $get = Statistic::whereBetween('order_date',[$sub365days, $now])->orderBy('order_date','ASC')->get();
+        }
+
+        foreach($get as $key => $val){
             $chart_data[] = array(
 
                 'period' => $val->order_date,

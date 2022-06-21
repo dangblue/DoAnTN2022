@@ -110,7 +110,7 @@
                         </form>
                         <form action="{{URL::to('/show-cart')}}" method="GET">
                             {{ csrf_field() }}
-                        <div class="product__details__price">{{$value->product_price}} VNĐ</div>
+                        <div class="product__details__price">{{number_format($value->product_price,0,',','.')}} VNĐ</div>
 
                         <div class="product__details__quantity">
                             <div class="quantity">
@@ -173,11 +173,11 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                    aria-selected="true">Chi tiết</a>
+                                    aria-selected="true">Mô tả</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                                    aria-selected="false">Mô tả ngắn</a>
+                                    aria-selected="false">Chi tiết</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
@@ -187,14 +187,15 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Thông tin sản phẩm</h6>
-                                    <p>{!!$value->product_content!!}</p>
+                                    <h6>Mô tả sản phẩm</h6>
+                                   <p>{!!$value->product_desc!!}</p>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Mô tả sản phẩm</h6>
-                                   <p>{!!$value->product_desc!!}</p>
+                                    <h6>Thông tin sản phẩm</h6>
+                                    <p>{!!$value->product_content!!}</p>
+
 
                                 </div>
                             </div>
@@ -285,7 +286,7 @@
                         </div>
                         <div class="product__item__text">
                             <h6><a href="#">{{$relate->product_name}}</a></h6>
-                            <h5>{{$relate->product_price}} VNĐ</h5>
+                            <h5> {{number_format($relate->product_price,0,',','.')}} VNĐ</h5>
                         </div>
                     </form>
                     </div>

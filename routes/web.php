@@ -34,6 +34,7 @@ Route::get('/dashboard', 'AdminController@show_dashboard');
 Route::post('/admin-dashboard', 'AdminController@admin_dashboard');
 Route::get('/logout', 'AdminController@logout');
 Route::post('/filter-by-date', 'AdminController@filter_by_date');
+Route::post('/dashboard-filter', 'AdminController@dashboard_filter');
 
 
 //User

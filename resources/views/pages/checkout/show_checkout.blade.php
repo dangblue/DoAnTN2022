@@ -138,11 +138,11 @@
                                         $total+=$subtotal;
                                     @endphp
                                     <ul>
-                                        <li>{{$cart['product_name']}}<span>{{$cart['product_price']*$cart['product_qty']}}</span></li>
+                                        <li>{{$cart['product_name']}}<span>{{number_format($cart['product_price']*$cart['product_qty'],0,',','.')}}</span></li>
                                     </ul>
                                 @endforeach
                                     <div class="checkout__order__total">Tổng giá
-                                        <span>{{$total}}</span></div>
+                                        <span> {{number_format($total,0,',','.')}}</span></div>
                             @if($cou1)
 
 									@foreach($cou1 as $key => $cou)

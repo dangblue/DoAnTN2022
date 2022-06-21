@@ -63,7 +63,7 @@
           <tr>
             <td><i>{{$i}}</i></label></td>
             <td>{{$pro -> product_name}}</td>
-            <td>{{$pro -> product_price}}</td>
+            <td>{{number_format($pro->product_price,0,',','.')}}</td>
             <td><img src="{{asset('public/uploads/product/'.$pro->product_image)}}" height="100" width="100"></td>
             <td><a href="{{URL::to('/add-gallery/'.$pro->product_id)}}">Thêm thư viện ảnh</a></td>
             <td>{{$pro -> category_name}}</td>
@@ -102,14 +102,7 @@
           <small class="text-muted inline m-t-sm m-b-sm"></small>
         </div>
         <div class="col-sm-7 text-right text-center-xs">
-          <ul class="pagination pagination-sm m-t-none m-b-none">
-            <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
-          </ul>
+            {{$all_product->links('admin.pagination.pagination')}}
         </div>
       </div>
     </footer>

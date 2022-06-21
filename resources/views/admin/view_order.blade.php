@@ -131,15 +131,16 @@
             <td><i>{{$i}}</i></td>
             <td>{{$v_content->product_name}}</td>
             <td>{{$v_content->product_sales_quantity}}</td>
-            <td>{{$v_content->product_price}}</td>
-            <td>{{$v_content->product_price*$v_content->product_sales_quantity}}</td>
+            <td>{{number_format($v_content->product_price,0,',','.')}}</td>
+            <td>{{number_format($v_content->product_price*$v_content->product_sales_quantity,0,',','.')}}
+                </td>
 
 
           </tr>
             @endforeach
             <tr>
                 <td>
-                   <b> <i> Tổng thanh toán (Sau giảm): {{$v_content->order_total}} </i></b>
+                   <b> <i> Tổng thanh toán (Sau giảm):{{number_format($v_content->order_total,0,',','.')}} </i></b>
                 </td>
             </tr>
         </tbody>

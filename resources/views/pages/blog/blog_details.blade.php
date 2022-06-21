@@ -166,9 +166,10 @@
             </div>
         </div>
         <div class="row">
+            @foreach($related as $key => $post_relate)
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="blog__item">
-                    @foreach($related as $key => $post_relate)
+
                     <div class="blog__item__pic">
                         <a href="{{URL::to('/bai-viet/'.$post_relate->post_slug)}}"> <img src="{{asset('public/uploads/post/'.$post_relate->post_image)}}" alt=""> </a>
                     </div>
@@ -181,9 +182,10 @@
                         <h5><a href="{{URL::to('/bai-viet/'.$post_relate->post_slug)}}">{{$post_relate->post_title}}</a></h5>
                         {!!$post_relate->post_desc!!}
                     </div>
-                    @endforeach
+
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </section>

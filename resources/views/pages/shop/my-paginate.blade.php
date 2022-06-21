@@ -9,7 +9,7 @@
 
             @else
 
-                    <a href="{{ $paginator->previousPageUrl() }}">&lt</a>
+                    <a href="{{ $paginator->previousPageUrl() }}">&lt;</a>
 
             @endif
 
@@ -35,11 +35,11 @@
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
 
-                    <a href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
+                    <a href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&gt;</a>
 
             @else
                 <a class="disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                    <span aria-hidden="true">&rsaquo;</span>
+                    <span aria-hidden="true">&gt;</span>
                 </a>
             @endif
         </div>

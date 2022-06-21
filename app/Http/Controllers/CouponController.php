@@ -33,7 +33,7 @@ class CouponController extends Controller
 
     public function list_coupon(){
         $this->AuthLoginCheck();
-        $coupon = Coupon::orderby('coupon_id','desc')->get();
+        $coupon = Coupon::orderby('coupon_id','desc')->paginate(10);
         return view('admin.coupon.list_coupon')->with(compact('coupon'));
     }
     public function insert_coupon_code(Request $request){

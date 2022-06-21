@@ -102,7 +102,7 @@
                     </div>
                     <div class="featured__item__text">
                         <h6><a href="#">{{$product->product_name}}</a></h6>
-                        <h5>{{$product->product_price}} VNĐ</h5>
+                        <h5>{{number_format($product->product_price,0,',','.')}} VNĐ</h5>
                     </div>
                     </form>
                 </div>

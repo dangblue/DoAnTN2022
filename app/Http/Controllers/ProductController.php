@@ -43,7 +43,7 @@ class ProductController extends Controller
         $all_product=DB::table('tbl_product')
         ->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')
         ->join('tbl_brand','tbl_product.brand_id','=','tbl_brand.brand_id')
-        ->orderBy('tbl_product.product_id','desc')->get();
+        ->orderBy('tbl_product.product_id','desc')->paginate(20);
         $manager_product=view('admin.all_product')
         ->with('all_product',$all_product);
         return view('layouts.admin_layout')->with('admin.all_product',$manager_product);
@@ -184,7 +184,7 @@ class ProductController extends Controller
         $category_post = CatePost::orderBy('cate_post_id', 'desc')->where('cate_post_status', '0')->get();
        // $all_product = DB::table('tbl_product')->Paginate(6);
        $product_new = DB::table('tbl_product')->where('product_status','0')->orderBy('product_id','desc')->limit(5)->get();
-       $all_product = Product::orderBy('product_id','ASC')->Paginate(6);
+       $all_product = Product::orderBy('product_id','DESC')->Paginate(6);
         if(isset($_GET['sort_by'])){
             $sort_by = $_GET['sort_by'];
             if($sort_by=='kytu_za'){
@@ -200,7 +200,7 @@ class ProductController extends Controller
         }
         $pro_tag = Product::where('product_status','0')->take(5)->get();
 
-        return view('pages.shop.show_shop')->with('category',$cate_product)->with('product',$all_product)
+        return view('pages.shop.show_shop')->with('category',$cate_product)->with('all_product',$all_product)
         ->with('product_show',$product_show)->with('category_post',$category_post)->with('product_new',$product_new)->with('pro_tag',$pro_tag);
     }
     public function tag(Request $request, $product_tag){

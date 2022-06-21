@@ -27,7 +27,7 @@ class BrandProduct extends Controller
     }
     public function all_brand_product(){
         $this->AuthLoginCheck();
-        $all_brand_product=DB::table('tbl_brand')->get();
+        $all_brand_product=DB::table('tbl_brand')->paginate(20);
         $manager_brand_product=view('admin.all_brand_product')
         ->with('all_brand_product',$all_brand_product);
         return view('layouts.admin_layout')->with('admin.all_brand_product',$manager_brand_product);

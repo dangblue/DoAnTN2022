@@ -84,7 +84,7 @@
         </div>
         <div class="col-sm-7 text-right text-center-xs">
           <ul class="pagination pagination-sm m-t-none m-b-none">
-            {!!$category_post->links()!!}
+            {!!$category_post->links('admin.pagination.pagination')!!}
           </ul>
         </div>
       </div>
