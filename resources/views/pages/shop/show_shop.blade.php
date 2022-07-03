@@ -153,7 +153,7 @@
 
                                     <div class="product__discount__item__pic set-bg">
                                         <img id="wishlist_productimage{{$pro->product_id}}" src="{{URL::to('/public/uploads/product/'.$pro->product_image)}}">
-                                        <div class="product__discount__percent">-0%</div>
+                                        <div class="product__discount__percent">-30%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i type="button" class="fa fa-heart button_wishlist" id="{{$pro->product_id}}" onclick="add_wishlist(this.id);"></i></a></li>
                                             <li><a id="wishlist_producturl{{$pro->product_id}}" href="{{URL::to('/chi-tiet-san-pham',$pro->product_id)}}"><i class="fa fa-retweet"></i></a></li>
@@ -163,7 +163,14 @@
                                     <div class="product__discount__item__text">
                                         <span>{{$pro->category_name}}</span>
                                         <h5><a href="#">{{$pro->product_name}}</a></h5>
-                                        <div class="product__item__price">{{number_format($pro->product_price,0,',','.')}} VNĐ <span> {{number_format($pro->product_price,0,',','.')}} VNĐ</span></div>
+                                        @php
+                                            $a = $pro->product_price;
+                                            $a = $a - $a * 30/100;
+                                        @endphp
+
+                                        <div class="product__item__price">{{number_format($a,0,',','.')}} VNĐ <span>
+                                            {{number_format($a,0,',','.')}} VNĐ</span></div>
+                                        
                                     </div>
                                     </form>
                                 </div>

@@ -84,30 +84,44 @@
                         <input type="hidden" value="{{$value->product_price}}" class="cart_product_price_{{$value->product_id}}">
 
                         <h3>{{$value->product_name}}</h3>
-                        <form action="#" method="POST">
-                            {{csrf_field()}}
-                        <div class="product__details__rating">
-                            @for($count=1; $count<=5; $count ++)
-                                @php
-                                    if($count <= $rating){
-                                        $color = 'color:#ffcc00;';
-                                    }else {
-                                        $color = 'color:#ccc;';
-                                    }
-                                @endphp
+                        <?php
 
-                                <i title="đánh giá sao"
-                                id="{{$value->product_id}}-{{$count}}"
-                                data-index="{{$count}}"
-                                data-product_id="{{$value->product_id}}"
-                                data-rating="{{$rating}}"
-                                class="rating"
-                                style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</i>
+                        $customer_id = Session::get('customer_id');
+                            if($customer_id != NULL){
+                            ?>
+                                 <form action="#" method="POST">
+                                    {{csrf_field()}}
+                                <div class="product__details__rating">
+                                    @for($count=1; $count<=5; $count ++)
+                                        @php
+                                            if($count <= $rating){
+                                                $color = 'color:#ffcc00;';
+                                            }else {
+                                                $color = 'color:#ccc;';
+                                            }
+                                        @endphp
 
-                            @endfor
-                            <span>(Đánh giá sản phẩm !)</span>
-                        </div>
-                        </form>
+                                        <i title="đánh giá sao"
+                                        id="{{$value->product_id}}-{{$count}}"
+                                        data-index="{{$count}}"
+                                        data-product_id="{{$value->product_id}}"
+                                        data-rating="{{$rating}}"
+                                        class="rating"
+                                        style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</i>
+
+                                    @endfor
+                                    <span>(Đánh giá sản phẩm !)</span>
+                                </div>
+                                </form>
+                            <?php
+                                }else{
+                            ?>
+                                 <a href="{{URL::to('/login-checkout')}}"><b style="color:red;">Hãy đăng nhập để đánh giá sản phẩm</b></a>
+
+                            <?php
+                                }
+                            ?>
+
                         <form action="{{URL::to('/show-cart')}}" method="GET">
                             {{ csrf_field() }}
                         <div class="product__details__price">{{number_format($value->product_price,0,',','.')}} VNĐ</div>
@@ -181,7 +195,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                    aria-selected="false">Đánh giá <span></span></a>
+                                    aria-selected="false">Bình luận đánh giá<span></span></a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -195,8 +209,6 @@
                                 <div class="product__details__tab__desc">
                                     <h6>Thông tin sản phẩm</h6>
                                     <p>{!!$value->product_content!!}</p>
-
-
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
@@ -227,21 +239,35 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <form>
-                                            @csrf
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-6">
-                                                    <input type="text" class="comment_name" placeholder="Tên bình luận" required>
-                                                </div>
+                                        <?php
 
-                                                <div class="col-lg-12 text-center">
-                                                    <textarea name="comment" class="comment_content" placeholder="Nhập nội dung của bạn" required></textarea>
-                                                    <button type="submit" class="site-btn send-comment">Gửi đánh giá</button>
-                                                </div>
-                                                <div id="notify_comment">
-                                                </div>
-                                            </div>
-                                        </form>
+                                            $customer_id = Session::get('customer_id');
+                                            if($customer_id != NULL){
+                                        ?>
+                                <form>
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <input type="text" class="comment_name" placeholder="Tên bình luận" required>
+                                        </div>
+
+                                        <div class="col-lg-12 text-center">
+                                            <textarea name="comment" class="comment_content" placeholder="Nhập nội dung của bạn" required></textarea>
+                                            <button type="submit" class="site-btn send-comment">Gửi đánh giá</button>
+                                        </div>
+                                        <div id="notify_comment">
+                                        </div>
+                                    </div>
+                                </form>
+                            <?php
+                                }else{
+                            ?>
+                                <h3><b style="color:red;">Hãy đăng nhập để đánh giá sản phẩm</b></h3><br>
+                                <a href="{{URL::to('/login-checkout')}}" class="primary-btn" > Đăng nhập</a>
+                            <?php
+                                }
+                            ?>
+
                                     </div>
                                 </div>
                             </div>
