@@ -184,7 +184,7 @@
 						@endif
                     </ul>
                     <?php
-                        $cart_checkout = Session::get('cart');
+                        //$cart_checkout = Session::get('cart');
                         $customer_id = Session::get('customer_id');
                             if($customer_id != NULL){
                             ?>

@@ -13,7 +13,7 @@
                                             echo 'Vô địch';
                                         }elseif($i%3==0){
                                             echo 'Việt nam';
-                                        
+
                                         }
                                         else  echo $i;
                                         }

@@ -170,7 +170,7 @@
 
                                         <div class="product__item__price">{{number_format($a,0,',','.')}} VNĐ <span>
                                             {{number_format($a,0,',','.')}} VNĐ</span></div>
-                                        
+
                                     </div>
                                     </form>
                                 </div>
